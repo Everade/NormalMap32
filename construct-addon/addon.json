@@ -1,17 +1,19 @@
 {
 	"is-c3-addon": true,
 	"type": "effect",
+	"supported-renderers": ["webgl","webgl2"],
 	"name": "NormalMap32",
 	"id": "normalmap32",
-	"version": "1.6.0.0",
+	"version": "1.7.0.0",
 	"author": "Donelwero, Matriax, Mikal, Everade",
-	"website": "https://www.construct.net/en/make-games/addons/898/normalmap32",
-	"documentation": "https://www.construct.net/en/make-games/addons/898/normalmap32/documentation",
+	"website": "https://www.construct.net/make-games/addons/898/normalmap32",
+	"documentation": "https://www.construct.net/make-games/addons/898/normalmap32/documentation",
 	"description": "Create a 3D light effect on any 2D sprite using a normal map. Each normal map pixel represents the direction in which the sprite's pixel is facing.",
 	"file-list": [
 		"lang/en-US.json",
 		"addon.json",
-		"effect.fx"
+		"effect.fx",
+		"effect.webgl2.fx"
 	],
 
 	"category": "color",
@@ -42,7 +44,7 @@
 		  "id": "light-1-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light1State01"
+		  "uniform": "light1State"
 		},
 		{
 		  "id": "light-1-pos-x",
@@ -138,7 +140,7 @@
 		  "id": "light-2-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light2State01"
+		  "uniform": "light2State"
 		},
 		{
 		  "id": "light-2-pos-x",
@@ -234,7 +236,7 @@
 		  "id": "light-3-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light3State01"
+		  "uniform": "light3State"
 		},
 		{
 		  "id": "light-3-pos-x",
@@ -330,7 +332,7 @@
 		  "id": "light-4-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light4State01"
+		  "uniform": "light4State"
 		},
 		{
 		  "id": "light-4-pos-x",
@@ -426,7 +428,7 @@
 		  "id": "light-5-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light5State01"
+		  "uniform": "light5State"
 		},
 		{
 		  "id": "light-5-pos-x",
@@ -522,7 +524,7 @@
 		  "id": "light-6-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light6State01"
+		  "uniform": "light6State"
 		},
 		{
 		  "id": "light-6-pos-x",
@@ -618,7 +620,7 @@
 		  "id": "light-7-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light7State01"
+		  "uniform": "light7State"
 		},
 		{
 		  "id": "light-7-pos-x",
@@ -714,7 +716,7 @@
 		  "id": "light-8-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light8State01"
+		  "uniform": "light8State"
 		},
 		{
 		  "id": "light-8-pos-x",
@@ -810,7 +812,7 @@
 		  "id": "light-9-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light9State01"
+		  "uniform": "light9State"
 		},
 		{
 		  "id": "light-9-pos-x",
@@ -906,7 +908,7 @@
 		  "id": "light-10-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light10State01"
+		  "uniform": "light10State"
 		},
 		{
 		  "id": "light-10-pos-x",
@@ -1002,7 +1004,7 @@
 		  "id": "light-11-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light11State01"
+		  "uniform": "light11State"
 		},
 		{
 		  "id": "light-11-pos-x",
@@ -1098,7 +1100,7 @@
 		  "id": "light-12-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light12State01"
+		  "uniform": "light12State"
 		},
 		{
 		  "id": "light-12-pos-x",
@@ -1194,7 +1196,7 @@
 		  "id": "light-13-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light13State01"
+		  "uniform": "light13State"
 		},
 		{
 		  "id": "light-13-pos-x",
@@ -1290,7 +1292,7 @@
 		  "id": "light-14-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light14State01"
+		  "uniform": "light14State"
 		},
 		{
 		  "id": "light-14-pos-x",
@@ -1386,7 +1388,7 @@
 		  "id": "light-15-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light15State01"
+		  "uniform": "light15State"
 		},
 		{
 		  "id": "light-15-pos-x",
@@ -1482,7 +1484,7 @@
 		  "id": "light-16-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light16State01"
+		  "uniform": "light16State"
 		},
 		{
 		  "id": "light-16-pos-x",
@@ -1578,7 +1580,7 @@
 		  "id": "light-17-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light17State01"
+		  "uniform": "light17State"
 		},
 		{
 		  "id": "light-17-pos-x",
@@ -1674,7 +1676,7 @@
 		  "id": "light-18-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light18State01"
+		  "uniform": "light18State"
 		},
 		{
 		  "id": "light-18-pos-x",
@@ -1770,7 +1772,7 @@
 		  "id": "light-19-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light19State01"
+		  "uniform": "light19State"
 		},
 		{
 		  "id": "light-19-pos-x",
@@ -1866,7 +1868,7 @@
 		  "id": "light-20-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light20State01"
+		  "uniform": "light20State"
 		},
 		{
 		  "id": "light-20-pos-x",
@@ -1962,7 +1964,7 @@
 		  "id": "light-21-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light21State01"
+		  "uniform": "light21State"
 		},
 		{
 		  "id": "light-21-pos-x",
@@ -2058,7 +2060,7 @@
 		  "id": "light-22-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light22State01"
+		  "uniform": "light22State"
 		},
 		{
 		  "id": "light-22-pos-x",
@@ -2154,7 +2156,7 @@
 		  "id": "light-23-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light23State01"
+		  "uniform": "light23State"
 		},
 		{
 		  "id": "light-23-pos-x",
@@ -2250,7 +2252,7 @@
 		  "id": "light-24-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light24State01"
+		  "uniform": "light24State"
 		},
 		{
 		  "id": "light-24-pos-x",
@@ -2346,7 +2348,7 @@
 		  "id": "light-25-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light25State01"
+		  "uniform": "light25State"
 		},
 		{
 		  "id": "light-25-pos-x",
@@ -2442,7 +2444,7 @@
 		  "id": "light-26-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light26State01"
+		  "uniform": "light26State"
 		},
 		{
 		  "id": "light-26-pos-x",
@@ -2538,7 +2540,7 @@
 		  "id": "light-27-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light27State01"
+		  "uniform": "light27State"
 		},
 		{
 		  "id": "light-27-pos-x",
@@ -2634,7 +2636,7 @@
 		  "id": "light-28-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light28State01"
+		  "uniform": "light28State"
 		},
 		{
 		  "id": "light-28-pos-x",
@@ -2730,7 +2732,7 @@
 		  "id": "light-29-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light29State01"
+		  "uniform": "light29State"
 		},
 		{
 		  "id": "light-29-pos-x",
@@ -2826,7 +2828,7 @@
 		  "id": "light-30-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light30State01"
+		  "uniform": "light30State"
 		},
 		{
 		  "id": "light-30-pos-x",
@@ -2922,7 +2924,7 @@
 		  "id": "light-31-state-01",
 		  "type": "float",
 		  "initial-value": 0,
-		  "uniform": "light31State01"
+		  "uniform": "light31State"
 		},
 		{
 		  "id": "light-31-pos-x",
@@ -3018,7 +3020,7 @@
 		  "id": "light-32-state-01",
 		  "type": "float",
 		  "initial-value": 1,
-		  "uniform": "light32State01"
+		  "uniform": "light32State"
 		},
 		{
 		  "id": "light-32-pos-x",

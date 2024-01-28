@@ -36,7 +36,7 @@ Applying the effect to lots of individual normal map sprites can be costly. Cons
 
 ## Features
 
-- Supports WebGL1.
+- Supports WebGL1, WebGL2.
 - Up to 32 simultaneous RGB light sources per normal map.
 - Linear, quadratic or mixed light falloff.
 - Distance clamping for spot light effects.

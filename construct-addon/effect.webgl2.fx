@@ -1,3 +1,4 @@
+#version 300 es
 // NormalMap32 evolved from the original NormalMapExtended 1.4 https://www.construct.net/make-games/addons/194/normalmapextended by Mikal
 //
 // V1.0 - by donelwero
@@ -14,7 +15,7 @@
 //	Code cleanup and removed redundant calculations.
 //	Changed background sampler to use relative locations not vTex
 //		mediump vec2 n = (vTex - srcStart) / (srcEnd - srcStart);
-//		lowp vec4 DiffuseColor = texture2D(u_texture, mix(destStart, destEnd, n));
+//		lowp vec4 DiffuseColor = texture2D(samplerBack, mix(destStart, destEnd, n));
 //
 // V1.4 - by Mikal
 //	Updated with Spotlight effect.
@@ -610,7 +611,7 @@ uniform float light32Falloffv2;
 uniform float light32Falloffv3;
 
 // Attribute from vertex shader
-varying mediump vec2 vTex;
+in mediump vec2 vTex;
 
 // Texture samplers
 uniform lowp sampler2D samplerBack;		//diffuse map
@@ -628,17 +629,20 @@ vec3 LightPos;
 // Resolution
 vec2 Resolution;
 
+// Fragment Shader
+out vec4 outColor;
+
 void main(void)
 {
 	// RGBA of our normal map color
-	lowp vec4 front = texture2D(samplerFront, vTex);
+	lowp vec4 front = texture(samplerFront, vTex);
 
 	// RGBA of our diffuse color, use relative location
 	mediump vec2 n = (vTex - srcStart) / (srcEnd - srcStart);
-	lowp vec4 DiffuseColor = texture2D(samplerBack, mix(destStart, destEnd, n));
+	lowp vec4 DiffuseColor = texture(samplerBack, mix(destStart, destEnd, n));
 
 	// RGB of our normal map
-	mediump vec3 NormalMap = texture2D(samplerFront, vTex).rgb;
+	mediump vec3 NormalMap = texture(samplerFront, vTex).rgb;
 
 	// Sum of multiple lights
 	vec3 Sum = vec3(0.0);
@@ -695,7 +699,7 @@ void main(void)
 	// Bring it all together
 	vec3 Intensity = Ambient + Diffuse * Attenuation;
 	vec3 FinalColor = DiffuseColor.rgb * Intensity;
-	gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+	outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 	// Sum up for multiple lights
 	Sum += FinalColor * light1State;
@@ -729,7 +733,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light2State;
 	}
@@ -763,7 +767,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light3State;
 	}
@@ -797,7 +801,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light4State;
 	}
@@ -831,7 +835,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light5State;
 	}
@@ -865,7 +869,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light6State;
 	}
@@ -899,7 +903,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light7State;
 	}
@@ -933,7 +937,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light8State;
 	}
@@ -967,7 +971,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light9State;
 	}
@@ -1001,7 +1005,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light10State;
 	}
@@ -1035,7 +1039,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light11State;
 	}
@@ -1069,7 +1073,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light12State;
 	}
@@ -1103,7 +1107,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light13State;
 	}
@@ -1137,7 +1141,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light14State;
 	}
@@ -1171,7 +1175,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light15State;
 	}
@@ -1205,7 +1209,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light16State;
 	}
@@ -1239,7 +1243,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light17State;
 	}
@@ -1273,7 +1277,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light18State;
 	}
@@ -1307,7 +1311,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light19State;
 	}
@@ -1341,7 +1345,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light20State;
 	}
@@ -1375,7 +1379,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light21State;
 	}
@@ -1409,7 +1413,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light22State;
 	}
@@ -1443,7 +1447,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light23State;
 	}
@@ -1477,7 +1481,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light24State;
 	}
@@ -1511,7 +1515,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light25State;
 	}
@@ -1545,7 +1549,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light26State;
 	}
@@ -1579,7 +1583,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light27State;
 	}
@@ -1613,7 +1617,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light28State;
 	}
@@ -1647,7 +1651,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light29State;
 	}
@@ -1681,7 +1685,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light30State;
 	}
@@ -1715,7 +1719,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light31State;
 	}
@@ -1749,7 +1753,7 @@ void main(void)
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		gl_FragColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
 
 		Sum += FinalColor * light32State;
 	}
@@ -1759,5 +1763,5 @@ void main(void)
 // ===============
 	// Multiple Lights
 	// "* front.a" at the end to use NormalMaps with alpha and avoid some glitches
-	gl_FragColor = (vec4(Sum, DiffuseColor.a)) * front.a;
+	outColor = (vec4(Sum, DiffuseColor.a)) * front.a;
 }

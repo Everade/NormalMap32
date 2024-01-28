@@ -6,7 +6,7 @@
 			"normalmap32": {
 				"name": "NormalMap32",
 				"description": "Create a 3D light effect on any 2D sprite using a normal map.",
-				"help-url": "https://www.construct.net/en/make-games/addons/898/normalmap32",
+				"help-url": "https://www.construct.net/make-games/addons/898/normalmap32",
 				"parameters": {
 					"screen-x-resolution":{
 					  "name": "Screen X Resolution [000]",
@@ -30,7 +30,7 @@
 					},
 					"light-1-pos-z":{
 					  "name": "Light 1 Z Position [005]",
-					  "desc": "Light 1 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 1 Position (Z) 0 to 1"
 					},
 					"light-1-color-r":{
 					  "name": "Light 1 Color (Red) [006]",
@@ -94,7 +94,7 @@
 					},
 					"light-2-pos-z":{
 					  "name": "Light 2 Z Position [021]",
-					  "desc": "Light 2 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 2 Position (Z) 0 to 1."
 					},
 					"light-2-color-r":{
 					  "name": "Light 2 Color (Red) [022]",
@@ -158,7 +158,7 @@
 					},
 					"light-3-pos-z":{
 					  "name": "Light 3 Z Position [037]",
-					  "desc": "Light 3 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 3 Position (Z) 0 to 1."
 					},
 					"light-3-color-r":{
 					  "name": "Light 3 Color (Red) [038]",
@@ -222,7 +222,7 @@
 					},
 					"light-4-pos-z":{
 					  "name": "Light 4 Z Position [053]",
-					  "desc": "Light 4 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 4 Position (Z) 0 to 1."
 					},
 					"light-4-color-r":{
 					  "name": "Light 4 Color (Red) [054]",
@@ -286,7 +286,7 @@
 					},
 					"light-5-pos-z":{
 					  "name": "Light 5 Z Position [069]",
-					  "desc": "Light 5 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 5 Position (Z) 0 to 1."
 					},
 					"light-5-color-r":{
 					  "name": "Light 5 Color (Red) [070]",
@@ -350,7 +350,7 @@
 					},
 					"light-6-pos-z":{
 					  "name": "Light 6 Z Position [085]",
-					  "desc": "Light 6 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 6 Position (Z) 0 to 1."
 					},
 					"light-6-color-r":{
 					  "name": "Light 6 Color (Red) [086]",
@@ -414,7 +414,7 @@
 					},
 					"light-7-pos-z":{
 					  "name": "Light 7 Z Position [101]",
-					  "desc": "Light 7 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 7 Position (Z) 0 to 1."
 					},
 					"light-7-color-r":{
 					  "name": "Light 7 Color (Red) [102]",
@@ -478,7 +478,7 @@
 					},
 					"light-8-pos-z":{
 					  "name": "Light 8 Z Position [117]",
-					  "desc": "Light 8 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 8 Position (Z) 0 to 1."
 					},
 					"light-8-color-r":{
 					  "name": "Light 8 Color (Red) [118]",
@@ -542,7 +542,7 @@
 					},
 					"light-9-pos-z":{
 					  "name": "Light 9 Z Position [133]",
-					  "desc": "Light 9 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 9 Position (Z) 0 to 1."
 					},
 					"light-9-color-r":{
 					  "name": "Light 9 Color (Red) [134]",
@@ -606,7 +606,7 @@
 					},
 					"light-10-pos-z":{
 					  "name": "Light 10 Z Position [149]",
-					  "desc": "Light 10 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 10 Position (Z) 0 to 1."
 					},
 					"light-10-color-r":{
 					  "name": "Light 10 Color (Red) [150]",
@@ -670,7 +670,7 @@
 					},
 					"light-11-pos-z":{
 					  "name": "Light 11 Z Position [165]",
-					  "desc": "Light H Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light H Position (Z) 0 to 1."
 					},
 					"light-11-color-r":{
 					  "name": "Light 11 Color (Red) [166]",
@@ -734,7 +734,7 @@
 					},
 					"light-12-pos-z":{
 					  "name": "Light 12 Z Position [181]",
-					  "desc": "Light 12 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 12 Position (Z) 0 to 1."
 					},
 					"light-12-color-r":{
 					  "name": "Light 12 Color (Red) [182]",
@@ -798,7 +798,7 @@
 					},
 					"light-13-pos-z":{
 					  "name": "Light 13 Z Position [197]",
-					  "desc": "Light 13 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 13 Position (Z) 0 to 1."
 					},
 					"light-13-color-r":{
 					  "name": "Light 13 Color (Red) [198]",
@@ -862,7 +862,7 @@
 					},
 					"light-14-pos-z":{
 					  "name": "Light 14 Z Position [213]",
-					  "desc": "Light 14 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 14 Position (Z) 0 to 1."
 					},
 					"light-14-color-r":{
 					  "name": "Light 14 Color (Red) [214]",
@@ -926,7 +926,7 @@
 					},
 					"light-15-pos-z":{
 					  "name": "Light 15 Z Position [229]",
-					  "desc": "Light 15 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 15 Position (Z) 0 to 1."
 					},
 					"light-15-color-r":{
 					  "name": "Light 15 Color (Red) [230]",
@@ -990,7 +990,7 @@
 					},
 					"light-16-pos-z":{
 					  "name": "Light 16 Z Position [245]",
-					  "desc": "Light 16 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 16 Position (Z) 0 to 1."
 					},
 					"light-16-color-r":{
 					  "name": "Light 16 Color (Red) [246]",
@@ -1054,7 +1054,7 @@
 					},
 					"light-17-pos-z":{
 					  "name": "Light 17 Z Position [261]",
-					  "desc": "Light 17 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 17 Position (Z) 0 to 1."
 					},
 					"light-17-color-r":{
 					  "name": "Light 17 Color (Red) [262]",
@@ -1118,7 +1118,7 @@
 					},
 					"light-18-pos-z":{
 					  "name": "Light 18 Z Position [277]",
-					  "desc": "Light 18 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 18 Position (Z) 0 to 1."
 					},
 					"light-18-color-r":{
 					  "name": "Light 18 Color (Red) [278]",
@@ -1182,7 +1182,7 @@
 					},
 					"light-19-pos-z":{
 					  "name": "Light 19 Z Position [293]",
-					  "desc": "Light 19 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 19 Position (Z) 0 to 1."
 					},
 					"light-19-color-r":{
 					  "name": "Light 19 Color (Red) [294]",
@@ -1246,7 +1246,7 @@
 					},
 					"light-20-pos-z":{
 					  "name": "Light 20 Z Position [309]",
-					  "desc": "Light 20 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 20 Position (Z) 0 to 1."
 					},
 					"light-20-color-r":{
 					  "name": "Light 20 Color (Red) [310]",
@@ -1310,7 +1310,7 @@
 					},
 					"light-21-pos-z":{
 					  "name": "Light 21 Z Position [325]",
-					  "desc": "Light 21 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 21 Position (Z) 0 to 1."
 					},
 					"light-21-color-r":{
 					  "name": "Light 21 Color (Red) [326]",
@@ -1374,7 +1374,7 @@
 					},
 					"light-22-pos-z":{
 					  "name": "Light 22 Z Position [341]",
-					  "desc": "Light 22 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 22 Position (Z) 0 to 1."
 					},
 					"light-22-color-r":{
 					  "name": "Light 22 Color (Red) [342]",
@@ -1438,7 +1438,7 @@
 					},
 					"light-23-pos-z":{
 					  "name": "Light 23 Z Position [357]",
-					  "desc": "Light 23 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 23 Position (Z) 0 to 1."
 					},
 					"light-23-color-r":{
 					  "name": "Light 23 Color (Red) [358]",
@@ -1502,7 +1502,7 @@
 					},
 					"light-24-pos-z":{
 					  "name": "Light 24 Z Position [373]",
-					  "desc": "Light 24 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 24 Position (Z) 0 to 1."
 					},
 					"light-24-color-r":{
 					  "name": "Light 24 Color (Red) [374]",
@@ -1566,7 +1566,7 @@
 					},
 					"light-25-pos-z":{
 					  "name": "Light 25 Z Position [389]",
-					  "desc": "Light 25 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 25 Position (Z) 0 to 1."
 					},
 					"light-25-color-r":{
 					  "name": "Light 25 Color (Red) [390]",
@@ -1630,7 +1630,7 @@
 					},
 					"light-26-pos-z":{
 					  "name": "Light 26 Z Position [405]",
-					  "desc": "Light 26 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 26 Position (Z) 0 to 1."
 					},
 					"light-26-color-r":{
 					  "name": "Light 26 Color (Red) [406]",
@@ -1694,7 +1694,7 @@
 					},
 					"light-27-pos-z":{
 					  "name": "Light 27 Z Position [421]",
-					  "desc": "Light 27 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 27 Position (Z) 0 to 1."
 					},
 					"light-27-color-r":{
 					  "name": "Light 27 Color (Red) [422]",
@@ -1758,7 +1758,7 @@
 					},
 					"light-28-pos-z":{
 					  "name": "Light 28 Z Position [437]",
-					  "desc": "Light 28 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 28 Position (Z) 0 to 1."
 					},
 					"light-28-color-r":{
 					  "name": "Light 28 Color (Red) [438]",
@@ -1822,7 +1822,7 @@
 					},
 					"light-29-pos-z":{
 					  "name": "Light 29 Z Position [453]",
-					  "desc": "Light 29 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 29 Position (Z) 0 to 1."
 					},
 					"light-29-color-r":{
 					  "name": "Light 29 Color (Red) [454]",
@@ -1886,7 +1886,7 @@
 					},
 					"light-30-pos-z":{
 					  "name": "Light 30 Z Position [469]",
-					  "desc": "Light 30 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 30 Position (Z) 0 to 1."
 					},
 					"light-30-color-r":{
 					  "name": "Light 30 Color (Red) [470]",
@@ -1950,7 +1950,7 @@
 					},
 					"light-31-pos-z":{
 					  "name": "Light 31 Z Position [485]",
-					  "desc": "Light 31 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 31 Position (Z) 0 to 1."
 					},
 					"light-31-color-r":{
 					  "name": "Light 31 Color (Red) [486]",
@@ -2014,7 +2014,7 @@
 					},
 					"light-32-pos-z":{
 					  "name": "Light 32 Z Position [501]",
-					  "desc": "Light 32 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					  "desc": "Light 32 Position (Z) 0 to 1."
 					},
 					"light-32-color-r":{
 					  "name": "Light 32 Color (Red) [502]",

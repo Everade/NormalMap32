@@ -17,7 +17,10 @@ The Construct plugin is distributed as a [.c3addon file](https://www.construct.n
 ## What is a Normal Map?
 
 Normal mapping is a texture mapping technique used for faking the lighting of bumps and dents – an implementation of bump mapping. Each normal map pixel represents the direction in which the sprite's pixel is facing.
+
 ![normals60degreescropped](https://github.com/Everade/NormalMap32/assets/12261601/7f708429-d451-4abf-a192-e44298d647f5)
+
+https://github.com/Everade/NormalMap32/assets/12261601/5e1581fb-cf97-445b-9075-a88f3becde71
 
 ## How does it work?
 
@@ -32,6 +35,7 @@ Please note that a light source object is not a requirement, but it's a convenie
 Applying the effect to lots of individual normal map sprites can be costly. Consider to either draw all normal sprites to a canvas or apply it to a layer instead. Set Max Light ID to the lowest possible value for enhanced shader performance.
 
 ## Features
+
 - Supports WebGL1.
 - Up to 32 simultaneous RGB light sources per normal map.
 - Linear, quadratic or mixed light falloff.

@@ -1,0 +1,2071 @@
+{
+	"languageTag": "en-US",
+	"fileDescription": "Strings for NormalMap32.",
+	"text": {
+		"effects": {
+			"normalmap32": {
+				"name": "NormalMap32",
+				"description": "Create a 3D light effect on any 2D sprite using a normal map.",
+				"help-url": "https://www.construct.net/en/make-games/addons/898/normalmap32",
+				"parameters": {
+					"screen-x-resolution":{
+					  "name": "Screen X Resolution [000]",
+					  "desc": "Screen X Resolution"
+					},
+					"screen-y-resolution":{
+					  "name": "Screen Y Resolution [001]",
+					  "desc": "Screen Y Resolution"
+					},
+					"light-1-state-01":{
+					  "name": "Light 1 State 0/1 [002]",
+					  "desc": "Light 1 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-1-pos-x":{
+					  "name": "Light 1 X Position [003]",
+					  "desc": "Light 1 Position (X)"
+					},
+					"light-1-pos-y":{
+					  "name": "Light 1 Y Position [004]",
+					  "desc": "Light 1 Position (Y)"
+					},
+					"light-1-pos-z":{
+					  "name": "Light 1 Z Position [005]",
+					  "desc": "Light 1 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-1-color-r":{
+					  "name": "Light 1 Color (Red) [006]",
+					  "desc": "Light 1 Color (Red) 0 to 1"
+					},
+					"light-1-color-g":{
+					  "name": "Light 1 Color (Green) [007]",
+					  "desc": "Light 1 Color (Green) 0 to 1"
+					},
+					"light-1-color-b":{
+					  "name": "Light 1 Color (Blue) [008]",
+					  "desc": "Light 1 Color (Blue) 0 to 1"
+					},
+					"light-1-luminosity":{
+					  "name": "Light 1 Luminosity [009]",
+					  "desc": "Light 1 Luminosity 0 to 1"
+					},
+					"light-1-ambient-r":{
+					  "name": "Light 1 Ambient (Red) [010]",
+					  "desc": "Light 1 Ambient (Red) 0 to 1"
+					},
+					"light-1-ambient-g":{
+					  "name": "Light 1 Ambient (Green) [011]",
+					  "desc": "Light 1 Ambient (Green) 0 to 1"
+					},
+					"light-1-ambient-b":{
+					  "name": "Light 1 Ambient (Blue) [012]",
+					  "desc": "Light 1 Ambient (Blue) 0 to 1"
+					},
+					"light-1-ambient-luminosity":{
+					  "name": "Light 1 Ambient Luminosity [013]",
+					  "desc": "Light 1 Ambient Luminosity 0 to 1"
+					},
+					"light-1-distance":{
+					  "name": "Light 1 Distance [014]",
+					  "desc": "Light 1 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-1-falloffv1":{
+					  "name": "Light 1 Falloff A [015]",
+					  "desc": "Light 1 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-1-falloffv2":{
+					  "name": "Light 1 Falloff B [016]",
+					  "desc": "Light 1 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-1-falloffv3":{
+					  "name": "Light 1 Falloff C [017]",
+					  "desc": "Light 1 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-2-state-01":{
+					  "name": "Light 2 State 0/1 [018]",
+					  "desc": "Light 2 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-2-pos-x":{
+					  "name": "Light 2 X Position [019]",
+					  "desc": "Light 2 Position (X)"
+					},
+					"light-2-pos-y":{
+					  "name": "Light 2 Y Position [020]",
+					  "desc": "Light 2 Position (Y)"
+					},
+					"light-2-pos-z":{
+					  "name": "Light 2 Z Position [021]",
+					  "desc": "Light 2 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-2-color-r":{
+					  "name": "Light 2 Color (Red) [022]",
+					  "desc": "Light 2 Color (Red) 0 to 1"
+					},
+					"light-2-color-g":{
+					  "name": "Light 2 Color (Green) [023]",
+					  "desc": "Light 2 Color (Green) 0 to 1"
+					},
+					"light-2-color-b":{
+					  "name": "Light 2 Color (Blue) [024]",
+					  "desc": "Light 2 Color (Blue) 0 to 1"
+					},
+					"light-2-luminosity":{
+					  "name": "Light 2 Luminosity [025]",
+					  "desc": "Light 2 Luminosity 0 to 1"
+					},
+					"light-2-ambient-r":{
+					  "name": "Light 2 Ambient (Red) [026]",
+					  "desc": "Light 2 Ambient (Red) 0 to 1"
+					},
+					"light-2-ambient-g":{
+					  "name": "Light 2 Ambient (Green) [027]",
+					  "desc": "Light 2 Ambient (Green) 0 to 1"
+					},
+					"light-2-ambient-b":{
+					  "name": "Light 2 Ambient (Blue) [028]",
+					  "desc": "Light 2 Ambient (Blue) 0 to 1"
+					},
+					"light-2-ambient-luminosity":{
+					  "name": "Light 2 Ambient Luminosity [029]",
+					  "desc": "Light 2 Ambient Luminosity 0 to 1"
+					},
+					"light-2-distance":{
+					  "name": "Light 2 Distance [030]",
+					  "desc": "Light 2 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-2-falloffv1":{
+					  "name": "Light 2 Falloff A [031]",
+					  "desc": "Light 2 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-2-falloffv2":{
+					  "name": "Light 2 Falloff B [032]",
+					  "desc": "Light 2 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-2-falloffv3":{
+					  "name": "Light 2 Falloff C [033]",
+					  "desc": "Light 2 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-3-state-01":{
+					  "name": "Light 3 State 0/1 [034]",
+					  "desc": "Light 3 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-3-pos-x":{
+					  "name": "Light 3 X Position [035]",
+					  "desc": "Light 3 Position (X)"
+					},
+					"light-3-pos-y":{
+					  "name": "Light 3 Y Position [036]",
+					  "desc": "Light 3 Position (Y)"
+					},
+					"light-3-pos-z":{
+					  "name": "Light 3 Z Position [037]",
+					  "desc": "Light 3 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-3-color-r":{
+					  "name": "Light 3 Color (Red) [038]",
+					  "desc": "Light 3 Color (Red) 0 to 1"
+					},
+					"light-3-color-g":{
+					  "name": "Light 3 Color (Green) [039]",
+					  "desc": "Light 3 Color (Green) 0 to 1"
+					},
+					"light-3-color-b":{
+					  "name": "Light 3 Color (Blue) [040]",
+					  "desc": "Light 3 Color (Blue) 0 to 1"
+					},
+					"light-3-luminosity":{
+					  "name": "Light 3 Luminosity [041]",
+					  "desc": "Light 3 Luminosity 0 to 1"
+					},
+					"light-3-ambient-r":{
+					  "name": "Light 3 Ambient (Red) [042]",
+					  "desc": "Light 3 Ambient (Red) 0 to 1"
+					},
+					"light-3-ambient-g":{
+					  "name": "Light 3 Ambient (Green) [043]",
+					  "desc": "Light 3 Ambient (Green) 0 to 1"
+					},
+					"light-3-ambient-b":{
+					  "name": "Light 3 Ambient (Blue) [044]",
+					  "desc": "Light 3 Ambient (Blue) 0 to 1"
+					},
+					"light-3-ambient-luminosity":{
+					  "name": "Light 3 Ambient Luminosity [045]",
+					  "desc": "Light 3 Ambient Luminosity 0 to 1"
+					},
+					"light-3-distance":{
+					  "name": "Light 3 Distance [046]",
+					  "desc": "Light 3 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-3-falloffv1":{
+					  "name": "Light 3 Falloff A [047]",
+					  "desc": "Light 3 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-3-falloffv2":{
+					  "name": "Light 3 Falloff B [048]",
+					  "desc": "Light 3 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-3-falloffv3":{
+					  "name": "Light 3 Falloff C [049]",
+					  "desc": "Light 3 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-4-state-01":{
+					  "name": "Light 4 State 0/1 [050]",
+					  "desc": "Light 4 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-4-pos-x":{
+					  "name": "Light 4 X Position [051]",
+					  "desc": "Light 4 Position (X)"
+					},
+					"light-4-pos-y":{
+					  "name": "Light 4 Y Position [052]",
+					  "desc": "Light 4 Position (Y)"
+					},
+					"light-4-pos-z":{
+					  "name": "Light 4 Z Position [053]",
+					  "desc": "Light 4 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-4-color-r":{
+					  "name": "Light 4 Color (Red) [054]",
+					  "desc": "Light 4 Color (Red) 0 to 1"
+					},
+					"light-4-color-g":{
+					  "name": "Light 4 Color (Green) [055]",
+					  "desc": "Light 4 Color (Green) 0 to 1"
+					},
+					"light-4-color-b":{
+					  "name": "Light 4 Color (Blue) [056]",
+					  "desc": "Light 4 Color (Blue) 0 to 1"
+					},
+					"light-4-luminosity":{
+					  "name": "Light 4 Luminosity [057]",
+					  "desc": "Light 4 Luminosity 0 to 1"
+					},
+					"light-4-ambient-r":{
+					  "name": "Light 4 Ambient (Red) [058]",
+					  "desc": "Light 4 Ambient (Red) 0 to 1"
+					},
+					"light-4-ambient-g":{
+					  "name": "Light 4 Ambient (Green) [059]",
+					  "desc": "Light 4 Ambient (Green) 0 to 1"
+					},
+					"light-4-ambient-b":{
+					  "name": "Light 4 Ambient (Blue) [060]",
+					  "desc": "Light 4 Ambient (Blue) 0 to 1"
+					},
+					"light-4-ambient-luminosity":{
+					  "name": "Light 4 Ambient Luminosity [061]",
+					  "desc": "Light 4 Ambient Luminosity 0 to 1"
+					},
+					"light-4-distance":{
+					  "name": "Light 4 Distance [062]",
+					  "desc": "Light 4 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-4-falloffv1":{
+					  "name": "Light 4 Falloff A [063]",
+					  "desc": "Light 4 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-4-falloffv2":{
+					  "name": "Light 4 Falloff B [064]",
+					  "desc": "Light 4 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-4-falloffv3":{
+					  "name": "Light 4 Falloff C [065]",
+					  "desc": "Light 4 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-5-state-01":{
+					  "name": "Light 5 State 0/1 [066]",
+					  "desc": "Light 5 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-5-pos-x":{
+					  "name": "Light 5 X Position [067]",
+					  "desc": "Light 5 Position (X)"
+					},
+					"light-5-pos-y":{
+					  "name": "Light 5 Y Position [068]",
+					  "desc": "Light 5 Position (Y)"
+					},
+					"light-5-pos-z":{
+					  "name": "Light 5 Z Position [069]",
+					  "desc": "Light 5 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-5-color-r":{
+					  "name": "Light 5 Color (Red) [070]",
+					  "desc": "Light 5 Color (Red) 0 to 1"
+					},
+					"light-5-color-g":{
+					  "name": "Light 5 Color (Green) [071]",
+					  "desc": "Light 5 Color (Green) 0 to 1"
+					},
+					"light-5-color-b":{
+					  "name": "Light 5 Color (Blue) [072]",
+					  "desc": "Light 5 Color (Blue) 0 to 1"
+					},
+					"light-5-luminosity":{
+					  "name": "Light 5 Luminosity [073]",
+					  "desc": "Light 5 Luminosity 0 to 1"
+					},
+					"light-5-ambient-r":{
+					  "name": "Light 5 Ambient (Red) [074]",
+					  "desc": "Light 5 Ambient (Red) 0 to 1"
+					},
+					"light-5-ambient-g":{
+					  "name": "Light 5 Ambient (Green) [075]",
+					  "desc": "Light 5 Ambient (Green) 0 to 1"
+					},
+					"light-5-ambient-b":{
+					  "name": "Light 5 Ambient (Blue) [076]",
+					  "desc": "Light 5 Ambient (Blue) 0 to 1"
+					},
+					"light-5-ambient-luminosity":{
+					  "name": "Light 5 Ambient Luminosity [077]",
+					  "desc": "Light 5 Ambient Luminosity 0 to 1"
+					},
+					"light-5-distance":{
+					  "name": "Light 5 Distance [078]",
+					  "desc": "Light 5 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-5-falloffv1":{
+					  "name": "Light 5 Falloff A [079]",
+					  "desc": "Light 5 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-5-falloffv2":{
+					  "name": "Light 5 Falloff B [080]",
+					  "desc": "Light 5 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-5-falloffv3":{
+					  "name": "Light 5 Falloff C [081]",
+					  "desc": "Light 5 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-6-state-01":{
+					  "name": "Light 6 State 0/1 [082]",
+					  "desc": "Light 6 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-6-pos-x":{
+					  "name": "Light 6 X Position [083]",
+					  "desc": "Light 6 Position (X)"
+					},
+					"light-6-pos-y":{
+					  "name": "Light 6 Y Position [084]",
+					  "desc": "Light 6 Position (Y)"
+					},
+					"light-6-pos-z":{
+					  "name": "Light 6 Z Position [085]",
+					  "desc": "Light 6 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-6-color-r":{
+					  "name": "Light 6 Color (Red) [086]",
+					  "desc": "Light 6 Color (Red) 0 to 1"
+					},
+					"light-6-color-g":{
+					  "name": "Light 6 Color (Green) [087]",
+					  "desc": "Light 6 Color (Green) 0 to 1"
+					},
+					"light-6-color-b":{
+					  "name": "Light 6 Color (Blue) [088]",
+					  "desc": "Light 6 Color (Blue) 0 to 1"
+					},
+					"light-6-luminosity":{
+					  "name": "Light 6 Luminosity [089]",
+					  "desc": "Light 6 Luminosity 0 to 1"
+					},
+					"light-6-ambient-r":{
+					  "name": "Light 6 Ambient (Red) [090]",
+					  "desc": "Light 6 Ambient (Red) 0 to 1"
+					},
+					"light-6-ambient-g":{
+					  "name": "Light 6 Ambient (Green) [091]",
+					  "desc": "Light 6 Ambient (Green) 0 to 1"
+					},
+					"light-6-ambient-b":{
+					  "name": "Light 6 Ambient (Blue) [092]",
+					  "desc": "Light 6 Ambient (Blue) 0 to 1"
+					},
+					"light-6-ambient-luminosity":{
+					  "name": "Light 6 Ambient Luminosity [093]",
+					  "desc": "Light 6 Ambient Luminosity 0 to 1"
+					},
+					"light-6-distance":{
+					  "name": "Light 6 Distance [094]",
+					  "desc": "Light 6 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-6-falloffv1":{
+					  "name": "Light 6 Falloff A [095]",
+					  "desc": "Light 6 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-6-falloffv2":{
+					  "name": "Light 6 Falloff B [096]",
+					  "desc": "Light 6 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-6-falloffv3":{
+					  "name": "Light 6 Falloff C [097]",
+					  "desc": "Light 6 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-7-state-01":{
+					  "name": "Light 7 State 0/1 [098]",
+					  "desc": "Light 7 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-7-pos-x":{
+					  "name": "Light 7 X Position [99]",
+					  "desc": "Light 7 Position (X)"
+					},
+					"light-7-pos-y":{
+					  "name": "Light 7 Y Position [100]",
+					  "desc": "Light 7 Position (Y)"
+					},
+					"light-7-pos-z":{
+					  "name": "Light 7 Z Position [101]",
+					  "desc": "Light 7 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-7-color-r":{
+					  "name": "Light 7 Color (Red) [102]",
+					  "desc": "Light 7 Color (Red) 0 to 1"
+					},
+					"light-7-color-g":{
+					  "name": "Light 7 Color (Green) [103]",
+					  "desc": "Light 7 Color (Green) 0 to 1"
+					},
+					"light-7-color-b":{
+					  "name": "Light 7 Color (Blue) [104]",
+					  "desc": "Light 7 Color (Blue) 0 to 1"
+					},
+					"light-7-luminosity":{
+					  "name": "Light 7 Luminosity [105]",
+					  "desc": "Light 7 Luminosity 0 to 1"
+					},
+					"light-7-ambient-r":{
+					  "name": "Light 7 Ambient (Red) [106]",
+					  "desc": "Light 7 Ambient (Red) 0 to 1"
+					},
+					"light-7-ambient-g":{
+					  "name": "Light 7 Ambient (Green) [107]",
+					  "desc": "Light 7 Ambient (Green) 0 to 1"
+					},
+					"light-7-ambient-b":{
+					  "name": "Light 7 Ambient (Blue) [108]",
+					  "desc": "Light 7 Ambient (Blue) 0 to 1"
+					},
+					"light-7-ambient-luminosity":{
+					  "name": "Light 7 Ambient Luminosity [109]",
+					  "desc": "Light 7 Ambient Luminosity 0 to 1"
+					},
+					"light-7-distance":{
+					  "name": "Light 7 Distance [110]",
+					  "desc": "Light 7 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-7-falloffv1":{
+					  "name": "Light 7 Falloff A [111]",
+					  "desc": "Light 7 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-7-falloffv2":{
+					  "name": "Light 7 Falloff B [112]",
+					  "desc": "Light 7 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-7-falloffv3":{
+					  "name": "Light 7 Falloff C [113]",
+					  "desc": "Light 7 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-8-state-01":{
+					  "name": "Light 8 State 0/1 [114]",
+					  "desc": "Light 8 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-8-pos-x":{
+					  "name": "Light 8 X Position [115]",
+					  "desc": "Light 8 Position (X)"
+					},
+					"light-8-pos-y":{
+					  "name": "Light 8 Y Position [116]",
+					  "desc": "Light 8 Position (Y)"
+					},
+					"light-8-pos-z":{
+					  "name": "Light 8 Z Position [117]",
+					  "desc": "Light 8 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-8-color-r":{
+					  "name": "Light 8 Color (Red) [118]",
+					  "desc": "Light 8 Color (Red) 0 to 1"
+					},
+					"light-8-color-g":{
+					  "name": "Light 8 Color (Green) [119]",
+					  "desc": "Light 8 Color (Green) 0 to 1"
+					},
+					"light-8-color-b":{
+					  "name": "Light 8 Color (Blue) [120]",
+					  "desc": "Light 8 Color (Blue) 0 to 1"
+					},
+					"light-8-luminosity":{
+					  "name": "Light 8 Luminosity [121]",
+					  "desc": "Light 8 Luminosity 0 to 1"
+					},
+					"light-8-ambient-r":{
+					  "name": "Light 8 Ambient (Red) [122]",
+					  "desc": "Light 8 Ambient (Red) 0 to 1"
+					},
+					"light-8-ambient-g":{
+					  "name": "Light 8 Ambient (Green) [123]",
+					  "desc": "Light 8 Ambient (Green) 0 to 1"
+					},
+					"light-8-ambient-b":{
+					  "name": "Light 8 Ambient (Blue) [124]",
+					  "desc": "Light 8 Ambient (Blue) 0 to 1"
+					},
+					"light-8-ambient-luminosity":{
+					  "name": "Light 8 Ambient Luminosity [125]",
+					  "desc": "Light 8 Ambient Luminosity 0 to 1"
+					},
+					"light-8-distance":{
+					  "name": "Light 8 Distance [126]",
+					  "desc": "Light 8 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-8-falloffv1":{
+					  "name": "Light 8 Falloff A [127]",
+					  "desc": "Light 8 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-8-falloffv2":{
+					  "name": "Light 8 Falloff B [128]",
+					  "desc": "Light 8 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-8-falloffv3":{
+					  "name": "Light 8 Falloff C [129]",
+					  "desc": "Light 8 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-9-state-01":{
+					  "name": "Light 9 State 0/1 [130]",
+					  "desc": "Light 9 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-9-pos-x":{
+					  "name": "Light 9 X Position [131]",
+					  "desc": "Light 9 Position (X)"
+					},
+					"light-9-pos-y":{
+					  "name": "Light 9 Y Position [132]",
+					  "desc": "Light 9 Position (Y)"
+					},
+					"light-9-pos-z":{
+					  "name": "Light 9 Z Position [133]",
+					  "desc": "Light 9 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-9-color-r":{
+					  "name": "Light 9 Color (Red) [134]",
+					  "desc": "Light 9 Color (Red) 0 to 1"
+					},
+					"light-9-color-g":{
+					  "name": "Light 9 Color (Green) [135]",
+					  "desc": "Light 9 Color (Green) 0 to 1"
+					},
+					"light-9-color-b":{
+					  "name": "Light 9 Color (Blue) [136]",
+					  "desc": "Light 9 Color (Blue) 0 to 1"
+					},
+					"light-9-luminosity":{
+					  "name": "Light 9 Luminosity [137]",
+					  "desc": "Light 9 Luminosity 0 to 1"
+					},
+					"light-9-ambient-r":{
+					  "name": "Light 9 Ambient (Red) [138]",
+					  "desc": "Light 9 Ambient (Red) 0 to 1"
+					},
+					"light-9-ambient-g":{
+					  "name": "Light 9 Ambient (Green) [139]",
+					  "desc": "Light 9 Ambient (Green) 0 to 1"
+					},
+					"light-9-ambient-b":{
+					  "name": "Light 9 Ambient (Blue) [140]",
+					  "desc": "Light 9 Ambient (Blue) 0 to 1"
+					},
+					"light-9-ambient-luminosity":{
+					  "name": "Light 9 Ambient Luminosity [141]",
+					  "desc": "Light 9 Ambient Luminosity 0 to 1"
+					},
+					"light-9-distance":{
+					  "name": "Light 9 Distance [142]",
+					  "desc": "Light 9 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-9-falloffv1":{
+					  "name": "Light 9 Falloff A [143]",
+					  "desc": "Light 9 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-9-falloffv2":{
+					  "name": "Light 9 Falloff B [144]",
+					  "desc": "Light 9 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-9-falloffv3":{
+					  "name": "Light 9 Falloff C [145]",
+					  "desc": "Light 9 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-10-state-01":{
+					  "name": "Light 10 State 0/1 [146]",
+					  "desc": "Light 10 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-10-pos-x":{
+					  "name": "Light 10 X Position [147]",
+					  "desc": "Light 10 Position (X)"
+					},
+					"light-10-pos-y":{
+					  "name": "Light 10 Y Position [148]",
+					  "desc": "Light 10 Position (Y)"
+					},
+					"light-10-pos-z":{
+					  "name": "Light 10 Z Position [149]",
+					  "desc": "Light 10 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-10-color-r":{
+					  "name": "Light 10 Color (Red) [150]",
+					  "desc": "Light 10 Color (Red) 0 to 1"
+					},
+					"light-10-color-g":{
+					  "name": "Light 10 Color (Green) [151]",
+					  "desc": "Light 10 Color (Green) 0 to 1"
+					},
+					"light-10-color-b":{
+					  "name": "Light 10 Color (Blue) [152]",
+					  "desc": "Light 10 Color (Blue) 0 to 1"
+					},
+					"light-10-luminosity":{
+					  "name": "Light 10 Luminosity [153]",
+					  "desc": "Light 10 Luminosity 0 to 1"
+					},
+					"light-10-ambient-r":{
+					  "name": "Light 10 Ambient (Red) [154]",
+					  "desc": "Light 10 Ambient (Red) 0 to 1"
+					},
+					"light-10-ambient-g":{
+					  "name": "Light 10 Ambient (Green) [155]",
+					  "desc": "Light 10 Ambient (Green) 0 to 1"
+					},
+					"light-10-ambient-b":{
+					  "name": "Light 10 Ambient (Blue) [156]",
+					  "desc": "Light 10 Ambient (Blue) 0 to 1"
+					},
+					"light-10-ambient-luminosity":{
+					  "name": "Light 10 Ambient Luminosity [157]",
+					  "desc": "Light 10 Ambient Luminosity 0 to 1"
+					},
+					"light-10-distance":{
+					  "name": "Light 10 Distance [158]",
+					  "desc": "Light 10 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-10-falloffv1":{
+					  "name": "Light 10 Falloff A [159]",
+					  "desc": "Light 10 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-10-falloffv2":{
+					  "name": "Light 10 Falloff B [160]",
+					  "desc": "Light 10 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-10-falloffv3":{
+					  "name": "Light 10 Falloff C [161]",
+					  "desc": "Light 10 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-11-state-01":{
+					  "name": "Light 11 State 0/1 [162]",
+					  "desc": "Light 11 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-11-pos-x":{
+					  "name": "Light 11 X Position [163]",
+					  "desc": "Light 11 Position (X)"
+					},
+					"light-11-pos-y":{
+					  "name": "Light 11 Y Position [164]",
+					  "desc": "Light 11 Position (Y)"
+					},
+					"light-11-pos-z":{
+					  "name": "Light 11 Z Position [165]",
+					  "desc": "Light H Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-11-color-r":{
+					  "name": "Light 11 Color (Red) [166]",
+					  "desc": "Light 11 Color (Red) 0 to 1"
+					},
+					"light-11-color-g":{
+					  "name": "Light 11 Color (Green) [167]",
+					  "desc": "Light 11 Color (Green) 0 to 1"
+					},
+					"light-11-color-b":{
+					  "name": "Light 11 Color (Blue) [168]",
+					  "desc": "Light 11 Color (Blue) 0 to 1"
+					},
+					"light-11-luminosity":{
+					  "name": "Light 11 Luminosity [169]",
+					  "desc": "Light 11 Luminosity 0 to 1"
+					},
+					"light-11-ambient-r":{
+					  "name": "Light 11 Ambient (Red) [170]",
+					  "desc": "Light 11 Ambient (Red) 0 to 1"
+					},
+					"light-11-ambient-g":{
+					  "name": "Light 11 Ambient (Green) [171]",
+					  "desc": "Light 11 Ambient (Green) 0 to 1"
+					},
+					"light-11-ambient-b":{
+					  "name": "Light 11 Ambient (Blue) [172]",
+					  "desc": "Light 11 Ambient (Blue) 0 to 1"
+					},
+					"light-11-ambient-luminosity":{
+					  "name": "Light 11 Ambient Luminosity [173]",
+					  "desc": "Light 11 Ambient Luminosity 0 to 1"
+					},
+					"light-11-distance":{
+					  "name": "Light 11 Distance [174]",
+					  "desc": "Light 11 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-11-falloffv1":{
+					  "name": "Light 11 Falloff A [175]",
+					  "desc": "Light 11 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-11-falloffv2":{
+					  "name": "Light 11 Falloff B [176]",
+					  "desc": "Light 11 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-11-falloffv3":{
+					  "name": "Light 11 Falloff C [177]",
+					  "desc": "Light 11 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-12-state-01":{
+					  "name": "Light 12 State 0/1 [178]",
+					  "desc": "Light 12 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-12-pos-x":{
+					  "name": "Light 12 X Position [179]",
+					  "desc": "Light 12 Position (X)"
+					},
+					"light-12-pos-y":{
+					  "name": "Light 12 Y Position [180]",
+					  "desc": "Light 12 Position (Y)"
+					},
+					"light-12-pos-z":{
+					  "name": "Light 12 Z Position [181]",
+					  "desc": "Light 12 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-12-color-r":{
+					  "name": "Light 12 Color (Red) [182]",
+					  "desc": "Light 12 Color (Red) 0 to 1"
+					},
+					"light-12-color-g":{
+					  "name": "Light 12 Color (Green) [183]",
+					  "desc": "Light 12 Color (Green) 0 to 1"
+					},
+					"light-12-color-b":{
+					  "name": "Light 12 Color (Blue) [184]",
+					  "desc": "Light 12 Color (Blue) 0 to 1"
+					},
+					"light-12-luminosity":{
+					  "name": "Light 12 Luminosity [185]",
+					  "desc": "Light 12 Luminosity 0 to 1"
+					},
+					"light-12-ambient-r":{
+					  "name": "Light 12 Ambient (Red) [186]",
+					  "desc": "Light 12 Ambient (Red) 0 to 1"
+					},
+					"light-12-ambient-g":{
+					  "name": "Light 12 Ambient (Green) [187]",
+					  "desc": "Light 12 Ambient (Green) 0 to 1"
+					},
+					"light-12-ambient-b":{
+					  "name": "Light 12 Ambient (Blue) [188]",
+					  "desc": "Light 12 Ambient (Blue) 0 to 1"
+					},
+					"light-12-ambient-luminosity":{
+					  "name": "Light 12 Ambient Luminosity [189]",
+					  "desc": "Light 12 Ambient Luminosity 0 to 1"
+					},
+					"light-12-distance":{
+					  "name": "Light 12 Distance [190]",
+					  "desc": "Light 12 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-12-falloffv1":{
+					  "name": "Light 12 Falloff A [191]",
+					  "desc": "Light 12 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-12-falloffv2":{
+					  "name": "Light 12 Falloff B [192]",
+					  "desc": "Light 12 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-12-falloffv3":{
+					  "name": "Light 12 Falloff C [193]",
+					  "desc": "Light 12 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-13-state-01":{
+					  "name": "Light 13 State 0/1 [194]",
+					  "desc": "Light 13 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-13-pos-x":{
+					  "name": "Light 13 X Position [195]",
+					  "desc": "Light 13 Position (X)"
+					},
+					"light-13-pos-y":{
+					  "name": "Light 13 Y Position [196]",
+					  "desc": "Light 13 Position (Y)"
+					},
+					"light-13-pos-z":{
+					  "name": "Light 13 Z Position [197]",
+					  "desc": "Light 13 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-13-color-r":{
+					  "name": "Light 13 Color (Red) [198]",
+					  "desc": "Light 13 Color (Red) 0 to 1"
+					},
+					"light-13-color-g":{
+					  "name": "Light 13 Color (Green) [199]",
+					  "desc": "Light 13 Color (Green) 0 to 1"
+					},
+					"light-13-color-b":{
+					  "name": "Light 13 Color (Blue) [200]",
+					  "desc": "Light 13 Color (Blue) 0 to 1"
+					},
+					"light-13-luminosity":{
+					  "name": "Light 13 Luminosity [201]",
+					  "desc": "Light 13 Luminosity 0 to 1"
+					},
+					"light-13-ambient-r":{
+					  "name": "Light 13 Ambient (Red) [202]",
+					  "desc": "Light 13 Ambient (Red) 0 to 1"
+					},
+					"light-13-ambient-g":{
+					  "name": "Light 13 Ambient (Green) [203]",
+					  "desc": "Light 13 Ambient (Green) 0 to 1"
+					},
+					"light-13-ambient-b":{
+					  "name": "Light 13 Ambient (Blue) [204]",
+					  "desc": "Light 13 Ambient (Blue) 0 to 1"
+					},
+					"light-13-ambient-luminosity":{
+					  "name": "Light 13 Ambient Luminosity [205]",
+					  "desc": "Light 13 Ambient Luminosity 0 to 1"
+					},
+					"light-13-distance":{
+					  "name": "Light 13 Distance [206]",
+					  "desc": "Light 13 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-13-falloffv1":{
+					  "name": "Light 13 Falloff A [207]",
+					  "desc": "Light 13 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-13-falloffv2":{
+					  "name": "Light 13 Falloff B [208]",
+					  "desc": "Light 13 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-13-falloffv3":{
+					  "name": "Light 13 Falloff C [209]",
+					  "desc": "Light 13 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-14-state-01":{
+					  "name": "Light 14 State 0/1 [210]",
+					  "desc": "Light 14 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-14-pos-x":{
+					  "name": "Light 14 X Position [211]",
+					  "desc": "Light 14 Position (X)"
+					},
+					"light-14-pos-y":{
+					  "name": "Light 14 Y Position [212]",
+					  "desc": "Light 14 Position (Y)"
+					},
+					"light-14-pos-z":{
+					  "name": "Light 14 Z Position [213]",
+					  "desc": "Light 14 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-14-color-r":{
+					  "name": "Light 14 Color (Red) [214]",
+					  "desc": "Light 14 Color (Red) 0 to 1"
+					},
+					"light-14-color-g":{
+					  "name": "Light 14 Color (Green) [215]",
+					  "desc": "Light 14 Color (Green) 0 to 1"
+					},
+					"light-14-color-b":{
+					  "name": "Light 14 Color (Blue) [216]",
+					  "desc": "Light 14 Color (Blue) 0 to 1"
+					},
+					"light-14-luminosity":{
+					  "name": "Light 14 Luminosity [217]",
+					  "desc": "Light 14 Luminosity 0 to 1"
+					},
+					"light-14-ambient-r":{
+					  "name": "Light 14 Ambient (Red) [218]",
+					  "desc": "Light 14 Ambient (Red) 0 to 1"
+					},
+					"light-14-ambient-g":{
+					  "name": "Light 14 Ambient (Green) [219]",
+					  "desc": "Light 14 Ambient (Green) 0 to 1"
+					},
+					"light-14-ambient-b":{
+					  "name": "Light 14 Ambient (Blue) [220]",
+					  "desc": "Light 14 Ambient (Blue) 0 to 1"
+					},
+					"light-14-ambient-luminosity":{
+					  "name": "Light 14 Ambient Luminosity [221]",
+					  "desc": "Light 14 Ambient Luminosity 0 to 1"
+					},
+					"light-14-distance":{
+					  "name": "Light 14 Distance [222]",
+					  "desc": "Light 14 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-14-falloffv1":{
+					  "name": "Light 14 Falloff A [223]",
+					  "desc": "Light 14 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-14-falloffv2":{
+					  "name": "Light 14 Falloff B [224]",
+					  "desc": "Light 14 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-14-falloffv3":{
+					  "name": "Light 14 Falloff C [225]",
+					  "desc": "Light 14 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-15-state-01":{
+					  "name": "Light 15 State 0/1 [226]",
+					  "desc": "Light 15 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-15-pos-x":{
+					  "name": "Light 15 X Position [227]",
+					  "desc": "Light 15 Position (X)"
+					},
+					"light-15-pos-y":{
+					  "name": "Light 15 Y Position [228]",
+					  "desc": "Light 15 Position (Y)"
+					},
+					"light-15-pos-z":{
+					  "name": "Light 15 Z Position [229]",
+					  "desc": "Light 15 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-15-color-r":{
+					  "name": "Light 15 Color (Red) [230]",
+					  "desc": "Light 15 Color (Red) 0 to 1"
+					},
+					"light-15-color-g":{
+					  "name": "Light 15 Color (Green) [231]",
+					  "desc": "Light 15 Color (Green) 0 to 1"
+					},
+					"light-15-color-b":{
+					  "name": "Light 15 Color (Blue) [232]",
+					  "desc": "Light 15 Color (Blue) 0 to 1"
+					},
+					"light-15-luminosity":{
+					  "name": "Light 15 Luminosity [233]",
+					  "desc": "Light 15 Luminosity 0 to 1"
+					},
+					"light-15-ambient-r":{
+					  "name": "Light 15 Ambient (Red) [234]",
+					  "desc": "Light 15 Ambient (Red) 0 to 1"
+					},
+					"light-15-ambient-g":{
+					  "name": "Light 15 Ambient (Green) [235]",
+					  "desc": "Light 15 Ambient (Green) 0 to 1"
+					},
+					"light-15-ambient-b":{
+					  "name": "Light 15 Ambient (Blue) [236]",
+					  "desc": "Light 15 Ambient (Blue) 0 to 1"
+					},
+					"light-15-ambient-luminosity":{
+					  "name": "Light 15 Ambient Luminosity [237]",
+					  "desc": "Light 15 Ambient Luminosity 0 to 1"
+					},
+					"light-15-distance":{
+					  "name": "Light 15 Distance [238]",
+					  "desc": "Light 15 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-15-falloffv1":{
+					  "name": "Light 15 Falloff A [239]",
+					  "desc": "Light 15 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-15-falloffv2":{
+					  "name": "Light 15 Falloff B [240]",
+					  "desc": "Light 15 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-15-falloffv3":{
+					  "name": "Light 15 Falloff C [241]",
+					  "desc": "Light 15 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-16-state-01":{
+					  "name": "Light 16 State 0/1 [242]",
+					  "desc": "Light 16 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-16-pos-x":{
+					  "name": "Light 16 X Position [243]",
+					  "desc": "Light 16 Position (X)"
+					},
+					"light-16-pos-y":{
+					  "name": "Light 16 Y Position [244]",
+					  "desc": "Light 16 Position (Y)"
+					},
+					"light-16-pos-z":{
+					  "name": "Light 16 Z Position [245]",
+					  "desc": "Light 16 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-16-color-r":{
+					  "name": "Light 16 Color (Red) [246]",
+					  "desc": "Light 16 Color (Red) 0 to 1"
+					},
+					"light-16-color-g":{
+					  "name": "Light 16 Color (Green) [247]",
+					  "desc": "Light 16 Color (Green) 0 to 1"
+					},
+					"light-16-color-b":{
+					  "name": "Light 16 Color (Blue) [248]",
+					  "desc": "Light 16 Color (Blue) 0 to 1"
+					},
+					"light-16-luminosity":{
+					  "name": "Light 16 Luminosity [249]",
+					  "desc": "Light 16 Luminosity 0 to 1"
+					},
+					"light-16-ambient-r":{
+					  "name": "Light 16 Ambient (Red) [250]",
+					  "desc": "Light 16 Ambient (Red) 0 to 1"
+					},
+					"light-16-ambient-g":{
+					  "name": "Light 16 Ambient (Green) [251]",
+					  "desc": "Light 16 Ambient (Green) 0 to 1"
+					},
+					"light-16-ambient-b":{
+					  "name": "Light 16 Ambient (Blue) [252]",
+					  "desc": "Light 16 Ambient (Blue) 0 to 1"
+					},
+					"light-16-ambient-luminosity":{
+					  "name": "Light 16 Ambient Luminosity [253]",
+					  "desc": "Light 16 Ambient Luminosity 0 to 1"
+					},
+					"light-16-distance":{
+					  "name": "Light 16 Distance [254]",
+					  "desc": "Light 16 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-16-falloffv1":{
+					  "name": "Light 16 Falloff A [255]",
+					  "desc": "Light 16 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-16-falloffv2":{
+					  "name": "Light 16 Falloff B [256]",
+					  "desc": "Light 16 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-16-falloffv3":{
+					  "name": "Light 16 Falloff C [257]",
+					  "desc": "Light 16 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-17-state-01":{
+					  "name": "Light 17 State 0/1 [258]",
+					  "desc": "Light 17 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-17-pos-x":{
+					  "name": "Light 17 X Position [259]",
+					  "desc": "Light 17 Position (X)"
+					},
+					"light-17-pos-y":{
+					  "name": "Light 17 Y Position [260]",
+					  "desc": "Light 17 Position (Y)"
+					},
+					"light-17-pos-z":{
+					  "name": "Light 17 Z Position [261]",
+					  "desc": "Light 17 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-17-color-r":{
+					  "name": "Light 17 Color (Red) [262]",
+					  "desc": "Light 17 Color (Red) 0 to 1"
+					},
+					"light-17-color-g":{
+					  "name": "Light 17 Color (Green) [263]",
+					  "desc": "Light 17 Color (Green) 0 to 1"
+					},
+					"light-17-color-b":{
+					  "name": "Light 17 Color (Blue) [264]",
+					  "desc": "Light 17 Color (Blue) 0 to 1"
+					},
+					"light-17-luminosity":{
+					  "name": "Light 17 Luminosity [265]",
+					  "desc": "Light 17 Luminosity 0 to 1"
+					},
+					"light-17-ambient-r":{
+					  "name": "Light 17 Ambient (Red) [266]",
+					  "desc": "Light 17 Ambient (Red) 0 to 1"
+					},
+					"light-17-ambient-g":{
+					  "name": "Light 17 Ambient (Green) [267]",
+					  "desc": "Light 17 Ambient (Green) 0 to 1"
+					},
+					"light-17-ambient-b":{
+					  "name": "Light 17 Ambient (Blue) [268]",
+					  "desc": "Light 17 Ambient (Blue) 0 to 1"
+					},
+					"light-17-ambient-luminosity":{
+					  "name": "Light 17 Ambient Luminosity [269]",
+					  "desc": "Light 17 Ambient Luminosity 0 to 1"
+					},
+					"light-17-distance":{
+					  "name": "Light 17 Distance [270]",
+					  "desc": "Light 17 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-17-falloffv1":{
+					  "name": "Light 17 Falloff A [271]",
+					  "desc": "Light 17 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-17-falloffv2":{
+					  "name": "Light 17 Falloff B [272]",
+					  "desc": "Light 17 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-17-falloffv3":{
+					  "name": "Light 17 Falloff C [273]",
+					  "desc": "Light 17 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-18-state-01":{
+					  "name": "Light 18 State 0/1 [274]",
+					  "desc": "Light 18 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-18-pos-x":{
+					  "name": "Light 18 X Position [275]",
+					  "desc": "Light 18 Position (X)"
+					},
+					"light-18-pos-y":{
+					  "name": "Light 18 Y Position [276]",
+					  "desc": "Light 18 Position (Y)"
+					},
+					"light-18-pos-z":{
+					  "name": "Light 18 Z Position [277]",
+					  "desc": "Light 18 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-18-color-r":{
+					  "name": "Light 18 Color (Red) [278]",
+					  "desc": "Light 18 Color (Red) 0 to 1"
+					},
+					"light-18-color-g":{
+					  "name": "Light 18 Color (Green) [279]",
+					  "desc": "Light 18 Color (Green) 0 to 1"
+					},
+					"light-18-color-b":{
+					  "name": "Light 18 Color (Blue) [280]",
+					  "desc": "Light 18 Color (Blue) 0 to 1"
+					},
+					"light-18-luminosity":{
+					  "name": "Light 18 Luminosity [281]",
+					  "desc": "Light 18 Luminosity 0 to 1"
+					},
+					"light-18-ambient-r":{
+					  "name": "Light 18 Ambient (Red) [282]",
+					  "desc": "Light 18 Ambient (Red) 0 to 1"
+					},
+					"light-18-ambient-g":{
+					  "name": "Light 18 Ambient (Green) [283]",
+					  "desc": "Light 18 Ambient (Green) 0 to 1"
+					},
+					"light-18-ambient-b":{
+					  "name": "Light 18 Ambient (Blue) [284]",
+					  "desc": "Light 18 Ambient (Blue) 0 to 1"
+					},
+					"light-18-ambient-luminosity":{
+					  "name": "Light 18 Ambient Luminosity [285]",
+					  "desc": "Light 18 Ambient Luminosity 0 to 1"
+					},
+					"light-18-distance":{
+					  "name": "Light 18 Distance [286]",
+					  "desc": "Light 18 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-18-falloffv1":{
+					  "name": "Light 18 Falloff A [287]",
+					  "desc": "Light 18 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-18-falloffv2":{
+					  "name": "Light 18 Falloff B [288]",
+					  "desc": "Light 18 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-18-falloffv3":{
+					  "name": "Light 18 Falloff C [289]",
+					  "desc": "Light 18 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-19-state-01":{
+					  "name": "Light 19 State 0/1 [290]",
+					  "desc": "Light 19 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-19-pos-x":{
+					  "name": "Light 19 X Position [291]",
+					  "desc": "Light 19 Position (X)"
+					},
+					"light-19-pos-y":{
+					  "name": "Light 19 Y Position [292]",
+					  "desc": "Light 19 Position (Y)"
+					},
+					"light-19-pos-z":{
+					  "name": "Light 19 Z Position [293]",
+					  "desc": "Light 19 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-19-color-r":{
+					  "name": "Light 19 Color (Red) [294]",
+					  "desc": "Light 19 Color (Red) 0 to 1"
+					},
+					"light-19-color-g":{
+					  "name": "Light 19 Color (Green) [295]",
+					  "desc": "Light 19 Color (Green) 0 to 1"
+					},
+					"light-19-color-b":{
+					  "name": "Light 19 Color (Blue) [296]",
+					  "desc": "Light 19 Color (Blue) 0 to 1"
+					},
+					"light-19-luminosity":{
+					  "name": "Light 19 Luminosity [297]",
+					  "desc": "Light 19 Luminosity 0 to 1"
+					},
+					"light-19-ambient-r":{
+					  "name": "Light 19 Ambient (Red) [298]",
+					  "desc": "Light 19 Ambient (Red) 0 to 1"
+					},
+					"light-19-ambient-g":{
+					  "name": "Light 19 Ambient (Green) [299]",
+					  "desc": "Light 19 Ambient (Green) 0 to 1"
+					},
+					"light-19-ambient-b":{
+					  "name": "Light 19 Ambient (Blue) [300]",
+					  "desc": "Light 19 Ambient (Blue) 0 to 1"
+					},
+					"light-19-ambient-luminosity":{
+					  "name": "Light 19 Ambient Luminosity [301]",
+					  "desc": "Light 19 Ambient Luminosity 0 to 1"
+					},
+					"light-19-distance":{
+					  "name": "Light 19 Distance [302]",
+					  "desc": "Light 19 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-19-falloffv1":{
+					  "name": "Light 19 Falloff A [303]",
+					  "desc": "Light 19 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-19-falloffv2":{
+					  "name": "Light 19 Falloff B [304]",
+					  "desc": "Light 19 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-19-falloffv3":{
+					  "name": "Light 19 Falloff C [305]",
+					  "desc": "Light 19 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-20-state-01":{
+					  "name": "Light 20 State 0/1 [306]",
+					  "desc": "Light 20 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-20-pos-x":{
+					  "name": "Light 20 X Position [307]",
+					  "desc": "Light 20 Position (X)"
+					},
+					"light-20-pos-y":{
+					  "name": "Light 20 Y Position [308]",
+					  "desc": "Light 20 Position (Y)"
+					},
+					"light-20-pos-z":{
+					  "name": "Light 20 Z Position [309]",
+					  "desc": "Light 20 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-20-color-r":{
+					  "name": "Light 20 Color (Red) [310]",
+					  "desc": "Light 20 Color (Red) 0 to 1"
+					},
+					"light-20-color-g":{
+					  "name": "Light 20 Color (Green) [311]",
+					  "desc": "Light 20 Color (Green) 0 to 1"
+					},
+					"light-20-color-b":{
+					  "name": "Light 20 Color (Blue) [312]",
+					  "desc": "Light 20 Color (Blue) 0 to 1"
+					},
+					"light-20-luminosity":{
+					  "name": "Light 20 Luminosity [313]",
+					  "desc": "Light 20 Luminosity 0 to 1"
+					},
+					"light-20-ambient-r":{
+					  "name": "Light 20 Ambient (Red) [314]",
+					  "desc": "Light 20 Ambient (Red) 0 to 1"
+					},
+					"light-20-ambient-g":{
+					  "name": "Light 20 Ambient (Green) [315]",
+					  "desc": "Light 20 Ambient (Green) 0 to 1"
+					},
+					"light-20-ambient-b":{
+					  "name": "Light 20 Ambient (Blue) [316]",
+					  "desc": "Light 20 Ambient (Blue) 0 to 1"
+					},
+					"light-20-ambient-luminosity":{
+					  "name": "Light 20 Ambient Luminosity [317]",
+					  "desc": "Light 20 Ambient Luminosity 0 to 1"
+					},
+					"light-20-distance":{
+					  "name": "Light 20 Distance [318]",
+					  "desc": "Light 20 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-20-falloffv1":{
+					  "name": "Light 20 Falloff A [319]",
+					  "desc": "Light 20 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-20-falloffv2":{
+					  "name": "Light 20 Falloff B [320]",
+					  "desc": "Light 20 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-20-falloffv3":{
+					  "name": "Light 20 Falloff C [321]",
+					  "desc": "Light 20 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-21-state-01":{
+					  "name": "Light 21 State 0/1 [322]",
+					  "desc": "Light 21 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-21-pos-x":{
+					  "name": "Light 21 X Position [323]",
+					  "desc": "Light 21 Position (X)"
+					},
+					"light-21-pos-y":{
+					  "name": "Light 21 Y Position [324]",
+					  "desc": "Light 21 Position (Y)"
+					},
+					"light-21-pos-z":{
+					  "name": "Light 21 Z Position [325]",
+					  "desc": "Light 21 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-21-color-r":{
+					  "name": "Light 21 Color (Red) [326]",
+					  "desc": "Light 21 Color (Red) 0 to 1"
+					},
+					"light-21-color-g":{
+					  "name": "Light 21 Color (Green) [327]",
+					  "desc": "Light 21 Color (Green) 0 to 1"
+					},
+					"light-21-color-b":{
+					  "name": "Light 21 Color (Blue) [328]",
+					  "desc": "Light 21 Color (Blue) 0 to 1"
+					},
+					"light-21-luminosity":{
+					  "name": "Light 21 Luminosity [329]",
+					  "desc": "Light 21 Luminosity 0 to 1"
+					},
+					"light-21-ambient-r":{
+					  "name": "Light 21 Ambient (Red) [330]",
+					  "desc": "Light 21 Ambient (Red) 0 to 1"
+					},
+					"light-21-ambient-g":{
+					  "name": "Light 21 Ambient (Green) [331]",
+					  "desc": "Light 21 Ambient (Green) 0 to 1"
+					},
+					"light-21-ambient-b":{
+					  "name": "Light 21 Ambient (Blue) [332]",
+					  "desc": "Light 21 Ambient (Blue) 0 to 1"
+					},
+					"light-21-ambient-luminosity":{
+					  "name": "Light 21 Ambient Luminosity [333]",
+					  "desc": "Light 21 Ambient Luminosity 0 to 1"
+					},
+					"light-21-distance":{
+					  "name": "Light 21 Distance [334]",
+					  "desc": "Light 21 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-21-falloffv1":{
+					  "name": "Light 21 Falloff A [335]",
+					  "desc": "Light 21 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-21-falloffv2":{
+					  "name": "Light 21 Falloff B [336]",
+					  "desc": "Light 21 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-21-falloffv3":{
+					  "name": "Light 21 Falloff C [337]",
+					  "desc": "Light 21 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-22-state-01":{
+					  "name": "Light 22 State 0/1 [338]",
+					  "desc": "Light 22 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-22-pos-x":{
+					  "name": "Light 22 X Position [339]",
+					  "desc": "Light 22 Position (X)"
+					},
+					"light-22-pos-y":{
+					  "name": "Light 22 Y Position [340]",
+					  "desc": "Light 22 Position (Y)"
+					},
+					"light-22-pos-z":{
+					  "name": "Light 22 Z Position [341]",
+					  "desc": "Light 22 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-22-color-r":{
+					  "name": "Light 22 Color (Red) [342]",
+					  "desc": "Light 22 Color (Red) 0 to 1"
+					},
+					"light-22-color-g":{
+					  "name": "Light 22 Color (Green) [343]",
+					  "desc": "Light 22 Color (Green) 0 to 1"
+					},
+					"light-22-color-b":{
+					  "name": "Light 22 Color (Blue) [344]",
+					  "desc": "Light 22 Color (Blue) 0 to 1"
+					},
+					"light-22-luminosity":{
+					  "name": "Light 22 Luminosity [345]",
+					  "desc": "Light 22 Luminosity 0 to 1"
+					},
+					"light-22-ambient-r":{
+					  "name": "Light 22 Ambient (Red) [346]",
+					  "desc": "Light 22 Ambient (Red) 0 to 1"
+					},
+					"light-22-ambient-g":{
+					  "name": "Light 22 Ambient (Green) [347]",
+					  "desc": "Light 22 Ambient (Green) 0 to 1"
+					},
+					"light-22-ambient-b":{
+					  "name": "Light 22 Ambient (Blue) [348]",
+					  "desc": "Light 22 Ambient (Blue) 0 to 1"
+					},
+					"light-22-ambient-luminosity":{
+					  "name": "Light 22 Ambient Luminosity [349]",
+					  "desc": "Light 22 Ambient Luminosity 0 to 1"
+					},
+					"light-22-distance":{
+					  "name": "Light 22 Distance [350]",
+					  "desc": "Light 22 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-22-falloffv1":{
+					  "name": "Light 22 Falloff A [351]",
+					  "desc": "Light 22 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-22-falloffv2":{
+					  "name": "Light 22 Falloff B [352]",
+					  "desc": "Light 22 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-22-falloffv3":{
+					  "name": "Light 22 Falloff C [353]",
+					  "desc": "Light 22 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-23-state-01":{
+					  "name": "Light 23 State 0/1 [354]",
+					  "desc": "Light 23 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-23-pos-x":{
+					  "name": "Light 23 X Position [355]",
+					  "desc": "Light 23 Position (X)"
+					},
+					"light-23-pos-y":{
+					  "name": "Light 23 Y Position [356]",
+					  "desc": "Light 23 Position (Y)"
+					},
+					"light-23-pos-z":{
+					  "name": "Light 23 Z Position [357]",
+					  "desc": "Light 23 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-23-color-r":{
+					  "name": "Light 23 Color (Red) [358]",
+					  "desc": "Light 23 Color (Red) 0 to 1"
+					},
+					"light-23-color-g":{
+					  "name": "Light 23 Color (Green) [359]",
+					  "desc": "Light 23 Color (Green) 0 to 1"
+					},
+					"light-23-color-b":{
+					  "name": "Light 23 Color (Blue) [360]",
+					  "desc": "Light 23 Color (Blue) 0 to 1"
+					},
+					"light-23-luminosity":{
+					  "name": "Light 23 Luminosity [361]",
+					  "desc": "Light 23 Luminosity 0 to 1"
+					},
+					"light-23-ambient-r":{
+					  "name": "Light 23 Ambient (Red) [362]",
+					  "desc": "Light 23 Ambient (Red) 0 to 1"
+					},
+					"light-23-ambient-g":{
+					  "name": "Light 23 Ambient (Green) [363]",
+					  "desc": "Light 23 Ambient (Green) 0 to 1"
+					},
+					"light-23-ambient-b":{
+					  "name": "Light 23 Ambient (Blue) [364]",
+					  "desc": "Light 23 Ambient (Blue) 0 to 1"
+					},
+					"light-23-ambient-luminosity":{
+					  "name": "Light 23 Ambient Luminosity [365]",
+					  "desc": "Light 23 Ambient Luminosity 0 to 1"
+					},
+					"light-23-distance":{
+					  "name": "Light 23 Distance [366]",
+					  "desc": "Light 23 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-23-falloffv1":{
+					  "name": "Light 23 Falloff A [367]",
+					  "desc": "Light 23 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-23-falloffv2":{
+					  "name": "Light 23 Falloff B [368]",
+					  "desc": "Light 23 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-23-falloffv3":{
+					  "name": "Light 23 Falloff C [369]",
+					  "desc": "Light 23 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-24-state-01":{
+					  "name": "Light 24 State 0/1 [370]",
+					  "desc": "Light 24 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-24-pos-x":{
+					  "name": "Light 24 X Position [371]",
+					  "desc": "Light 24 Position (X)"
+					},
+					"light-24-pos-y":{
+					  "name": "Light 24 Y Position [372]",
+					  "desc": "Light 24 Position (Y)"
+					},
+					"light-24-pos-z":{
+					  "name": "Light 24 Z Position [373]",
+					  "desc": "Light 24 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-24-color-r":{
+					  "name": "Light 24 Color (Red) [374]",
+					  "desc": "Light 24 Color (Red) 0 to 1"
+					},
+					"light-24-color-g":{
+					  "name": "Light 24 Color (Green) [375]",
+					  "desc": "Light 24 Color (Green) 0 to 1"
+					},
+					"light-24-color-b":{
+					  "name": "Light 24 Color (Blue) [376]",
+					  "desc": "Light 24 Color (Blue) 0 to 1"
+					},
+					"light-24-luminosity":{
+					  "name": "Light 24 Luminosity [377]",
+					  "desc": "Light 24 Luminosity 0 to 1"
+					},
+					"light-24-ambient-r":{
+					  "name": "Light 24 Ambient (Red) [378]",
+					  "desc": "Light 24 Ambient (Red) 0 to 1"
+					},
+					"light-24-ambient-g":{
+					  "name": "Light 24 Ambient (Green) [379]",
+					  "desc": "Light 24 Ambient (Green) 0 to 1"
+					},
+					"light-24-ambient-b":{
+					  "name": "Light 24 Ambient (Blue) [380]",
+					  "desc": "Light 24 Ambient (Blue) 0 to 1"
+					},
+					"light-24-ambient-luminosity":{
+					  "name": "Light 24 Ambient Luminosity [381]",
+					  "desc": "Light 24 Ambient Luminosity 0 to 1"
+					},
+					"light-24-distance":{
+					  "name": "Light 24 Distance [382]",
+					  "desc": "Light 24 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-24-falloffv1":{
+					  "name": "Light 24 Falloff A [383]",
+					  "desc": "Light 24 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-24-falloffv2":{
+					  "name": "Light 24 Falloff B [384]",
+					  "desc": "Light 24 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-24-falloffv3":{
+					  "name": "Light 24 Falloff C [385]",
+					  "desc": "Light 24 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-25-state-01":{
+					  "name": "Light 25 State 0/1 [386]",
+					  "desc": "Light 25 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-25-pos-x":{
+					  "name": "Light 25 X Position [387]",
+					  "desc": "Light 25 Position (X)"
+					},
+					"light-25-pos-y":{
+					  "name": "Light 25 Y Position [388]",
+					  "desc": "Light 25 Position (Y)"
+					},
+					"light-25-pos-z":{
+					  "name": "Light 25 Z Position [389]",
+					  "desc": "Light 25 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-25-color-r":{
+					  "name": "Light 25 Color (Red) [390]",
+					  "desc": "Light 25 Color (Red) 0 to 1"
+					},
+					"light-25-color-g":{
+					  "name": "Light 25 Color (Green) [391]",
+					  "desc": "Light 25 Color (Green) 0 to 1"
+					},
+					"light-25-color-b":{
+					  "name": "Light 25 Color (Blue) [392]",
+					  "desc": "Light 25 Color (Blue) 0 to 1"
+					},
+					"light-25-luminosity":{
+					  "name": "Light 25 Luminosity [393]",
+					  "desc": "Light 25 Luminosity 0 to 1"
+					},
+					"light-25-ambient-r":{
+					  "name": "Light 25 Ambient (Red) [394]",
+					  "desc": "Light 25 Ambient (Red) 0 to 1"
+					},
+					"light-25-ambient-g":{
+					  "name": "Light 25 Ambient (Green) [395]",
+					  "desc": "Light 25 Ambient (Green) 0 to 1"
+					},
+					"light-25-ambient-b":{
+					  "name": "Light 25 Ambient (Blue) [396]",
+					  "desc": "Light 25 Ambient (Blue) 0 to 1"
+					},
+					"light-25-ambient-luminosity":{
+					  "name": "Light 25 Ambient Luminosity [397]",
+					  "desc": "Light 25 Ambient Luminosity 0 to 1"
+					},
+					"light-25-distance":{
+					  "name": "Light 25 Distance [398]",
+					  "desc": "Light 25 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-25-falloffv1":{
+					  "name": "Light 25 Falloff A [399]",
+					  "desc": "Light 25 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-25-falloffv2":{
+					  "name": "Light 25 Falloff B [400]",
+					  "desc": "Light 25 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-25-falloffv3":{
+					  "name": "Light 25 Falloff C [401]",
+					  "desc": "Light 25 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-26-state-01":{
+					  "name": "Light 26 State 0/1 [402]",
+					  "desc": "Light 26 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-26-pos-x":{
+					  "name": "Light 26 X Position [403]",
+					  "desc": "Light 26 Position (X)"
+					},
+					"light-26-pos-y":{
+					  "name": "Light 26 Y Position [404]",
+					  "desc": "Light 26 Position (Y)"
+					},
+					"light-26-pos-z":{
+					  "name": "Light 26 Z Position [405]",
+					  "desc": "Light 26 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-26-color-r":{
+					  "name": "Light 26 Color (Red) [406]",
+					  "desc": "Light 26 Color (Red) 0 to 1"
+					},
+					"light-26-color-g":{
+					  "name": "Light 26 Color (Green) [407]",
+					  "desc": "Light 26 Color (Green) 0 to 1"
+					},
+					"light-26-color-b":{
+					  "name": "Light 26 Color (Blue) [408]",
+					  "desc": "Light 26 Color (Blue) 0 to 1"
+					},
+					"light-26-luminosity":{
+					  "name": "Light 26 Luminosity [409]",
+					  "desc": "Light 26 Luminosity 0 to 1"
+					},
+					"light-26-ambient-r":{
+					  "name": "Light 26 Ambient (Red) [410]",
+					  "desc": "Light 26 Ambient (Red) 0 to 1"
+					},
+					"light-26-ambient-g":{
+					  "name": "Light 26 Ambient (Green) [411]",
+					  "desc": "Light 26 Ambient (Green) 0 to 1"
+					},
+					"light-26-ambient-b":{
+					  "name": "Light 26 Ambient (Blue) [412]",
+					  "desc": "Light 26 Ambient (Blue) 0 to 1"
+					},
+					"light-26-ambient-luminosity":{
+					  "name": "Light 26 Ambient Luminosity [413]",
+					  "desc": "Light 26 Ambient Luminosity 0 to 1"
+					},
+					"light-26-distance":{
+					  "name": "Light 26 Distance [414]",
+					  "desc": "Light 26 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-26-falloffv1":{
+					  "name": "Light 26 Falloff A [415]",
+					  "desc": "Light 26 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-26-falloffv2":{
+					  "name": "Light 26 Falloff B [416]",
+					  "desc": "Light 26 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-26-falloffv3":{
+					  "name": "Light 26 Falloff C [417]",
+					  "desc": "Light 26 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-27-state-01":{
+					  "name": "Light 27 State 0/1 [418]",
+					  "desc": "Light 27 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-27-pos-x":{
+					  "name": "Light 27 X Position [419]",
+					  "desc": "Light 27 Position (X)"
+					},
+					"light-27-pos-y":{
+					  "name": "Light 27 Y Position [420]",
+					  "desc": "Light 27 Position (Y)"
+					},
+					"light-27-pos-z":{
+					  "name": "Light 27 Z Position [421]",
+					  "desc": "Light 27 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-27-color-r":{
+					  "name": "Light 27 Color (Red) [422]",
+					  "desc": "Light 27 Color (Red) 0 to 1"
+					},
+					"light-27-color-g":{
+					  "name": "Light 27 Color (Green) [423]",
+					  "desc": "Light 27 Color (Green) 0 to 1"
+					},
+					"light-27-color-b":{
+					  "name": "Light 27 Color (Blue) [424]",
+					  "desc": "Light 27 Color (Blue) 0 to 1"
+					},
+					"light-27-luminosity":{
+					  "name": "Light 27 Luminosity [425]",
+					  "desc": "Light 27 Luminosity 0 to 1"
+					},
+					"light-27-ambient-r":{
+					  "name": "Light 27 Ambient (Red) [426]",
+					  "desc": "Light 27 Ambient (Red) 0 to 1"
+					},
+					"light-27-ambient-g":{
+					  "name": "Light 27 Ambient (Green) [427]",
+					  "desc": "Light 27 Ambient (Green) 0 to 1"
+					},
+					"light-27-ambient-b":{
+					  "name": "Light 27 Ambient (Blue) [428]",
+					  "desc": "Light 27 Ambient (Blue) 0 to 1"
+					},
+					"light-27-ambient-luminosity":{
+					  "name": "Light 27 Ambient Luminosity [429]",
+					  "desc": "Light 27 Ambient Luminosity 0 to 1"
+					},
+					"light-27-distance":{
+					  "name": "Light 27 Distance [430]",
+					  "desc": "Light 27 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-27-falloffv1":{
+					  "name": "Light 27 Falloff A [431]",
+					  "desc": "Light 27 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-27-falloffv2":{
+					  "name": "Light 27 Falloff B [432]",
+					  "desc": "Light 27 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-27-falloffv3":{
+					  "name": "Light 27 Falloff C [433]",
+					  "desc": "Light 27 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-28-state-01":{
+					  "name": "Light 28 State 0/1 [434]",
+					  "desc": "Light 28 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-28-pos-x":{
+					  "name": "Light 28 X Position [435]",
+					  "desc": "Light 28 Position (X)"
+					},
+					"light-28-pos-y":{
+					  "name": "Light 28 Y Position [436]",
+					  "desc": "Light 28 Position (Y)"
+					},
+					"light-28-pos-z":{
+					  "name": "Light 28 Z Position [437]",
+					  "desc": "Light 28 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-28-color-r":{
+					  "name": "Light 28 Color (Red) [438]",
+					  "desc": "Light 28 Color (Red) 0 to 1"
+					},
+					"light-28-color-g":{
+					  "name": "Light 28 Color (Green) [439]",
+					  "desc": "Light 28 Color (Green) 0 to 1"
+					},
+					"light-28-color-b":{
+					  "name": "Light 28 Color (Blue) [440]",
+					  "desc": "Light 28 Color (Blue) 0 to 1"
+					},
+					"light-28-luminosity":{
+					  "name": "Light 28 Luminosity [441]",
+					  "desc": "Light 28 Luminosity 0 to 1"
+					},
+					"light-28-ambient-r":{
+					  "name": "Light 28 Ambient (Red) [442]",
+					  "desc": "Light 28 Ambient (Red) 0 to 1"
+					},
+					"light-28-ambient-g":{
+					  "name": "Light 28 Ambient (Green) [443]",
+					  "desc": "Light 28 Ambient (Green) 0 to 1"
+					},
+					"light-28-ambient-b":{
+					  "name": "Light 28 Ambient (Blue) [444]",
+					  "desc": "Light 28 Ambient (Blue) 0 to 1"
+					},
+					"light-28-ambient-luminosity":{
+					  "name": "Light 28 Ambient Luminosity [445]",
+					  "desc": "Light 28 Ambient Luminosity 0 to 1"
+					},
+					"light-28-distance":{
+					  "name": "Light 28 Distance [446]",
+					  "desc": "Light 28 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-28-falloffv1":{
+					  "name": "Light 28 Falloff A [447]",
+					  "desc": "Light 28 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-28-falloffv2":{
+					  "name": "Light 28 Falloff B [448]",
+					  "desc": "Light 28 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-28-falloffv3":{
+					  "name": "Light 28 Falloff C [449]",
+					  "desc": "Light 28 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-29-state-01":{
+					  "name": "Light 29 State 0/1 [450]",
+					  "desc": "Light 29 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-29-pos-x":{
+					  "name": "Light 29 X Position [451]",
+					  "desc": "Light 29 Position (X)"
+					},
+					"light-29-pos-y":{
+					  "name": "Light 29 Y Position [452]",
+					  "desc": "Light 29 Position (Y)"
+					},
+					"light-29-pos-z":{
+					  "name": "Light 29 Z Position [453]",
+					  "desc": "Light 29 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-29-color-r":{
+					  "name": "Light 29 Color (Red) [454]",
+					  "desc": "Light 29 Color (Red) 0 to 1"
+					},
+					"light-29-color-g":{
+					  "name": "Light 29 Color (Green) [455]",
+					  "desc": "Light 29 Color (Green) 0 to 1"
+					},
+					"light-29-color-b":{
+					  "name": "Light 29 Color (Blue) [456]",
+					  "desc": "Light 29 Color (Blue) 0 to 1"
+					},
+					"light-29-luminosity":{
+					  "name": "Light 29 Luminosity [457]",
+					  "desc": "Light 29 Luminosity 0 to 1"
+					},
+					"light-29-ambient-r":{
+					  "name": "Light 29 Ambient (Red) [458]",
+					  "desc": "Light 29 Ambient (Red) 0 to 1"
+					},
+					"light-29-ambient-g":{
+					  "name": "Light 29 Ambient (Green) [459]",
+					  "desc": "Light 29 Ambient (Green) 0 to 1"
+					},
+					"light-29-ambient-b":{
+					  "name": "Light 29 Ambient (Blue) [460]",
+					  "desc": "Light 29 Ambient (Blue) 0 to 1"
+					},
+					"light-29-ambient-luminosity":{
+					  "name": "Light 29 Ambient Luminosity [461]",
+					  "desc": "Light 29 Ambient Luminosity 0 to 1"
+					},
+					"light-29-distance":{
+					  "name": "Light 29 Distance [462]",
+					  "desc": "Light 29 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-29-falloffv1":{
+					  "name": "Light 29 Falloff A [463]",
+					  "desc": "Light 29 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-29-falloffv2":{
+					  "name": "Light 29 Falloff B [464]",
+					  "desc": "Light 29 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-29-falloffv3":{
+					  "name": "Light 29 Falloff C [465]",
+					  "desc": "Light 29 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-30-state-01":{
+					  "name": "Light 30 State 0/1 [466]",
+					  "desc": "Light 30 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-30-pos-x":{
+					  "name": "Light 30 X Position [467]",
+					  "desc": "Light 30 Position (X)"
+					},
+					"light-30-pos-y":{
+					  "name": "Light 30 Y Position [468]",
+					  "desc": "Light 30 Position (Y)"
+					},
+					"light-30-pos-z":{
+					  "name": "Light 30 Z Position [469]",
+					  "desc": "Light 30 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-30-color-r":{
+					  "name": "Light 30 Color (Red) [470]",
+					  "desc": "Light 30 Color (Red) 0 to 1"
+					},
+					"light-30-color-g":{
+					  "name": "Light 30 Color (Green) [471]",
+					  "desc": "Light 30 Color (Green) 0 to 1"
+					},
+					"light-30-color-b":{
+					  "name": "Light 30 Color (Blue) [472]",
+					  "desc": "Light 30 Color (Blue) 0 to 1"
+					},
+					"light-30-luminosity":{
+					  "name": "Light 30 Luminosity [473]",
+					  "desc": "Light 30 Luminosity 0 to 1"
+					},
+					"light-30-ambient-r":{
+					  "name": "Light 30 Ambient (Red) [474]",
+					  "desc": "Light 30 Ambient (Red) 0 to 1"
+					},
+					"light-30-ambient-g":{
+					  "name": "Light 30 Ambient (Green) [475]",
+					  "desc": "Light 30 Ambient (Green) 0 to 1"
+					},
+					"light-30-ambient-b":{
+					  "name": "Light 30 Ambient (Blue) [476]",
+					  "desc": "Light 30 Ambient (Blue) 0 to 1"
+					},
+					"light-30-ambient-luminosity":{
+					  "name": "Light 30 Ambient Luminosity [477]",
+					  "desc": "Light 30 Ambient Luminosity 0 to 1"
+					},
+					"light-30-distance":{
+					  "name": "Light 30 Distance [478]",
+					  "desc": "Light 30 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-30-falloffv1":{
+					  "name": "Light 30 Falloff A [479]",
+					  "desc": "Light 30 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-30-falloffv2":{
+					  "name": "Light 30 Falloff B [480]",
+					  "desc": "Light 30 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-30-falloffv3":{
+					  "name": "Light 30 Falloff C [481]",
+					  "desc": "Light 30 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-31-state-01":{
+					  "name": "Light 31 State 0/1 [482]",
+					  "desc": "Light 31 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-31-pos-x":{
+					  "name": "Light 31 X Position [483]",
+					  "desc": "Light 31 Position (X)"
+					},
+					"light-31-pos-y":{
+					  "name": "Light 31 Y Position [484]",
+					  "desc": "Light 31 Position (Y)"
+					},
+					"light-31-pos-z":{
+					  "name": "Light 31 Z Position [485]",
+					  "desc": "Light 31 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-31-color-r":{
+					  "name": "Light 31 Color (Red) [486]",
+					  "desc": "Light 31 Color (Red) 0 to 1"
+					},
+					"light-31-color-g":{
+					  "name": "Light 31 Color (Green) [487]",
+					  "desc": "Light 31 Color (Green) 0 to 1"
+					},
+					"light-31-color-b":{
+					  "name": "Light 31 Color (Blue) [488]",
+					  "desc": "Light 31 Color (Blue) 0 to 1"
+					},
+					"light-31-luminosity":{
+					  "name": "Light 31 Luminosity [489]",
+					  "desc": "Light 31 Luminosity 0 to 1"
+					},
+					"light-31-ambient-r":{
+					  "name": "Light 31 Ambient (Red) [490]",
+					  "desc": "Light 31 Ambient (Red) 0 to 1"
+					},
+					"light-31-ambient-g":{
+					  "name": "Light 31 Ambient (Green) [491]",
+					  "desc": "Light 31 Ambient (Green) 0 to 1"
+					},
+					"light-31-ambient-b":{
+					  "name": "Light 31 Ambient (Blue) [492]",
+					  "desc": "Light 31 Ambient (Blue) 0 to 1"
+					},
+					"light-31-ambient-luminosity":{
+					  "name": "Light 31 Ambient Luminosity [493]",
+					  "desc": "Light 31 Ambient Luminosity 0 to 1"
+					},
+					"light-31-distance":{
+					  "name": "Light 31 Distance [494]",
+					  "desc": "Light 31 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-31-falloffv1":{
+					  "name": "Light 31 Falloff A [495]",
+					  "desc": "Light 31 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-31-falloffv2":{
+					  "name": "Light 31 Falloff B [496]",
+					  "desc": "Light 31 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-31-falloffv3":{
+					  "name": "Light 31 Falloff C [497]",
+					  "desc": "Light 31 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-32-state-01":{
+					  "name": "Light 32 State 0/1 [498]",
+					  "desc": "Light 32 OFF (0), ON (1) or dim inbetween. OFF (0) saves performance."
+					},
+					"light-32-pos-x":{
+					  "name": "Light 32 X Position [499]",
+					  "desc": "Light 32 Position (X)"
+					},
+					"light-32-pos-y":{
+					  "name": "Light 32 Y Position [500]",
+					  "desc": "Light 32 Position (Y)"
+					},
+					"light-32-pos-z":{
+					  "name": "Light 32 Z Position [501]",
+					  "desc": "Light 32 Position (Z) 0 to 1, creates Spotlight effect inbetween."
+					},
+					"light-32-color-r":{
+					  "name": "Light 32 Color (Red) [502]",
+					  "desc": "Light 32 Color (Red) 0 to 1"
+					},
+					"light-32-color-g":{
+					  "name": "Light 32 Color (Green) [503]",
+					  "desc": "Light 32 Color (Green) 0 to 1"
+					},
+					"light-32-color-b":{
+					  "name": "Light 32 Color (Blue) [504]",
+					  "desc": "Light 32 Color (Blue) 0 to 1"
+					},
+					"light-32-luminosity":{
+					  "name": "Light 32 Luminosity [505]",
+					  "desc": "Light 32 Luminosity 0 to 1"
+					},
+					"light-32-ambient-r":{
+					  "name": "Light 32 Ambient (Red) [506]",
+					  "desc": "Light 32 Ambient (Red) 0 to 1"
+					},
+					"light-32-ambient-g":{
+					  "name": "Light 32 Ambient (Green) [507]",
+					  "desc": "Light 32 Ambient (Green) 0 to 1"
+					},
+					"light-32-ambient-b":{
+					  "name": "Light 32 Ambient (Blue) [508]",
+					  "desc": "Light 32 Ambient (Blue) 0 to 1"
+					},
+					"light-32-ambient-luminosity":{
+					  "name": "Light 32 Ambient Luminosity [509]",
+					  "desc": "Light 32 Ambient Luminosity 0 to 1"
+					},
+					"light-32-distance":{
+					  "name": "Light 32 Distance [510]",
+					  "desc": "Light 32 hard-edge circle (clamp) to dark. Depends on falloff B and C."
+					},
+					"light-32-falloffv1":{
+					  "name": "Light 32 Falloff A [511]",
+					  "desc": "Light 32 Falloff A - Overall curve intensity. 0 = Full Intensity"
+					},
+					"light-32-falloffv2":{
+					  "name": "Light 32 Falloff B [512]",
+					  "desc": "Light 32 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
+					},
+					"light-32-falloffv3":{
+					  "name": "Light 32 Falloff C [513]",
+					  "desc": "Light 32 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					}
+				}
+			}
+		}
+	}
+}

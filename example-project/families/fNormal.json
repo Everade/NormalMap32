@@ -1,0 +1,16 @@
+{
+	"name": "fNormal",
+	"plugin-id": "Sprite",
+	"sid": 398200728388895,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [
+		{
+			"effectId": "normalmap32",
+			"name": "NormalMap32"
+		}
+	],
+	"members": [
+		"2DSpriteNormalMap"
+	]
+}

@@ -1,0 +1,3114 @@
+{
+	"is-c3-addon": true,
+	"type": "effect",
+	"name": "NormalMap32",
+	"id": "normalmap32",
+	"version": "1.6.0.0",
+	"author": "Donelwero, Matriax, Mikal, Everade",
+	"website": "https://www.construct.net/en/make-games/addons/898/normalmap32",
+	"documentation": "https://www.construct.net/en/make-games/addons/898/normalmap32/documentation",
+	"description": "Create a 3D light effect on any 2D sprite using a normal map. Each normal map pixel represents the direction in which the sprite's pixel is facing.",
+	"file-list": [
+		"lang/en-US.json",
+		"addon.json",
+		"effect.fx"
+	],
+
+	"category": "color",
+	"blends-background": true,
+	"cross-sampling": false,
+	"preserves-opaqueness": false,
+	"animated": false,
+	"must-predraw": false,
+	"extend-box": {
+		"horizontal": 0,
+		"vertical": 0
+	},
+
+	"parameters": [
+		{
+		  "id": "screen-x-resolution",
+		  "type": "float",
+		  "initial-value": 1920,
+		  "uniform": "screenXResolution"
+		},
+		{
+		  "id": "screen-y-resolution",
+		  "type": "float",
+		  "initial-value": 1080,
+		  "uniform": "screenYResolution"
+		},
+		{
+		  "id": "light-1-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light1State01"
+		},
+		{
+		  "id": "light-1-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light1PosX"
+		},
+		{
+		  "id": "light-1-pos-y",
+		  "type": "float",
+		  "initial-value": 0.0,
+		  "uniform": "light1PosY"
+		},
+		{
+		  "id": "light-1-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light1PosZ"
+		},
+		{
+		  "id": "light-1-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light1ColorR"
+		},
+		{
+		  "id": "light-1-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light1ColorG"
+		},
+		{
+		  "id": "light-1-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light1ColorB"
+		},
+		{
+		  "id": "light-1-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light1Luminosity"
+		},
+		{
+		  "id": "light-1-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light1AmbientR"
+		},
+		{
+		  "id": "light-1-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light1AmbientG"
+		},
+		{
+		  "id": "light-1-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light1AmbientB"
+		},
+		{
+		  "id": "light-1-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light1AmbientLuminosity"
+		},
+		{
+		  "id": "light-1-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light1Distance"
+		},
+		{
+		  "id": "light-1-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light1Falloffv1"
+		},
+		{
+		  "id": "light-1-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light1Falloffv2"
+		},
+		{
+		  "id": "light-1-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light1Falloffv3"
+		},
+		{
+		  "id": "light-2-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light2State01"
+		},
+		{
+		  "id": "light-2-pos-x",
+		  "type": "float",
+		  "initial-value": 0.0,
+		  "uniform": "light2PosX"
+		},
+		{
+		  "id": "light-2-pos-y",
+		  "type": "float",
+		  "initial-value": 0.0,
+		  "uniform": "light2PosY"
+		},
+		{
+		  "id": "light-2-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light2PosZ"
+		},
+		{
+		  "id": "light-2-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light2ColorR"
+		},
+		{
+		  "id": "light-2-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light2ColorG"
+		},
+		{
+		  "id": "light-2-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light2ColorB"
+		},
+		{
+		  "id": "light-2-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light2Luminosity"
+		},
+		{
+		  "id": "light-2-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light2AmbientR"
+		},
+		{
+		  "id": "light-2-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light2AmbientG"
+		},
+		{
+		  "id": "light-2-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light2AmbientB"
+		},
+		{
+		  "id": "light-2-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light2AmbientLuminosity"
+		},
+		{
+		  "id": "light-2-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light2Distance"
+		},
+		{
+		  "id": "light-2-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light2Falloffv1"
+		},
+		{
+		  "id": "light-2-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light2Falloffv2"
+		},
+		{
+		  "id": "light-2-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light2Falloffv3"
+		},
+		{
+		  "id": "light-3-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light3State01"
+		},
+		{
+		  "id": "light-3-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light3PosX"
+		},
+		{
+		  "id": "light-3-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light3PosY"
+		},
+		{
+		  "id": "light-3-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light3PosZ"
+		},
+		{
+		  "id": "light-3-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light3ColorR"
+		},
+		{
+		  "id": "light-3-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light3ColorG"
+		},
+		{
+		  "id": "light-3-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light3ColorB"
+		},
+		{
+		  "id": "light-3-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light3Luminosity"
+		},
+		{
+		  "id": "light-3-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light3AmbientR"
+		},
+		{
+		  "id": "light-3-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light3AmbientG"
+		},
+		{
+		  "id": "light-3-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light3AmbientB"
+		},
+		{
+		  "id": "light-3-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light3AmbientLuminosity"
+		},
+		{
+		  "id": "light-3-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light3Distance"
+		},
+		{
+		  "id": "light-3-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light3Falloffv1"
+		},
+		{
+		  "id": "light-3-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light3Falloffv2"
+		},
+		{
+		  "id": "light-3-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light3Falloffv3"
+		},
+		{
+		  "id": "light-4-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light4State01"
+		},
+		{
+		  "id": "light-4-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light4PosX"
+		},
+		{
+		  "id": "light-4-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light4PosY"
+		},
+		{
+		  "id": "light-4-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light4PosZ"
+		},
+		{
+		  "id": "light-4-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light4ColorR"
+		},
+		{
+		  "id": "light-4-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light4ColorG"
+		},
+		{
+		  "id": "light-4-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light4ColorB"
+		},
+		{
+		  "id": "light-4-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light4Luminosity"
+		},
+		{
+		  "id": "light-4-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light4AmbientR"
+		},
+		{
+		  "id": "light-4-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light4AmbientG"
+		},
+		{
+		  "id": "light-4-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light4AmbientB"
+		},
+		{
+		  "id": "light-4-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light4AmbientLuminosity"
+		},
+		{
+		  "id": "light-4-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light4Distance"
+		},
+		{
+		  "id": "light-4-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light4Falloffv1"
+		},
+		{
+		  "id": "light-4-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light4Falloffv2"
+		},
+		{
+		  "id": "light-4-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light4Falloffv3"
+		},
+		{
+		  "id": "light-5-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light5State01"
+		},
+		{
+		  "id": "light-5-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light5PosX"
+		},
+		{
+		  "id": "light-5-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light5PosY"
+		},
+		{
+		  "id": "light-5-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light5PosZ"
+		},
+		{
+		  "id": "light-5-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light5ColorR"
+		},
+		{
+		  "id": "light-5-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light5ColorG"
+		},
+		{
+		  "id": "light-5-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light5ColorB"
+		},
+		{
+		  "id": "light-5-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light5Luminosity"
+		},
+		{
+		  "id": "light-5-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light5AmbientR"
+		},
+		{
+		  "id": "light-5-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light5AmbientG"
+		},
+		{
+		  "id": "light-5-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light5AmbientB"
+		},
+		{
+		  "id": "light-5-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light5AmbientLuminosity"
+		},
+		{
+		  "id": "light-5-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light5Distance"
+		},
+		{
+		  "id": "light-5-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light5Falloffv1"
+		},
+		{
+		  "id": "light-5-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light5Falloffv2"
+		},
+		{
+		  "id": "light-5-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light5Falloffv3"
+		},
+		{
+		  "id": "light-6-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light6State01"
+		},
+		{
+		  "id": "light-6-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light6PosX"
+		},
+		{
+		  "id": "light-6-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light6PosY"
+		},
+		{
+		  "id": "light-6-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light6PosZ"
+		},
+		{
+		  "id": "light-6-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light6ColorR"
+		},
+		{
+		  "id": "light-6-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light6ColorG"
+		},
+		{
+		  "id": "light-6-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light6ColorB"
+		},
+		{
+		  "id": "light-6-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light6Luminosity"
+		},
+		{
+		  "id": "light-6-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light6AmbientR"
+		},
+		{
+		  "id": "light-6-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light6AmbientG"
+		},
+		{
+		  "id": "light-6-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light6AmbientB"
+		},
+		{
+		  "id": "light-6-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light6AmbientLuminosity"
+		},
+		{
+		  "id": "light-6-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light6Distance"
+		},
+		{
+		  "id": "light-6-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light6Falloffv1"
+		},
+		{
+		  "id": "light-6-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light6Falloffv2"
+		},
+		{
+		  "id": "light-6-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light6Falloffv3"
+		},
+		{
+		  "id": "light-7-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light7State01"
+		},
+		{
+		  "id": "light-7-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light7PosX"
+		},
+		{
+		  "id": "light-7-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light7PosY"
+		},
+		{
+		  "id": "light-7-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light7PosZ"
+		},
+		{
+		  "id": "light-7-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light7ColorR"
+		},
+		{
+		  "id": "light-7-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light7ColorG"
+		},
+		{
+		  "id": "light-7-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light7ColorB"
+		},
+		{
+		  "id": "light-7-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light7Luminosity"
+		},
+		{
+		  "id": "light-7-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light7AmbientR"
+		},
+		{
+		  "id": "light-7-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light7AmbientG"
+		},
+		{
+		  "id": "light-7-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light7AmbientB"
+		},
+		{
+		  "id": "light-7-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light7AmbientLuminosity"
+		},
+		{
+		  "id": "light-7-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light7Distance"
+		},
+		{
+		  "id": "light-7-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light7Falloffv1"
+		},
+		{
+		  "id": "light-7-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light7Falloffv2"
+		},
+		{
+		  "id": "light-7-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light7Falloffv3"
+		},
+		{
+		  "id": "light-8-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light8State01"
+		},
+		{
+		  "id": "light-8-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light8PosX"
+		},
+		{
+		  "id": "light-8-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light8PosY"
+		},
+		{
+		  "id": "light-8-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light8PosZ"
+		},
+		{
+		  "id": "light-8-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light8ColorR"
+		},
+		{
+		  "id": "light-8-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light8ColorG"
+		},
+		{
+		  "id": "light-8-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light8ColorB"
+		},
+		{
+		  "id": "light-8-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light8Luminosity"
+		},
+		{
+		  "id": "light-8-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light8AmbientR"
+		},
+		{
+		  "id": "light-8-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light8AmbientG"
+		},
+		{
+		  "id": "light-8-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light8AmbientB"
+		},
+		{
+		  "id": "light-8-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light8AmbientLuminosity"
+		},
+		{
+		  "id": "light-8-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light8Distance"
+		},
+		{
+		  "id": "light-8-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light8Falloffv1"
+		},
+		{
+		  "id": "light-8-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light8Falloffv2"
+		},
+		{
+		  "id": "light-8-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light8Falloffv3"
+		},
+		{
+		  "id": "light-9-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light9State01"
+		},
+		{
+		  "id": "light-9-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light9PosX"
+		},
+		{
+		  "id": "light-9-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light9PosY"
+		},
+		{
+		  "id": "light-9-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light9PosZ"
+		},
+		{
+		  "id": "light-9-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light9ColorR"
+		},
+		{
+		  "id": "light-9-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light9ColorG"
+		},
+		{
+		  "id": "light-9-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light9ColorB"
+		},
+		{
+		  "id": "light-9-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light9Luminosity"
+		},
+		{
+		  "id": "light-9-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light9AmbientR"
+		},
+		{
+		  "id": "light-9-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light9AmbientG"
+		},
+		{
+		  "id": "light-9-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light9AmbientB"
+		},
+		{
+		  "id": "light-9-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light9AmbientLuminosity"
+		},
+		{
+		  "id": "light-9-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light9Distance"
+		},
+		{
+		  "id": "light-9-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light9Falloffv1"
+		},
+		{
+		  "id": "light-9-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light9Falloffv2"
+		},
+		{
+		  "id": "light-9-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light9Falloffv3"
+		},
+		{
+		  "id": "light-10-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light10State01"
+		},
+		{
+		  "id": "light-10-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light10PosX"
+		},
+		{
+		  "id": "light-10-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light10PosY"
+		},
+		{
+		  "id": "light-10-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light10PosZ"
+		},
+		{
+		  "id": "light-10-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light10ColorR"
+		},
+		{
+		  "id": "light-10-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light10ColorG"
+		},
+		{
+		  "id": "light-10-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light10ColorB"
+		},
+		{
+		  "id": "light-10-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light10Luminosity"
+		},
+		{
+		  "id": "light-10-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light10AmbientR"
+		},
+		{
+		  "id": "light-10-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light10AmbientG"
+		},
+		{
+		  "id": "light-10-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light10AmbientB"
+		},
+		{
+		  "id": "light-10-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light10AmbientLuminosity"
+		},
+		{
+		  "id": "light-10-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light10Distance"
+		},
+		{
+		  "id": "light-10-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light10Falloffv1"
+		},
+		{
+		  "id": "light-10-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light10Falloffv2"
+		},
+		{
+		  "id": "light-10-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light10Falloffv3"
+		},
+		{
+		  "id": "light-11-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light11State01"
+		},
+		{
+		  "id": "light-11-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light11PosX"
+		},
+		{
+		  "id": "light-11-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light11PosY"
+		},
+		{
+		  "id": "light-11-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light11PosZ"
+		},
+		{
+		  "id": "light-11-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light11ColorR"
+		},
+		{
+		  "id": "light-11-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light11ColorG"
+		},
+		{
+		  "id": "light-11-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light11ColorB"
+		},
+		{
+		  "id": "light-11-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light11Luminosity"
+		},
+		{
+		  "id": "light-11-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light11AmbientR"
+		},
+		{
+		  "id": "light-11-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light11AmbientG"
+		},
+		{
+		  "id": "light-11-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light11AmbientB"
+		},
+		{
+		  "id": "light-11-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light11AmbientLuminosity"
+		},
+		{
+		  "id": "light-11-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light11Distance"
+		},
+		{
+		  "id": "light-11-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light11Falloffv1"
+		},
+		{
+		  "id": "light-11-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light11Falloffv2"
+		},
+		{
+		  "id": "light-11-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light11Falloffv3"
+		},
+		{
+		  "id": "light-12-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light12State01"
+		},
+		{
+		  "id": "light-12-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light12PosX"
+		},
+		{
+		  "id": "light-12-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light12PosY"
+		},
+		{
+		  "id": "light-12-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light12PosZ"
+		},
+		{
+		  "id": "light-12-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light12ColorR"
+		},
+		{
+		  "id": "light-12-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light12ColorG"
+		},
+		{
+		  "id": "light-12-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light12ColorB"
+		},
+		{
+		  "id": "light-12-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light12Luminosity"
+		},
+		{
+		  "id": "light-12-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light12AmbientR"
+		},
+		{
+		  "id": "light-12-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light12AmbientG"
+		},
+		{
+		  "id": "light-12-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light12AmbientB"
+		},
+		{
+		  "id": "light-12-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light12AmbientLuminosity"
+		},
+		{
+		  "id": "light-12-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light12Distance"
+		},
+		{
+		  "id": "light-12-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light12Falloffv1"
+		},
+		{
+		  "id": "light-12-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light12Falloffv2"
+		},
+		{
+		  "id": "light-12-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light12Falloffv3"
+		},
+		{
+		  "id": "light-13-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light13State01"
+		},
+		{
+		  "id": "light-13-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light13PosX"
+		},
+		{
+		  "id": "light-13-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light13PosY"
+		},
+		{
+		  "id": "light-13-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light13PosZ"
+		},
+		{
+		  "id": "light-13-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light13ColorR"
+		},
+		{
+		  "id": "light-13-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light13ColorG"
+		},
+		{
+		  "id": "light-13-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light13ColorB"
+		},
+		{
+		  "id": "light-13-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light13Luminosity"
+		},
+		{
+		  "id": "light-13-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light13AmbientR"
+		},
+		{
+		  "id": "light-13-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light13AmbientG"
+		},
+		{
+		  "id": "light-13-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light13AmbientB"
+		},
+		{
+		  "id": "light-13-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light13AmbientLuminosity"
+		},
+		{
+		  "id": "light-13-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light13Distance"
+		},
+		{
+		  "id": "light-13-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light13Falloffv1"
+		},
+		{
+		  "id": "light-13-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light13Falloffv2"
+		},
+		{
+		  "id": "light-13-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light13Falloffv3"
+		},
+		{
+		  "id": "light-14-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light14State01"
+		},
+		{
+		  "id": "light-14-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light14PosX"
+		},
+		{
+		  "id": "light-14-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light14PosY"
+		},
+		{
+		  "id": "light-14-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light14PosZ"
+		},
+		{
+		  "id": "light-14-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light14ColorR"
+		},
+		{
+		  "id": "light-14-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light14ColorG"
+		},
+		{
+		  "id": "light-14-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light14ColorB"
+		},
+		{
+		  "id": "light-14-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light14Luminosity"
+		},
+		{
+		  "id": "light-14-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light14AmbientR"
+		},
+		{
+		  "id": "light-14-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light14AmbientG"
+		},
+		{
+		  "id": "light-14-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light14AmbientB"
+		},
+		{
+		  "id": "light-14-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light14AmbientLuminosity"
+		},
+		{
+		  "id": "light-14-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light14Distance"
+		},
+		{
+		  "id": "light-14-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light14Falloffv1"
+		},
+		{
+		  "id": "light-14-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light14Falloffv2"
+		},
+		{
+		  "id": "light-14-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light14Falloffv3"
+		},
+		{
+		  "id": "light-15-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light15State01"
+		},
+		{
+		  "id": "light-15-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light15PosX"
+		},
+		{
+		  "id": "light-15-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light15PosY"
+		},
+		{
+		  "id": "light-15-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light15PosZ"
+		},
+		{
+		  "id": "light-15-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light15ColorR"
+		},
+		{
+		  "id": "light-15-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light15ColorG"
+		},
+		{
+		  "id": "light-15-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light15ColorB"
+		},
+		{
+		  "id": "light-15-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light15Luminosity"
+		},
+		{
+		  "id": "light-15-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light15AmbientR"
+		},
+		{
+		  "id": "light-15-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light15AmbientG"
+		},
+		{
+		  "id": "light-15-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light15AmbientB"
+		},
+		{
+		  "id": "light-15-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light15AmbientLuminosity"
+		},
+		{
+		  "id": "light-15-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light15Distance"
+		},
+		{
+		  "id": "light-15-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light15Falloffv1"
+		},
+		{
+		  "id": "light-15-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light15Falloffv2"
+		},
+		{
+		  "id": "light-15-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light15Falloffv3"
+		},
+		{
+		  "id": "light-16-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light16State01"
+		},
+		{
+		  "id": "light-16-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light16PosX"
+		},
+		{
+		  "id": "light-16-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light16PosY"
+		},
+		{
+		  "id": "light-16-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light16PosZ"
+		},
+		{
+		  "id": "light-16-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light16ColorR"
+		},
+		{
+		  "id": "light-16-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light16ColorG"
+		},
+		{
+		  "id": "light-16-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light16ColorB"
+		},
+		{
+		  "id": "light-16-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light16Luminosity"
+		},
+		{
+		  "id": "light-16-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light16AmbientR"
+		},
+		{
+		  "id": "light-16-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light16AmbientG"
+		},
+		{
+		  "id": "light-16-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light16AmbientB"
+		},
+		{
+		  "id": "light-16-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light16AmbientLuminosity"
+		},
+		{
+		  "id": "light-16-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light16Distance"
+		},
+		{
+		  "id": "light-16-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light16Falloffv1"
+		},
+		{
+		  "id": "light-16-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light16Falloffv2"
+		},
+		{
+		  "id": "light-16-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light16Falloffv3"
+		},
+		{
+		  "id": "light-17-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light17State01"
+		},
+		{
+		  "id": "light-17-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light17PosX"
+		},
+		{
+		  "id": "light-17-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light17PosY"
+		},
+		{
+		  "id": "light-17-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light17PosZ"
+		},
+		{
+		  "id": "light-17-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light17ColorR"
+		},
+		{
+		  "id": "light-17-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light17ColorG"
+		},
+		{
+		  "id": "light-17-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light17ColorB"
+		},
+		{
+		  "id": "light-17-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light17Luminosity"
+		},
+		{
+		  "id": "light-17-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light17AmbientR"
+		},
+		{
+		  "id": "light-17-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light17AmbientG"
+		},
+		{
+		  "id": "light-17-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light17AmbientB"
+		},
+		{
+		  "id": "light-17-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light17AmbientLuminosity"
+		},
+		{
+		  "id": "light-17-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light17Distance"
+		},
+		{
+		  "id": "light-17-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light17Falloffv1"
+		},
+		{
+		  "id": "light-17-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light17Falloffv2"
+		},
+		{
+		  "id": "light-17-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light17Falloffv3"
+		},
+		{
+		  "id": "light-18-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light18State01"
+		},
+		{
+		  "id": "light-18-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light18PosX"
+		},
+		{
+		  "id": "light-18-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light18PosY"
+		},
+		{
+		  "id": "light-18-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light18PosZ"
+		},
+		{
+		  "id": "light-18-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light18ColorR"
+		},
+		{
+		  "id": "light-18-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light18ColorG"
+		},
+		{
+		  "id": "light-18-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light18ColorB"
+		},
+		{
+		  "id": "light-18-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light18Luminosity"
+		},
+		{
+		  "id": "light-18-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light18AmbientR"
+		},
+		{
+		  "id": "light-18-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light18AmbientG"
+		},
+		{
+		  "id": "light-18-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light18AmbientB"
+		},
+		{
+		  "id": "light-18-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light18AmbientLuminosity"
+		},
+		{
+		  "id": "light-18-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light18Distance"
+		},
+		{
+		  "id": "light-18-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light18Falloffv1"
+		},
+		{
+		  "id": "light-18-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light18Falloffv2"
+		},
+		{
+		  "id": "light-18-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light18Falloffv3"
+		},
+		{
+		  "id": "light-19-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light19State01"
+		},
+		{
+		  "id": "light-19-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light19PosX"
+		},
+		{
+		  "id": "light-19-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light19PosY"
+		},
+		{
+		  "id": "light-19-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light19PosZ"
+		},
+		{
+		  "id": "light-19-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light19ColorR"
+		},
+		{
+		  "id": "light-19-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light19ColorG"
+		},
+		{
+		  "id": "light-19-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light19ColorB"
+		},
+		{
+		  "id": "light-19-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light19Luminosity"
+		},
+		{
+		  "id": "light-19-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light19AmbientR"
+		},
+		{
+		  "id": "light-19-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light19AmbientG"
+		},
+		{
+		  "id": "light-19-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light19AmbientB"
+		},
+		{
+		  "id": "light-19-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light19AmbientLuminosity"
+		},
+		{
+		  "id": "light-19-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light19Distance"
+		},
+		{
+		  "id": "light-19-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light19Falloffv1"
+		},
+		{
+		  "id": "light-19-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light19Falloffv2"
+		},
+		{
+		  "id": "light-19-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light19Falloffv3"
+		},
+		{
+		  "id": "light-20-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light20State01"
+		},
+		{
+		  "id": "light-20-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light20PosX"
+		},
+		{
+		  "id": "light-20-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light20PosY"
+		},
+		{
+		  "id": "light-20-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light20PosZ"
+		},
+		{
+		  "id": "light-20-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light20ColorR"
+		},
+		{
+		  "id": "light-20-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light20ColorG"
+		},
+		{
+		  "id": "light-20-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light20ColorB"
+		},
+		{
+		  "id": "light-20-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light20Luminosity"
+		},
+		{
+		  "id": "light-20-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light20AmbientR"
+		},
+		{
+		  "id": "light-20-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light20AmbientG"
+		},
+		{
+		  "id": "light-20-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light20AmbientB"
+		},
+		{
+		  "id": "light-20-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light20AmbientLuminosity"
+		},
+		{
+		  "id": "light-20-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light20Distance"
+		},
+		{
+		  "id": "light-20-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light20Falloffv1"
+		},
+		{
+		  "id": "light-20-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light20Falloffv2"
+		},
+		{
+		  "id": "light-20-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light20Falloffv3"
+		},
+		{
+		  "id": "light-21-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light21State01"
+		},
+		{
+		  "id": "light-21-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light21PosX"
+		},
+		{
+		  "id": "light-21-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light21PosY"
+		},
+		{
+		  "id": "light-21-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light21PosZ"
+		},
+		{
+		  "id": "light-21-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light21ColorR"
+		},
+		{
+		  "id": "light-21-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light21ColorG"
+		},
+		{
+		  "id": "light-21-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light21ColorB"
+		},
+		{
+		  "id": "light-21-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light21Luminosity"
+		},
+		{
+		  "id": "light-21-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light21AmbientR"
+		},
+		{
+		  "id": "light-21-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light21AmbientG"
+		},
+		{
+		  "id": "light-21-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light21AmbientB"
+		},
+		{
+		  "id": "light-21-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light21AmbientLuminosity"
+		},
+		{
+		  "id": "light-21-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light21Distance"
+		},
+		{
+		  "id": "light-21-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light21Falloffv1"
+		},
+		{
+		  "id": "light-21-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light21Falloffv2"
+		},
+		{
+		  "id": "light-21-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light21Falloffv3"
+		},
+		{
+		  "id": "light-22-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light22State01"
+		},
+		{
+		  "id": "light-22-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light22PosX"
+		},
+		{
+		  "id": "light-22-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light22PosY"
+		},
+		{
+		  "id": "light-22-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light22PosZ"
+		},
+		{
+		  "id": "light-22-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light22ColorR"
+		},
+		{
+		  "id": "light-22-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light22ColorG"
+		},
+		{
+		  "id": "light-22-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light22ColorB"
+		},
+		{
+		  "id": "light-22-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light22Luminosity"
+		},
+		{
+		  "id": "light-22-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light22AmbientR"
+		},
+		{
+		  "id": "light-22-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light22AmbientG"
+		},
+		{
+		  "id": "light-22-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light22AmbientB"
+		},
+		{
+		  "id": "light-22-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light22AmbientLuminosity"
+		},
+		{
+		  "id": "light-22-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light22Distance"
+		},
+		{
+		  "id": "light-22-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light22Falloffv1"
+		},
+		{
+		  "id": "light-22-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light22Falloffv2"
+		},
+		{
+		  "id": "light-22-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light22Falloffv3"
+		},
+		{
+		  "id": "light-23-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light23State01"
+		},
+		{
+		  "id": "light-23-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light23PosX"
+		},
+		{
+		  "id": "light-23-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light23PosY"
+		},
+		{
+		  "id": "light-23-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light23PosZ"
+		},
+		{
+		  "id": "light-23-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light23ColorR"
+		},
+		{
+		  "id": "light-23-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light23ColorG"
+		},
+		{
+		  "id": "light-23-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light23ColorB"
+		},
+		{
+		  "id": "light-23-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light23Luminosity"
+		},
+		{
+		  "id": "light-23-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light23AmbientR"
+		},
+		{
+		  "id": "light-23-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light23AmbientG"
+		},
+		{
+		  "id": "light-23-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light23AmbientB"
+		},
+		{
+		  "id": "light-23-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light23AmbientLuminosity"
+		},
+		{
+		  "id": "light-23-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light23Distance"
+		},
+		{
+		  "id": "light-23-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light23Falloffv1"
+		},
+		{
+		  "id": "light-23-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light23Falloffv2"
+		},
+		{
+		  "id": "light-23-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light23Falloffv3"
+		},
+		{
+		  "id": "light-24-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light24State01"
+		},
+		{
+		  "id": "light-24-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light24PosX"
+		},
+		{
+		  "id": "light-24-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light24PosY"
+		},
+		{
+		  "id": "light-24-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light24PosZ"
+		},
+		{
+		  "id": "light-24-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light24ColorR"
+		},
+		{
+		  "id": "light-24-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light24ColorG"
+		},
+		{
+		  "id": "light-24-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light24ColorB"
+		},
+		{
+		  "id": "light-24-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light24Luminosity"
+		},
+		{
+		  "id": "light-24-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light24AmbientR"
+		},
+		{
+		  "id": "light-24-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light24AmbientG"
+		},
+		{
+		  "id": "light-24-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light24AmbientB"
+		},
+		{
+		  "id": "light-24-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light24AmbientLuminosity"
+		},
+		{
+		  "id": "light-24-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light24Distance"
+		},
+		{
+		  "id": "light-24-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light24Falloffv1"
+		},
+		{
+		  "id": "light-24-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light24Falloffv2"
+		},
+		{
+		  "id": "light-24-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light24Falloffv3"
+		},
+		{
+		  "id": "light-25-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light25State01"
+		},
+		{
+		  "id": "light-25-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light25PosX"
+		},
+		{
+		  "id": "light-25-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light25PosY"
+		},
+		{
+		  "id": "light-25-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light25PosZ"
+		},
+		{
+		  "id": "light-25-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light25ColorR"
+		},
+		{
+		  "id": "light-25-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light25ColorG"
+		},
+		{
+		  "id": "light-25-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light25ColorB"
+		},
+		{
+		  "id": "light-25-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light25Luminosity"
+		},
+		{
+		  "id": "light-25-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light25AmbientR"
+		},
+		{
+		  "id": "light-25-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light25AmbientG"
+		},
+		{
+		  "id": "light-25-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light25AmbientB"
+		},
+		{
+		  "id": "light-25-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light25AmbientLuminosity"
+		},
+		{
+		  "id": "light-25-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light25Distance"
+		},
+		{
+		  "id": "light-25-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light25Falloffv1"
+		},
+		{
+		  "id": "light-25-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light25Falloffv2"
+		},
+		{
+		  "id": "light-25-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light25Falloffv3"
+		},
+		{
+		  "id": "light-26-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light26State01"
+		},
+		{
+		  "id": "light-26-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light26PosX"
+		},
+		{
+		  "id": "light-26-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light26PosY"
+		},
+		{
+		  "id": "light-26-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light26PosZ"
+		},
+		{
+		  "id": "light-26-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light26ColorR"
+		},
+		{
+		  "id": "light-26-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light26ColorG"
+		},
+		{
+		  "id": "light-26-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light26ColorB"
+		},
+		{
+		  "id": "light-26-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light26Luminosity"
+		},
+		{
+		  "id": "light-26-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light26AmbientR"
+		},
+		{
+		  "id": "light-26-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light26AmbientG"
+		},
+		{
+		  "id": "light-26-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light26AmbientB"
+		},
+		{
+		  "id": "light-26-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light26AmbientLuminosity"
+		},
+		{
+		  "id": "light-26-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light26Distance"
+		},
+		{
+		  "id": "light-26-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light26Falloffv1"
+		},
+		{
+		  "id": "light-26-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light26Falloffv2"
+		},
+		{
+		  "id": "light-26-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light26Falloffv3"
+		},
+		{
+		  "id": "light-27-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light27State01"
+		},
+		{
+		  "id": "light-27-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light27PosX"
+		},
+		{
+		  "id": "light-27-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light27PosY"
+		},
+		{
+		  "id": "light-27-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light27PosZ"
+		},
+		{
+		  "id": "light-27-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light27ColorR"
+		},
+		{
+		  "id": "light-27-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light27ColorG"
+		},
+		{
+		  "id": "light-27-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light27ColorB"
+		},
+		{
+		  "id": "light-27-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light27Luminosity"
+		},
+		{
+		  "id": "light-27-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light27AmbientR"
+		},
+		{
+		  "id": "light-27-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light27AmbientG"
+		},
+		{
+		  "id": "light-27-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light27AmbientB"
+		},
+		{
+		  "id": "light-27-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light27AmbientLuminosity"
+		},
+		{
+		  "id": "light-27-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light27Distance"
+		},
+		{
+		  "id": "light-27-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light27Falloffv1"
+		},
+		{
+		  "id": "light-27-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light27Falloffv2"
+		},
+		{
+		  "id": "light-27-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light27Falloffv3"
+		},
+		{
+		  "id": "light-28-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light28State01"
+		},
+		{
+		  "id": "light-28-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light28PosX"
+		},
+		{
+		  "id": "light-28-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light28PosY"
+		},
+		{
+		  "id": "light-28-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light28PosZ"
+		},
+		{
+		  "id": "light-28-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light28ColorR"
+		},
+		{
+		  "id": "light-28-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light28ColorG"
+		},
+		{
+		  "id": "light-28-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light28ColorB"
+		},
+		{
+		  "id": "light-28-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light28Luminosity"
+		},
+		{
+		  "id": "light-28-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light28AmbientR"
+		},
+		{
+		  "id": "light-28-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light28AmbientG"
+		},
+		{
+		  "id": "light-28-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light28AmbientB"
+		},
+		{
+		  "id": "light-28-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light28AmbientLuminosity"
+		},
+		{
+		  "id": "light-28-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light28Distance"
+		},
+		{
+		  "id": "light-28-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light28Falloffv1"
+		},
+		{
+		  "id": "light-28-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light28Falloffv2"
+		},
+		{
+		  "id": "light-28-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light28Falloffv3"
+		},
+		{
+		  "id": "light-29-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light29State01"
+		},
+		{
+		  "id": "light-29-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light29PosX"
+		},
+		{
+		  "id": "light-29-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light29PosY"
+		},
+		{
+		  "id": "light-29-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light29PosZ"
+		},
+		{
+		  "id": "light-29-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light29ColorR"
+		},
+		{
+		  "id": "light-29-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light29ColorG"
+		},
+		{
+		  "id": "light-29-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light29ColorB"
+		},
+		{
+		  "id": "light-29-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light29Luminosity"
+		},
+		{
+		  "id": "light-29-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light29AmbientR"
+		},
+		{
+		  "id": "light-29-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light29AmbientG"
+		},
+		{
+		  "id": "light-29-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light29AmbientB"
+		},
+		{
+		  "id": "light-29-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light29AmbientLuminosity"
+		},
+		{
+		  "id": "light-29-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light29Distance"
+		},
+		{
+		  "id": "light-29-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light29Falloffv1"
+		},
+		{
+		  "id": "light-29-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light29Falloffv2"
+		},
+		{
+		  "id": "light-29-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light29Falloffv3"
+		},
+		{
+		  "id": "light-30-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light30State01"
+		},
+		{
+		  "id": "light-30-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light30PosX"
+		},
+		{
+		  "id": "light-30-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light30PosY"
+		},
+		{
+		  "id": "light-30-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light30PosZ"
+		},
+		{
+		  "id": "light-30-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light30ColorR"
+		},
+		{
+		  "id": "light-30-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light30ColorG"
+		},
+		{
+		  "id": "light-30-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light30ColorB"
+		},
+		{
+		  "id": "light-30-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light30Luminosity"
+		},
+		{
+		  "id": "light-30-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light30AmbientR"
+		},
+		{
+		  "id": "light-30-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light30AmbientG"
+		},
+		{
+		  "id": "light-30-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light30AmbientB"
+		},
+		{
+		  "id": "light-30-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light30AmbientLuminosity"
+		},
+		{
+		  "id": "light-30-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light30Distance"
+		},
+		{
+		  "id": "light-30-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light30Falloffv1"
+		},
+		{
+		  "id": "light-30-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light30Falloffv2"
+		},
+		{
+		  "id": "light-30-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light30Falloffv3"
+		},
+		{
+		  "id": "light-31-state-01",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light31State01"
+		},
+		{
+		  "id": "light-31-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light31PosX"
+		},
+		{
+		  "id": "light-31-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light31PosY"
+		},
+		{
+		  "id": "light-31-pos-z",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light31PosZ"
+		},
+		{
+		  "id": "light-31-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light31ColorR"
+		},
+		{
+		  "id": "light-31-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light31ColorG"
+		},
+		{
+		  "id": "light-31-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light31ColorB"
+		},
+		{
+		  "id": "light-31-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light31Luminosity"
+		},
+		{
+		  "id": "light-31-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light31AmbientR"
+		},
+		{
+		  "id": "light-31-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light31AmbientG"
+		},
+		{
+		  "id": "light-31-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light31AmbientB"
+		},
+		{
+		  "id": "light-31-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light31AmbientLuminosity"
+		},
+		{
+		  "id": "light-31-distance",
+		  "type": "float",
+		  "initial-value": 1000,
+		  "uniform": "light31Distance"
+		},
+		{
+		  "id": "light-31-falloffv1",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light31Falloffv1"
+		},
+		{
+		  "id": "light-31-falloffv2",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light31Falloffv2"
+		},
+		{
+		  "id": "light-31-falloffv3",
+		  "type": "float",
+		  "initial-value": 0.2,
+		  "uniform": "light31Falloffv3"
+		},
+		{
+		  "id": "light-32-state-01",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light32State01"
+		},
+		{
+		  "id": "light-32-pos-x",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light32PosX"
+		},
+		{
+		  "id": "light-32-pos-y",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light32PosY"
+		},
+		{
+		  "id": "light-32-pos-z",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light32PosZ"
+		},
+		{
+		  "id": "light-32-color-r",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light32ColorR"
+		},
+		{
+		  "id": "light-32-color-g",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light32ColorG"
+		},
+		{
+		  "id": "light-32-color-b",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light32ColorB"
+		},
+		{
+		  "id": "light-32-luminosity",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light32Luminosity"
+		},
+		{
+		  "id": "light-32-ambient-r",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light32AmbientR"
+		},
+		{
+		  "id": "light-32-ambient-g",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light32AmbientG"
+		},
+		{
+		  "id": "light-32-ambient-b",
+		  "type": "float",
+		  "initial-value": 0.5,
+		  "uniform": "light32AmbientB"
+		},
+		{
+		  "id": "light-32-ambient-luminosity",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light32AmbientLuminosity"
+		},
+		{
+		  "id": "light-32-distance",
+		  "type": "float",
+		  "initial-value": 0,
+		  "uniform": "light32Distance"
+		},
+		{
+		  "id": "light-32-falloffv1",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light32Falloffv1"
+		},
+		{
+		  "id": "light-32-falloffv2",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light32Falloffv2"
+		},
+		{
+		  "id": "light-32-falloffv3",
+		  "type": "float",
+		  "initial-value": 1,
+		  "uniform": "light32Falloffv3"
+		}
+	]
+}

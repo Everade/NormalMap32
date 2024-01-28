@@ -1,0 +1,262 @@
+{
+	"name": "PerLayerEvents",
+	"events": [
+		{
+			"eventType": "comment",
+			"text": "- Notice -\nThis SCENE example runs the effect on a single layer. All normal maps are placed on the \"normal\" layer, while the background sprites are on the \"background\" layer.\nThis comes with certain limitations as we can no longer account for individual sprite rotation and flipping using the effect Parameters. You would have to do that by adjusting the normal maps instead. However this approach comes with performance benefits when having lots of individual normal sprites.",
+			"text-color": [
+				1,
+				1,
+				1,
+				1
+			],
+			"background-color": [
+				1,
+				0.3607843137254902,
+				0.3607843137254902,
+				1
+			]
+		},
+		{
+			"eventType": "comment",
+			"text": "- Info -\nThe setup is generally the same when compared to the PerSpriteEvents example. Main difference is that we set the effect parameters on a single layer instead to individual normal map sprites."
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "Screen Resolution - Layer",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-start-of-layout",
+							"objectClass": "System",
+							"sid": 523374400243309
+						}
+					],
+					"actions": [
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 932551738636962,
+							"parameters": {
+								"seconds": "0"
+							}
+						},
+						{
+							"callFunction": "lUpdateViewport",
+							"sid": 642536663677966
+						}
+					],
+					"sid": 838835863245102
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-resized",
+							"objectClass": "Browser",
+							"sid": 588551464836401
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "lUpdateViewport",
+							"sid": 274616778177143
+						}
+					],
+					"sid": 215000136288850
+				}
+			],
+			"sid": 601091969826417
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "Light Positioning - Layer",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "lightCount",
+					"type": "number",
+					"initialValue": "2",
+					"comment": "Light IDs higher than defined here will be disabled",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 992943435427357
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for",
+							"objectClass": "System",
+							"sid": 827027123538841,
+							"parameters": {
+								"name": "\"\"",
+								"start-index": "1",
+								"end-index": "lightCount"
+							}
+						},
+						{
+							"id": "compare-animation-frame",
+							"objectClass": "LightSource",
+							"sid": 307576924524496,
+							"parameters": {
+								"comparison": 0,
+								"number": "loopindex"
+							}
+						},
+						{
+							"id": "pick-nearestfurthest",
+							"objectClass": "LightSource",
+							"sid": 615773018293004,
+							"parameters": {
+								"which": "nearest",
+								"x": "(ViewportLeft(\"normal\") + ViewportRight(\"normal\")) / 2",
+								"y": "(ViewportTop(\"normal\") + ViewportBottom(\"normal\")) / 2"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-layer-effect-parameter",
+							"objectClass": "System",
+							"sid": 500980485574160,
+							"parameters": {
+								"layer": "\"normal\"",
+								"effect": "\"NormalMap32\"",
+								"parameter-index": "9-lightOffset+loopindex*lightOffset",
+								"value": "(LayerToCanvasX(1, LightSource.X, 0))/(WWL)*100"
+							}
+						},
+						{
+							"id": "set-layer-effect-parameter",
+							"objectClass": "System",
+							"sid": 311935295941257,
+							"parameters": {
+								"layer": "\"normal\"",
+								"effect": "\"NormalMap32\"",
+								"parameter-index": "10-lightOffset+loopindex *lightOffset",
+								"value": "(LayerToCanvasY(1, 0, LightSource.Y))/(WHL)*100"
+							}
+						}
+					],
+					"sid": 267882619506720
+				},
+				{
+					"eventType": "comment",
+					"text": "Here's a more dynamic light by moving Light 1 back and forth (against/away) from the camera by changing the light's z height."
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-comparison",
+							"objectClass": "System",
+							"sid": 716903039123974,
+							"parameters": {
+								"object": "LightSource",
+								"expression": "LightSource.AnimationFrame",
+								"comparison": 0,
+								"value": "1"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-layer-effect-parameter",
+							"objectClass": "System",
+							"sid": 642189203804178,
+							"parameters": {
+								"layer": "\"normal\"",
+								"effect": "\"NormalMap32\"",
+								"parameter-index": "11",
+								"value": "LightSource.Sine.Value+20"
+							}
+						}
+					],
+					"sid": 306590201300059
+				}
+			],
+			"sid": 747999788961676
+		},
+		{
+			"functionName": "lUpdateViewport",
+			"functionDescription": "Updates all Viewport related variables and updates all Normal Map Screen Resolution effect parameters accordingly.",
+			"functionCategory": "Viewport",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 775917373210029,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 477874303679711,
+							"parameters": {
+								"variable": "PR",
+								"value": "PlatformInfo.DevicePixelRatio\n"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 487707855284440,
+							"parameters": {
+								"variable": "VPB",
+								"value": "ViewportBottom(1)"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 880707268725418,
+							"parameters": {
+								"variable": "VPR",
+								"value": "ViewportRight(1)\n"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 837467567695958,
+							"parameters": {
+								"variable": "WWL",
+								"value": "round(LayerToCanvasX(1,VPR,0))"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 349295804787679,
+							"parameters": {
+								"variable": "WHL",
+								"value": "round(LayerToCanvasY(1,0,VPB))"
+							}
+						},
+						{
+							"type": "comment",
+							"text": "In the other example we update the resolution parameters here. This example shows you that it works without setting them for both WebGL2 and WebGPU. If you would like to support WebGL1, make sure to update the iResolution parameters as shown in the PerSprite example."
+						}
+					],
+					"sid": 856199179967663
+				}
+			]
+		}
+	],
+	"sid": 203466089444418
+}

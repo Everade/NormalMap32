@@ -4,7 +4,7 @@
 
 This repository contains code for the [NormalMap32 Construct effect](https://www.construct.net/make-games/addons/898/normalmap32). NormalMap32 allows to create and control up to 32 colored point lights that interact with a 2D normal map texture. The result is a simulated 3D lighting effect. There are two main components in this repository:
 
-- *construct-addon*: the Construct addon, written in GLSL using the [Construct Addon SDK](https://github.com/Scirra/Construct-Addon-SDK)
+- *construct-addon*: the Construct addon, written in GLSL/WGSL using the [Construct Addon SDK](https://github.com/Scirra/Construct-Addon-SDK)
 - *example-project*: the Construct example project, demonstrating some of the effect capabilities
 
 ## Distributing
@@ -36,11 +36,11 @@ Applying the effect to lots of individual normal map sprites can be costly. Cons
 
 ## Features
 
-- Supports WebGL1, WebGL2.
+- Supports WebGL1, WebGL2 and WebGPU.
 - Up to 32 simultaneous RGB light sources per normal map.
 - Linear, quadratic or mixed light falloff.
 - Distance clamping for spot light effects.
-- Supports rotated normal maps.
+- Supports flipped and rotated normal maps.
 - Global ambient light (RGB).
 
 ## Credits

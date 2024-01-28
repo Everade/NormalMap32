@@ -1,0 +1,712 @@
+{
+	"name": "PerLayerLayout",
+	"layers": [
+		{
+			"name": "background",
+			"overriden": 0,
+			"subLayers": [],
+			"instances": [
+				{
+					"type": "SceneTexture",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Default",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 13,
+					"instanceVariables": {},
+					"behaviors": {},
+					"world": {
+						"x": 0,
+						"y": 0,
+						"width": 1024,
+						"height": 512,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "LightSource",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Default",
+						"initial-frame": 2,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 14,
+					"instanceVariables": {
+						"z": 0
+					},
+					"behaviors": {
+						"DragDrop": {
+							"properties": {
+								"axes": "both",
+								"enabled": true
+							}
+						},
+						"Sine": {
+							"properties": {
+								"movement": "horizontal",
+								"wave": "sine",
+								"period": 16,
+								"period-random": 0,
+								"period-offset": 0,
+								"period-offset-random": 0,
+								"magnitude": 100,
+								"magnitude-random": 0,
+								"enabled": true,
+								"live-preview": false
+							}
+						},
+						"Sine2": {
+							"properties": {
+								"movement": "vertical",
+								"wave": "sine",
+								"period": 8,
+								"period-random": 0,
+								"period-offset": 0,
+								"period-offset-random": 0,
+								"magnitude": 100,
+								"magnitude-random": 0,
+								"enabled": true,
+								"live-preview": false
+							}
+						}
+					},
+					"world": {
+						"x": 859,
+						"y": 291,
+						"width": 31,
+						"height": 31,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							0.37254901960784315,
+							1,
+							0.3607843137254902,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				},
+				{
+					"type": "LightSource",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Default",
+						"initial-frame": 1,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 15,
+					"instanceVariables": {
+						"z": 0
+					},
+					"behaviors": {
+						"DragDrop": {
+							"properties": {
+								"axes": "both",
+								"enabled": true
+							}
+						},
+						"Sine": {
+							"properties": {
+								"movement": "value-only",
+								"wave": "sine",
+								"period": 5,
+								"period-random": 0,
+								"period-offset": 0,
+								"period-offset-random": 0,
+								"magnitude": 10,
+								"magnitude-random": 0,
+								"enabled": true,
+								"live-preview": false
+							}
+						},
+						"Sine2": {
+							"properties": {
+								"movement": "horizontal",
+								"wave": "sine",
+								"period": 8,
+								"period-random": 0,
+								"period-offset": 0,
+								"period-offset-random": 0,
+								"magnitude": 50,
+								"magnitude-random": 0,
+								"enabled": false,
+								"live-preview": false
+							}
+						}
+					},
+					"world": {
+						"x": 159,
+						"y": 390,
+						"width": 31,
+						"height": 31,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							0.7647058823529411,
+							0.3607843137254902,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				}
+			],
+			"sid": 179373370526993,
+			"effectTypes": [],
+			"isInitiallyVisible": true,
+			"isInitiallyInteractive": true,
+			"color": [
+				1,
+				1,
+				1,
+				1
+			],
+			"backgroundColor": [
+				0.3686274509803922,
+				0.3686274509803922,
+				0.3686274509803922,
+				1
+			],
+			"isTransparent": true,
+			"parallaxX": 1,
+			"parallaxY": 1,
+			"scaleRate": 1,
+			"forceOwnTexture": false,
+			"renderingMode": "3d",
+			"drawOrder": "z-order",
+			"useRenderCells": false,
+			"blendMode": "normal",
+			"zElevation": 0,
+			"global": false
+		},
+		{
+			"name": "normal",
+			"overriden": 0,
+			"subLayers": [],
+			"instances": [
+				{
+					"type": "SceneNormal",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Default",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 16,
+					"instanceVariables": {},
+					"behaviors": {},
+					"world": {
+						"x": 0,
+						"y": 0,
+						"width": 1024,
+						"height": 512,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"angle": 0,
+						"zElevation": 0
+					}
+				}
+			],
+			"sid": 392067616005576,
+			"effectTypes": [
+				{
+					"effectId": "normalmap32",
+					"name": "NormalMap32",
+					"instance": {
+						"isEnabled": true,
+						"parameters": {
+							"screen-x-resolution": 1920,
+							"screen-y-resolution": 1080,
+							"normal-scale-x": 1,
+							"normal-scale-y": 1,
+							"normal-angle": 0,
+							"light-max-id": 2,
+							"ambient-color": [
+								0.5,
+								0.5,
+								0.5,
+								1
+							],
+							"ambient-intensity": 0.25,
+							"light-1-intensity-01": 1.5,
+							"light-1-pos-x": 0,
+							"light-1-pos-y": 0,
+							"light-1-pos-z": 0.3,
+							"light-1-color": [
+								0.996078431372549,
+								0.7764705882352941,
+								0.30196078431372547,
+								1
+							],
+							"light-1-clamp": 1,
+							"light-1-linear-falloff": 1.5,
+							"light-1-quadratic-falloff": 1,
+							"light-2-intensity-01": 2,
+							"light-2-pos-x": 0,
+							"light-2-pos-y": 0,
+							"light-2-pos-z": 0.2,
+							"light-2-color": [
+								0,
+								1,
+								0.4823529411764706,
+								1
+							],
+							"light-2-clamp": 1,
+							"light-2-linear-falloff": 2,
+							"light-2-quadratic-falloff": 1.5,
+							"light-3-intensity-01": 0,
+							"light-3-pos-x": 0,
+							"light-3-pos-y": 0,
+							"light-3-pos-z": 0.2,
+							"light-3-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-3-clamp": 1,
+							"light-3-linear-falloff": 2,
+							"light-3-quadratic-falloff": 0,
+							"light-4-intensity-01": 0,
+							"light-4-pos-x": 0,
+							"light-4-pos-y": 0,
+							"light-4-pos-z": 0.2,
+							"light-4-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-4-clamp": 1,
+							"light-4-linear-falloff": 2,
+							"light-4-quadratic-falloff": 0,
+							"light-5-intensity-01": 0,
+							"light-5-pos-x": 0,
+							"light-5-pos-y": 0,
+							"light-5-pos-z": 0.2,
+							"light-5-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-5-clamp": 1,
+							"light-5-linear-falloff": 2,
+							"light-5-quadratic-falloff": 0,
+							"light-6-intensity-01": 0,
+							"light-6-pos-x": 0,
+							"light-6-pos-y": 0,
+							"light-6-pos-z": 0.2,
+							"light-6-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-6-clamp": 1,
+							"light-6-linear-falloff": 2,
+							"light-6-quadratic-falloff": 0,
+							"light-7-intensity-01": 0,
+							"light-7-pos-x": 0,
+							"light-7-pos-y": 0,
+							"light-7-pos-z": 0.2,
+							"light-7-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-7-clamp": 1,
+							"light-7-linear-falloff": 2,
+							"light-7-quadratic-falloff": 0,
+							"light-8-intensity-01": 0,
+							"light-8-pos-x": 0,
+							"light-8-pos-y": 0,
+							"light-8-pos-z": 0.2,
+							"light-8-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-8-clamp": 1,
+							"light-8-linear-falloff": 2,
+							"light-8-quadratic-falloff": 0,
+							"light-9-intensity-01": 0,
+							"light-9-pos-x": 0,
+							"light-9-pos-y": 0,
+							"light-9-pos-z": 0.2,
+							"light-9-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-9-clamp": 1,
+							"light-9-linear-falloff": 2,
+							"light-9-quadratic-falloff": 0,
+							"light-10-intensity-01": 0,
+							"light-10-pos-x": 0,
+							"light-10-pos-y": 0,
+							"light-10-pos-z": 0.2,
+							"light-10-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-10-clamp": 1,
+							"light-10-linear-falloff": 2,
+							"light-10-quadratic-falloff": 0,
+							"light-11-intensity-01": 0,
+							"light-11-pos-x": 0,
+							"light-11-pos-y": 0,
+							"light-11-pos-z": 0.2,
+							"light-11-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-11-clamp": 1,
+							"light-11-linear-falloff": 2,
+							"light-11-quadratic-falloff": 0,
+							"light-12-intensity-01": 0,
+							"light-12-pos-x": 0,
+							"light-12-pos-y": 0,
+							"light-12-pos-z": 0.2,
+							"light-12-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-12-clamp": 1,
+							"light-12-linear-falloff": 2,
+							"light-12-quadratic-falloff": 0,
+							"light-13-intensity-01": 0,
+							"light-13-pos-x": 0,
+							"light-13-pos-y": 0,
+							"light-13-pos-z": 0.2,
+							"light-13-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-13-clamp": 1,
+							"light-13-linear-falloff": 2,
+							"light-13-quadratic-falloff": 0,
+							"light-14-intensity-01": 0,
+							"light-14-pos-x": 0,
+							"light-14-pos-y": 0,
+							"light-14-pos-z": 0.2,
+							"light-14-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-14-clamp": 1,
+							"light-14-linear-falloff": 2,
+							"light-14-quadratic-falloff": 0,
+							"light-15-intensity-01": 0,
+							"light-15-pos-x": 0,
+							"light-15-pos-y": 0,
+							"light-15-pos-z": 0.2,
+							"light-15-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-15-clamp": 1,
+							"light-15-linear-falloff": 2,
+							"light-15-quadratic-falloff": 0,
+							"light-16-intensity-01": 0,
+							"light-16-pos-x": 0,
+							"light-16-pos-y": 0,
+							"light-16-pos-z": 0.2,
+							"light-16-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-16-clamp": 1,
+							"light-16-linear-falloff": 2,
+							"light-16-quadratic-falloff": 0,
+							"light-17-intensity-01": 0,
+							"light-17-pos-x": 0,
+							"light-17-pos-y": 0,
+							"light-17-pos-z": 0.2,
+							"light-17-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-17-clamp": 1,
+							"light-17-linear-falloff": 2,
+							"light-17-quadratic-falloff": 0,
+							"light-18-intensity-01": 0,
+							"light-18-pos-x": 0,
+							"light-18-pos-y": 0,
+							"light-18-pos-z": 0.2,
+							"light-18-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-18-clamp": 1,
+							"light-18-linear-falloff": 2,
+							"light-18-quadratic-falloff": 0,
+							"light-19-intensity-01": 0,
+							"light-19-pos-x": 0,
+							"light-19-pos-y": 0,
+							"light-19-pos-z": 0.2,
+							"light-19-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-19-clamp": 1,
+							"light-19-linear-falloff": 2,
+							"light-19-quadratic-falloff": 0,
+							"light-20-intensity-01": 0,
+							"light-20-pos-x": 0,
+							"light-20-pos-y": 0,
+							"light-20-pos-z": 0.2,
+							"light-20-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-20-clamp": 1,
+							"light-20-linear-falloff": 2,
+							"light-20-quadratic-falloff": 0,
+							"light-21-intensity-01": 0,
+							"light-21-pos-x": 0,
+							"light-21-pos-y": 0,
+							"light-21-pos-z": 0.2,
+							"light-21-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-21-clamp": 1,
+							"light-21-linear-falloff": 2,
+							"light-21-quadratic-falloff": 0,
+							"light-22-intensity-01": 0,
+							"light-22-pos-x": 0,
+							"light-22-pos-y": 0,
+							"light-22-pos-z": 0.2,
+							"light-22-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-22-clamp": 1,
+							"light-22-linear-falloff": 2,
+							"light-22-quadratic-falloff": 0,
+							"light-23-intensity-01": 0,
+							"light-23-pos-x": 0,
+							"light-23-pos-y": 0,
+							"light-23-pos-z": 0.2,
+							"light-23-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-23-clamp": 1,
+							"light-23-linear-falloff": 2,
+							"light-23-quadratic-falloff": 0,
+							"light-24-intensity-01": 0,
+							"light-24-pos-x": 0,
+							"light-24-pos-y": 0,
+							"light-24-pos-z": 0.2,
+							"light-24-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-24-clamp": 1,
+							"light-24-linear-falloff": 2,
+							"light-24-quadratic-falloff": 0,
+							"light-25-intensity-01": 0,
+							"light-25-pos-x": 0,
+							"light-25-pos-y": 0,
+							"light-25-pos-z": 0.2,
+							"light-25-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-25-clamp": 1,
+							"light-25-linear-falloff": 2,
+							"light-25-quadratic-falloff": 0,
+							"light-26-intensity-01": 0,
+							"light-26-pos-x": 0,
+							"light-26-pos-y": 0,
+							"light-26-pos-z": 0.2,
+							"light-26-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-26-clamp": 1,
+							"light-26-linear-falloff": 2,
+							"light-26-quadratic-falloff": 0,
+							"light-27-intensity-01": 0,
+							"light-27-pos-x": 0,
+							"light-27-pos-y": 0,
+							"light-27-pos-z": 0.2,
+							"light-27-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-27-clamp": 1,
+							"light-27-linear-falloff": 2,
+							"light-27-quadratic-falloff": 0,
+							"light-28-intensity-01": 0,
+							"light-28-pos-x": 0,
+							"light-28-pos-y": 0,
+							"light-28-pos-z": 0.2,
+							"light-28-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-28-clamp": 1,
+							"light-28-linear-falloff": 2,
+							"light-28-quadratic-falloff": 0,
+							"light-29-intensity-01": 0,
+							"light-29-pos-x": 0,
+							"light-29-pos-y": 0,
+							"light-29-pos-z": 0.2,
+							"light-29-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-29-clamp": 1,
+							"light-29-linear-falloff": 2,
+							"light-29-quadratic-falloff": 0,
+							"light-30-intensity-01": 0,
+							"light-30-pos-x": 0,
+							"light-30-pos-y": 0,
+							"light-30-pos-z": 0.2,
+							"light-30-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-30-clamp": 1,
+							"light-30-linear-falloff": 2,
+							"light-30-quadratic-falloff": 0,
+							"light-31-intensity-01": 0,
+							"light-31-pos-x": 0,
+							"light-31-pos-y": 0,
+							"light-31-pos-z": 0.2,
+							"light-31-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-31-clamp": 1,
+							"light-31-linear-falloff": 2,
+							"light-31-quadratic-falloff": 0,
+							"light-32-intensity-01": 0,
+							"light-32-pos-x": 0,
+							"light-32-pos-y": 0,
+							"light-32-pos-z": 1,
+							"light-32-color": [
+								1,
+								1,
+								1,
+								1
+							],
+							"light-32-clamp": 1,
+							"light-32-linear-falloff": 2,
+							"light-32-quadratic-falloff": 0
+						}
+					}
+				}
+			],
+			"isInitiallyVisible": true,
+			"isInitiallyInteractive": true,
+			"color": [
+				1,
+				1,
+				1,
+				1
+			],
+			"backgroundColor": [
+				0.3686274509803922,
+				0.3686274509803922,
+				0.3686274509803922,
+				1
+			],
+			"isTransparent": true,
+			"parallaxX": 1,
+			"parallaxY": 1,
+			"scaleRate": 1,
+			"forceOwnTexture": false,
+			"renderingMode": "3d",
+			"drawOrder": "z-order",
+			"useRenderCells": false,
+			"blendMode": "normal",
+			"zElevation": 0,
+			"global": false
+		}
+	],
+	"sid": 127705231240163,
+	"nonworld-instances": [],
+	"effectTypes": [],
+	"width": 1708,
+	"height": 960,
+	"unboundedScrolling": false,
+	"vpX": 0.5,
+	"vpY": 0.5,
+	"projection": "perspective",
+	"eventSheet": "PerLayerEvents"
+}

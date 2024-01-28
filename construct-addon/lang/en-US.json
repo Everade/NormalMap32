@@ -5,2072 +5,1064 @@
 		"effects": {
 			"normalmap32": {
 				"name": "NormalMap32",
-				"description": "Create a 3D light effect on any 2D sprite using a normal map.",
+				"description": "Use 2D normal mapping to simulate multiple colored light sources on a texture, adding depth and creating the illusion of a 3D surface.",
 				"help-url": "https://www.construct.net/make-games/addons/898/normalmap32",
 				"parameters": {
 					"screen-x-resolution":{
-					  "name": "Screen X Resolution [000]",
-					  "desc": "Screen X Resolution"
+					  "name": "Screen X iResolution [000]",
+					  "desc": "Can be ignored for WebGL2 and WebGPU. For WebGL1 support forward: (round(LayerToCanvasX(layer,ViewportRight(layer),0)*PlatformInfo.DevicePixelRatio))"
 					},
 					"screen-y-resolution":{
-					  "name": "Screen Y Resolution [001]",
-					  "desc": "Screen Y Resolution"
+					  "name": "Screen Y iResolution [001]",
+					  "desc": "Can be ignored for WebGL2 and WebGPU. For WebGL1 support forward: (round(LayerToCanvasY(layer,0,ViewportBottom(layer))*PlatformInfo.DevicePixelRatio))"
+					},
+					"normal-scale-x":{
+					  "name": "Normal Map Scale X [002]",
+					  "desc": "Normal Map Sprite X Scale (Width). (1) for original scale, (-1) is flipped. Required to support scaled and flipped sprite. Forward: (sprite.Width/sprite.ImageWidth)"
+					},
+					"normal-scale-y":{
+					  "name": "Normal Map Scale Y [003]",
+					  "desc": "Normal Map Sprite Y Scale (Height). (1) for original scale, (-1) is flipped. Required to support scaled and flipped sprite. Forward: (sprite.Height/sprite.ImageHeight)"
 					},
 					"normal-angle":{
-					  "name": "Normal Map Angle [002]",
-					  "desc": "Normal Map Sprite Angle. OFF (0) improves performance"
+					  "name": "Normal Map Angle [004]",
+					  "desc": "Normal Map Sprite Angle. Required to support rotated sprite. Forward: (sprite.Angle)"
 					},
 					"light-max-id":{
-					  "name": "Max Light ID [003]",
-					  "desc": "Highest light ID used. Disables all light IDs higher than defined number. For minor performance improvements in WebGL2"
+					  "name": "Max Light ID [005]",
+					  "desc": "Highest light ID used (1 - 32). Disables all light IDs higher than defined number. Keep as low as possible for enhanced shader performance"
 					},
-					"light-1-state-01":{
-					  "name": "Light 1 State 0/1 [004]",
-					  "desc": "Light 1 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"ambient-color":{
+					  "name": "Ambient Light Color [006]",
+					  "desc": "Ambient Light Color (RGB)"
+					},
+					"ambient-intensity":{
+					  "name": "Ambient Light Intensity [007]",
+					  "desc": "Ambient Light Intensity defines the perceived ambient brightness"
+					},
+					"light-1-intensity-01":{
+					  "name": "Light 1 Intensity [008]",
+					  "desc": "Light 1 Intensity. OFF (0) improves shader performance"
 					},
 					"light-1-pos-x":{
-					  "name": "Light 1 X Position [005]",
-					  "desc": "Light 1 Position (X)"
+					  "name": "Light 1 X Position [009]",
+					  "desc": "Light 1 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-1-pos-y":{
-					  "name": "Light 1 Y Position [006]",
-					  "desc": "Light 1 Position (Y)"
+					  "name": "Light 1 Y Position [010]",
+					  "desc": "Light 1 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-1-pos-z":{
-					  "name": "Light 1 Z Position [007]",
-					  "desc": "Light 1 Position (Z) 0 to 1"
+					  "name": "Light 1 Z Position [011]",
+					  "desc": "Light 1 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-1-color-r":{
-					  "name": "Light 1 Color (Red) [008]",
-					  "desc": "Light 1 Color (Red) 0 to 1"
+					"light-1-color":{
+					  "name": "Light 1 Color [012]",
+					  "desc": "Light 1 Color (RGB)"
 					},
-					"light-1-color-g":{
-					  "name": "Light 1 Color (Green) [009]",
-					  "desc": "Light 1 Color (Green) 0 to 1"
+					"light-1-clamp":{
+					  "name": "Light 1 Clamp [013]",
+					  "desc": "Light 1 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-1-color-b":{
-					  "name": "Light 1 Color (Blue) [010]",
-					  "desc": "Light 1 Color (Blue) 0 to 1"
+					"light-1-linear-falloff":{
+					  "name": "Light 1 Linear Falloff [014]",
+					  "desc": "Light 1 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-1-luminosity":{
-					  "name": "Light 1 Luminosity [011]",
-					  "desc": "Light 1 Luminosity 0 to 1"
+					"light-1-quadratic-falloff":{
+					  "name": "Light 1 Quadratic Falloff [015]",
+					  "desc": "Light 1 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-1-ambient-r":{
-					  "name": "Light 1 Ambient (Red) [012]",
-					  "desc": "Light 1 Ambient (Red) 0 to 1"
-					},
-					"light-1-ambient-g":{
-					  "name": "Light 1 Ambient (Green) [013]",
-					  "desc": "Light 1 Ambient (Green) 0 to 1"
-					},
-					"light-1-ambient-b":{
-					  "name": "Light 1 Ambient (Blue) [014]",
-					  "desc": "Light 1 Ambient (Blue) 0 to 1"
-					},
-					"light-1-ambient-luminosity":{
-					  "name": "Light 1 Ambient Luminosity [015]",
-					  "desc": "Light 1 Ambient Luminosity 0 to 1"
-					},
-					"light-1-distance":{
-					  "name": "Light 1 Distance [016]",
-					  "desc": "Light 1 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-1-falloffv1":{
-					  "name": "Light 1 Falloff A [017]",
-					  "desc": "Light 1 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-1-falloffv2":{
-					  "name": "Light 1 Falloff B [018]",
-					  "desc": "Light 1 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-1-falloffv3":{
-					  "name": "Light 1 Falloff C [019]",
-					  "desc": "Light 1 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-2-state-01":{
-					  "name": "Light 2 State 0/1 [020]",
-					  "desc": "Light 2 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-2-intensity-01":{
+					  "name": "Light 2 Intensity [016]",
+					  "desc": "Light 2 Intensity. OFF (0) improves shader performance"
 					},
 					"light-2-pos-x":{
-					  "name": "Light 2 X Position [021]",
-					  "desc": "Light 2 Position (X)"
+					  "name": "Light 2 X Position [017]",
+					  "desc": "Light 2 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-2-pos-y":{
-					  "name": "Light 2 Y Position [022]",
-					  "desc": "Light 2 Position (Y)"
+					  "name": "Light 2 Y Position [018]",
+					  "desc": "Light 2 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-2-pos-z":{
-					  "name": "Light 2 Z Position [023]",
-					  "desc": "Light 2 Position (Z) 0 to 1"
+					  "name": "Light 2 Z Position [019]",
+					  "desc": "Light 2 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-2-color-r":{
-					  "name": "Light 2 Color (Red) [024]",
-					  "desc": "Light 2 Color (Red) 0 to 1"
+					"light-2-color":{
+					  "name": "Light 2 Color [020]",
+					  "desc": "Light 2 Color (RGB)"
 					},
-					"light-2-color-g":{
-					  "name": "Light 2 Color (Green) [025]",
-					  "desc": "Light 2 Color (Green) 0 to 1"
+					"light-2-clamp":{
+					  "name": "Light 2 Clamp [021]",
+					  "desc": "Light 2 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-2-color-b":{
-					  "name": "Light 2 Color (Blue) [026]",
-					  "desc": "Light 2 Color (Blue) 0 to 1"
+					"light-2-linear-falloff":{
+					  "name": "Light 2 Linear Falloff [022]",
+					  "desc": "Light 2 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-2-luminosity":{
-					  "name": "Light 2 Luminosity [027]",
-					  "desc": "Light 2 Luminosity 0 to 1"
+					"light-2-quadratic-falloff":{
+					  "name": "Light 2 Quadratic Falloff [023]",
+					  "desc": "Light 2 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-2-ambient-r":{
-					  "name": "Light 2 Ambient (Red) [028]",
-					  "desc": "Light 2 Ambient (Red) 0 to 1"
-					},
-					"light-2-ambient-g":{
-					  "name": "Light 2 Ambient (Green) [029]",
-					  "desc": "Light 2 Ambient (Green) 0 to 1"
-					},
-					"light-2-ambient-b":{
-					  "name": "Light 2 Ambient (Blue) [030]",
-					  "desc": "Light 2 Ambient (Blue) 0 to 1"
-					},
-					"light-2-ambient-luminosity":{
-					  "name": "Light 2 Ambient Luminosity [031]",
-					  "desc": "Light 2 Ambient Luminosity 0 to 1"
-					},
-					"light-2-distance":{
-					  "name": "Light 2 Distance [032]",
-					  "desc": "Light 2 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-2-falloffv1":{
-					  "name": "Light 2 Falloff A [033]",
-					  "desc": "Light 2 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-2-falloffv2":{
-					  "name": "Light 2 Falloff B [034]",
-					  "desc": "Light 2 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-2-falloffv3":{
-					  "name": "Light 2 Falloff C [035]",
-					  "desc": "Light 2 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-3-state-01":{
-					  "name": "Light 3 State 0/1 [036]",
-					  "desc": "Light 3 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-3-intensity-01":{
+					  "name": "Light 3 Intensity [024]",
+					  "desc": "Light 3 Intensity. OFF (0) improves shader performance"
 					},
 					"light-3-pos-x":{
-					  "name": "Light 3 X Position [037]",
-					  "desc": "Light 3 Position (X)"
+					  "name": "Light 3 X Position [025]",
+					  "desc": "Light 3 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-3-pos-y":{
-					  "name": "Light 3 Y Position [038]",
-					  "desc": "Light 3 Position (Y)"
+					  "name": "Light 3 Y Position [026]",
+					  "desc": "Light 3 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-3-pos-z":{
-					  "name": "Light 3 Z Position [039]",
-					  "desc": "Light 3 Position (Z) 0 to 1"
+					  "name": "Light 3 Z Position [027]",
+					  "desc": "Light 3 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-3-color-r":{
-					  "name": "Light 3 Color (Red) [040]",
-					  "desc": "Light 3 Color (Red) 0 to 1"
+					"light-3-color":{
+					  "name": "Light 3 Color [028]",
+					  "desc": "Light 3 Color (RGB)"
 					},
-					"light-3-color-g":{
-					  "name": "Light 3 Color (Green) [041]",
-					  "desc": "Light 3 Color (Green) 0 to 1"
+					"light-3-clamp":{
+					  "name": "Light 3 Clamp [029]",
+					  "desc": "Light 3 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-3-color-b":{
-					  "name": "Light 3 Color (Blue) [042]",
-					  "desc": "Light 3 Color (Blue) 0 to 1"
+					"light-3-linear-falloff":{
+					  "name": "Light 3 Linear Falloff [030]",
+					  "desc": "Light 3 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-3-luminosity":{
-					  "name": "Light 3 Luminosity [043]",
-					  "desc": "Light 3 Luminosity 0 to 1"
+					"light-3-quadratic-falloff":{
+					  "name": "Light 3 Quadratic Falloff [031]",
+					  "desc": "Light 3 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-3-ambient-r":{
-					  "name": "Light 3 Ambient (Red) [044]",
-					  "desc": "Light 3 Ambient (Red) 0 to 1"
-					},
-					"light-3-ambient-g":{
-					  "name": "Light 3 Ambient (Green) [045]",
-					  "desc": "Light 3 Ambient (Green) 0 to 1"
-					},
-					"light-3-ambient-b":{
-					  "name": "Light 3 Ambient (Blue) [046]",
-					  "desc": "Light 3 Ambient (Blue) 0 to 1"
-					},
-					"light-3-ambient-luminosity":{
-					  "name": "Light 3 Ambient Luminosity [047]",
-					  "desc": "Light 3 Ambient Luminosity 0 to 1"
-					},
-					"light-3-distance":{
-					  "name": "Light 3 Distance [048]",
-					  "desc": "Light 3 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-3-falloffv1":{
-					  "name": "Light 3 Falloff A [049]",
-					  "desc": "Light 3 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-3-falloffv2":{
-					  "name": "Light 3 Falloff B [050]",
-					  "desc": "Light 3 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-3-falloffv3":{
-					  "name": "Light 3 Falloff C [051]",
-					  "desc": "Light 3 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-4-state-01":{
-					  "name": "Light 4 State 0/1 [052]",
-					  "desc": "Light 4 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-4-intensity-01":{
+					  "name": "Light 4 Intensity [032]",
+					  "desc": "Light 4 Intensity. OFF (0) improves shader performance"
 					},
 					"light-4-pos-x":{
-					  "name": "Light 4 X Position [053]",
-					  "desc": "Light 4 Position (X)"
+					  "name": "Light 4 X Position [033]",
+					  "desc": "Light 4 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-4-pos-y":{
-					  "name": "Light 4 Y Position [054]",
-					  "desc": "Light 4 Position (Y)"
+					  "name": "Light 4 Y Position [034]",
+					  "desc": "Light 4 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-4-pos-z":{
-					  "name": "Light 4 Z Position [055]",
-					  "desc": "Light 4 Position (Z) 0 to 1"
+					  "name": "Light 4 Z Position [035]",
+					  "desc": "Light 4 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-4-color-r":{
-					  "name": "Light 4 Color (Red) [056]",
-					  "desc": "Light 4 Color (Red) 0 to 1"
+					"light-4-color":{
+					  "name": "Light 4 Color [036]",
+					  "desc": "Light 4 Color (RGB)"
 					},
-					"light-4-color-g":{
-					  "name": "Light 4 Color (Green) [057]",
-					  "desc": "Light 4 Color (Green) 0 to 1"
+					"light-4-clamp":{
+					  "name": "Light 4 Clamp [037]",
+					  "desc": "Light 4 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-4-color-b":{
-					  "name": "Light 4 Color (Blue) [058]",
-					  "desc": "Light 4 Color (Blue) 0 to 1"
+					"light-4-linear-falloff":{
+					  "name": "Light 4 Linear Falloff [038]",
+					  "desc": "Light 4 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-4-luminosity":{
-					  "name": "Light 4 Luminosity [059]",
-					  "desc": "Light 4 Luminosity 0 to 1"
+					"light-4-quadratic-falloff":{
+					  "name": "Light 4 Quadratic Falloff [039]",
+					  "desc": "Light 4 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-4-ambient-r":{
-					  "name": "Light 4 Ambient (Red) [060]",
-					  "desc": "Light 4 Ambient (Red) 0 to 1"
-					},
-					"light-4-ambient-g":{
-					  "name": "Light 4 Ambient (Green) [061]",
-					  "desc": "Light 4 Ambient (Green) 0 to 1"
-					},
-					"light-4-ambient-b":{
-					  "name": "Light 4 Ambient (Blue) [062]",
-					  "desc": "Light 4 Ambient (Blue) 0 to 1"
-					},
-					"light-4-ambient-luminosity":{
-					  "name": "Light 4 Ambient Luminosity [063]",
-					  "desc": "Light 4 Ambient Luminosity 0 to 1"
-					},
-					"light-4-distance":{
-					  "name": "Light 4 Distance [064]",
-					  "desc": "Light 4 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-4-falloffv1":{
-					  "name": "Light 4 Falloff A [065]",
-					  "desc": "Light 4 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-4-falloffv2":{
-					  "name": "Light 4 Falloff B [066]",
-					  "desc": "Light 4 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-4-falloffv3":{
-					  "name": "Light 4 Falloff C [067]",
-					  "desc": "Light 4 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-5-state-01":{
-					  "name": "Light 5 State 0/1 [068]",
-					  "desc": "Light 5 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-5-intensity-01":{
+					  "name": "Light 5 Intensity [040]",
+					  "desc": "Light 5 Intensity. OFF (0) improves shader performance"
 					},
 					"light-5-pos-x":{
-					  "name": "Light 5 X Position [069]",
-					  "desc": "Light 5 Position (X)"
+					  "name": "Light 5 X Position [041]",
+					  "desc": "Light 5 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-5-pos-y":{
-					  "name": "Light 5 Y Position [070]",
-					  "desc": "Light 5 Position (Y)"
+					  "name": "Light 5 Y Position [042]",
+					  "desc": "Light 5 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-5-pos-z":{
-					  "name": "Light 5 Z Position [071]",
-					  "desc": "Light 5 Position (Z) 0 to 1"
+					  "name": "Light 5 Z Position [043]",
+					  "desc": "Light 5 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-5-color-r":{
-					  "name": "Light 5 Color (Red) [072]",
-					  "desc": "Light 5 Color (Red) 0 to 1"
+					"light-5-color":{
+					  "name": "Light 5 Color [044]",
+					  "desc": "Light 5 Color (RGB)"
 					},
-					"light-5-color-g":{
-					  "name": "Light 5 Color (Green) [073]",
-					  "desc": "Light 5 Color (Green) 0 to 1"
+					"light-5-clamp":{
+					  "name": "Light 5 Clamp [045]",
+					  "desc": "Light 5 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-5-color-b":{
-					  "name": "Light 5 Color (Blue) [074]",
-					  "desc": "Light 5 Color (Blue) 0 to 1"
+					"light-5-linear-falloff":{
+					  "name": "Light 5 Linear Falloff [046]",
+					  "desc": "Light 5 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-5-luminosity":{
-					  "name": "Light 5 Luminosity [075]",
-					  "desc": "Light 5 Luminosity 0 to 1"
+					"light-5-quadratic-falloff":{
+					  "name": "Light 5 Quadratic Falloff [047]",
+					  "desc": "Light 5 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-5-ambient-r":{
-					  "name": "Light 5 Ambient (Red) [076]",
-					  "desc": "Light 5 Ambient (Red) 0 to 1"
-					},
-					"light-5-ambient-g":{
-					  "name": "Light 5 Ambient (Green) [077]",
-					  "desc": "Light 5 Ambient (Green) 0 to 1"
-					},
-					"light-5-ambient-b":{
-					  "name": "Light 5 Ambient (Blue) [078]",
-					  "desc": "Light 5 Ambient (Blue) 0 to 1"
-					},
-					"light-5-ambient-luminosity":{
-					  "name": "Light 5 Ambient Luminosity [079]",
-					  "desc": "Light 5 Ambient Luminosity 0 to 1"
-					},
-					"light-5-distance":{
-					  "name": "Light 5 Distance [080]",
-					  "desc": "Light 5 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-5-falloffv1":{
-					  "name": "Light 5 Falloff A [081]",
-					  "desc": "Light 5 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-5-falloffv2":{
-					  "name": "Light 5 Falloff B [082]",
-					  "desc": "Light 5 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-5-falloffv3":{
-					  "name": "Light 5 Falloff C [083]",
-					  "desc": "Light 5 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-6-state-01":{
-					  "name": "Light 6 State 0/1 [084]",
-					  "desc": "Light 6 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-6-intensity-01":{
+					  "name": "Light 6 Intensity [048]",
+					  "desc": "Light 6 Intensity. OFF (0) improves shader performance"
 					},
 					"light-6-pos-x":{
-					  "name": "Light 6 X Position [085]",
-					  "desc": "Light 6 Position (X)"
+					  "name": "Light 6 X Position [049]",
+					  "desc": "Light 6 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-6-pos-y":{
-					  "name": "Light 6 Y Position [086]",
-					  "desc": "Light 6 Position (Y)"
+					  "name": "Light 6 Y Position [050]",
+					  "desc": "Light 6 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-6-pos-z":{
-					  "name": "Light 6 Z Position [087]",
-					  "desc": "Light 6 Position (Z) 0 to 1"
+					  "name": "Light 6 Z Position [051]",
+					  "desc": "Light 6 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-6-color-r":{
-					  "name": "Light 6 Color (Red) [088]",
-					  "desc": "Light 6 Color (Red) 0 to 1"
+					"light-6-color":{
+					  "name": "Light 6 Color [052]",
+					  "desc": "Light 6 Color (RGB)"
 					},
-					"light-6-color-g":{
-					  "name": "Light 6 Color (Green) [089]",
-					  "desc": "Light 6 Color (Green) 0 to 1"
+					"light-6-clamp":{
+					  "name": "Light 6 Clamp [053]",
+					  "desc": "Light 6 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-6-color-b":{
-					  "name": "Light 6 Color (Blue) [090]",
-					  "desc": "Light 6 Color (Blue) 0 to 1"
+					"light-6-linear-falloff":{
+					  "name": "Light 6 Linear Falloff [054]",
+					  "desc": "Light 6 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-6-luminosity":{
-					  "name": "Light 6 Luminosity [091]",
-					  "desc": "Light 6 Luminosity 0 to 1"
+					"light-6-quadratic-falloff":{
+					  "name": "Light 6 Quadratic Falloff [055]",
+					  "desc": "Light 6 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-6-ambient-r":{
-					  "name": "Light 6 Ambient (Red) [092]",
-					  "desc": "Light 6 Ambient (Red) 0 to 1"
-					},
-					"light-6-ambient-g":{
-					  "name": "Light 6 Ambient (Green) [093]",
-					  "desc": "Light 6 Ambient (Green) 0 to 1"
-					},
-					"light-6-ambient-b":{
-					  "name": "Light 6 Ambient (Blue) [094]",
-					  "desc": "Light 6 Ambient (Blue) 0 to 1"
-					},
-					"light-6-ambient-luminosity":{
-					  "name": "Light 6 Ambient Luminosity [095]",
-					  "desc": "Light 6 Ambient Luminosity 0 to 1"
-					},
-					"light-6-distance":{
-					  "name": "Light 6 Distance [096]",
-					  "desc": "Light 6 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-6-falloffv1":{
-					  "name": "Light 6 Falloff A [097]",
-					  "desc": "Light 6 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-6-falloffv2":{
-					  "name": "Light 6 Falloff B [098]",
-					  "desc": "Light 6 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-6-falloffv3":{
-					  "name": "Light 6 Falloff C [099]",
-					  "desc": "Light 6 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-7-state-01":{
-					  "name": "Light 7 State 0/1 [100]",
-					  "desc": "Light 7 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-7-intensity-01":{
+					  "name": "Light 7 Intensity [056]",
+					  "desc": "Light 7 Intensity. OFF (0) improves shader performance"
 					},
 					"light-7-pos-x":{
-					  "name": "Light 7 X Position [101]",
-					  "desc": "Light 7 Position (X)"
+					  "name": "Light 7 X Position [057]",
+					  "desc": "Light 7 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-7-pos-y":{
-					  "name": "Light 7 Y Position [102]",
-					  "desc": "Light 7 Position (Y)"
+					  "name": "Light 7 Y Position [058]",
+					  "desc": "Light 7 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-7-pos-z":{
-					  "name": "Light 7 Z Position [103]",
-					  "desc": "Light 7 Position (Z) 0 to 1"
+					  "name": "Light 7 Z Position [059]",
+					  "desc": "Light 7 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-7-color-r":{
-					  "name": "Light 7 Color (Red) [104]",
-					  "desc": "Light 7 Color (Red) 0 to 1"
+					"light-7-color":{
+					  "name": "Light 7 Color [060]",
+					  "desc": "Light 7 Color (RGB)"
 					},
-					"light-7-color-g":{
-					  "name": "Light 7 Color (Green) [105]",
-					  "desc": "Light 7 Color (Green) 0 to 1"
+					"light-7-clamp":{
+					  "name": "Light 7 Clamp [061]",
+					  "desc": "Light 7 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-7-color-b":{
-					  "name": "Light 7 Color (Blue) [106]",
-					  "desc": "Light 7 Color (Blue) 0 to 1"
+					"light-7-linear-falloff":{
+					  "name": "Light 7 Linear Falloff [062]",
+					  "desc": "Light 7 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-7-luminosity":{
-					  "name": "Light 7 Luminosity [107]",
-					  "desc": "Light 7 Luminosity 0 to 1"
+					"light-7-quadratic-falloff":{
+					  "name": "Light 7 Quadratic Falloff [063]",
+					  "desc": "Light 7 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-7-ambient-r":{
-					  "name": "Light 7 Ambient (Red) [108]",
-					  "desc": "Light 7 Ambient (Red) 0 to 1"
-					},
-					"light-7-ambient-g":{
-					  "name": "Light 7 Ambient (Green) [109]",
-					  "desc": "Light 7 Ambient (Green) 0 to 1"
-					},
-					"light-7-ambient-b":{
-					  "name": "Light 7 Ambient (Blue) [110]",
-					  "desc": "Light 7 Ambient (Blue) 0 to 1"
-					},
-					"light-7-ambient-luminosity":{
-					  "name": "Light 7 Ambient Luminosity [111]",
-					  "desc": "Light 7 Ambient Luminosity 0 to 1"
-					},
-					"light-7-distance":{
-					  "name": "Light 7 Distance [112]",
-					  "desc": "Light 7 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-7-falloffv1":{
-					  "name": "Light 7 Falloff A [113]",
-					  "desc": "Light 7 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-7-falloffv2":{
-					  "name": "Light 7 Falloff B [114]",
-					  "desc": "Light 7 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-7-falloffv3":{
-					  "name": "Light 7 Falloff C [115]",
-					  "desc": "Light 7 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-8-state-01":{
-					  "name": "Light 8 State 0/1 [116]",
-					  "desc": "Light 8 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-8-intensity-01":{
+					  "name": "Light 8 Intensity [064]",
+					  "desc": "Light 8 Intensity. OFF (0) improves shader performance"
 					},
 					"light-8-pos-x":{
-					  "name": "Light 8 X Position [117]",
-					  "desc": "Light 8 Position (X)"
+					  "name": "Light 8 X Position [065]",
+					  "desc": "Light 8 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-8-pos-y":{
-					  "name": "Light 8 Y Position [118]",
-					  "desc": "Light 8 Position (Y)"
+					  "name": "Light 8 Y Position [066]",
+					  "desc": "Light 8 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-8-pos-z":{
-					  "name": "Light 8 Z Position [119]",
-					  "desc": "Light 8 Position (Z) 0 to 1"
+					  "name": "Light 8 Z Position [067]",
+					  "desc": "Light 8 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-8-color-r":{
-					  "name": "Light 8 Color (Red) [120]",
-					  "desc": "Light 8 Color (Red) 0 to 1"
+					"light-8-color":{
+					  "name": "Light 8 Color [068]",
+					  "desc": "Light 8 Color (RGB)"
 					},
-					"light-8-color-g":{
-					  "name": "Light 8 Color (Green) [121]",
-					  "desc": "Light 8 Color (Green) 0 to 1"
+					"light-8-clamp":{
+					  "name": "Light 8 Clamp [069]",
+					  "desc": "Light 8 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-8-color-b":{
-					  "name": "Light 8 Color (Blue) [122]",
-					  "desc": "Light 8 Color (Blue) 0 to 1"
+					"light-8-linear-falloff":{
+					  "name": "Light 8 Linear Falloff [070]",
+					  "desc": "Light 8 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-8-luminosity":{
-					  "name": "Light 8 Luminosity [123]",
-					  "desc": "Light 8 Luminosity 0 to 1"
+					"light-8-quadratic-falloff":{
+					  "name": "Light 8 Quadratic Falloff [071]",
+					  "desc": "Light 8 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-8-ambient-r":{
-					  "name": "Light 8 Ambient (Red) [124]",
-					  "desc": "Light 8 Ambient (Red) 0 to 1"
-					},
-					"light-8-ambient-g":{
-					  "name": "Light 8 Ambient (Green) [125]",
-					  "desc": "Light 8 Ambient (Green) 0 to 1"
-					},
-					"light-8-ambient-b":{
-					  "name": "Light 8 Ambient (Blue) [126]",
-					  "desc": "Light 8 Ambient (Blue) 0 to 1"
-					},
-					"light-8-ambient-luminosity":{
-					  "name": "Light 8 Ambient Luminosity [127]",
-					  "desc": "Light 8 Ambient Luminosity 0 to 1"
-					},
-					"light-8-distance":{
-					  "name": "Light 8 Distance [128]",
-					  "desc": "Light 8 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-8-falloffv1":{
-					  "name": "Light 8 Falloff A [129]",
-					  "desc": "Light 8 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-8-falloffv2":{
-					  "name": "Light 8 Falloff B [130]",
-					  "desc": "Light 8 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-8-falloffv3":{
-					  "name": "Light 8 Falloff C [131]",
-					  "desc": "Light 8 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-9-state-01":{
-					  "name": "Light 9 State 0/1 [132]",
-					  "desc": "Light 9 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-9-intensity-01":{
+					  "name": "Light 9 Intensity [072]",
+					  "desc": "Light 9 Intensity. OFF (0) improves shader performance"
 					},
 					"light-9-pos-x":{
-					  "name": "Light 9 X Position [133]",
-					  "desc": "Light 9 Position (X)"
+					  "name": "Light 9 X Position [073]",
+					  "desc": "Light 9 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-9-pos-y":{
-					  "name": "Light 9 Y Position [134]",
-					  "desc": "Light 9 Position (Y)"
+					  "name": "Light 9 Y Position [074]",
+					  "desc": "Light 9 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-9-pos-z":{
-					  "name": "Light 9 Z Position [135]",
-					  "desc": "Light 9 Position (Z) 0 to 1"
+					  "name": "Light 9 Z Position [075]",
+					  "desc": "Light 9 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-9-color-r":{
-					  "name": "Light 9 Color (Red) [136]",
-					  "desc": "Light 9 Color (Red) 0 to 1"
+					"light-9-color":{
+					  "name": "Light 9 Color [076]",
+					  "desc": "Light 9 Color (RGB)"
 					},
-					"light-9-color-g":{
-					  "name": "Light 9 Color (Green) [137]",
-					  "desc": "Light 9 Color (Green) 0 to 1"
+					"light-9-clamp":{
+					  "name": "Light 9 Clamp [077]",
+					  "desc": "Light 9 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-9-color-b":{
-					  "name": "Light 9 Color (Blue) [138]",
-					  "desc": "Light 9 Color (Blue) 0 to 1"
+					"light-9-linear-falloff":{
+					  "name": "Light 9 Linear Falloff [078]",
+					  "desc": "Light 9 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-9-luminosity":{
-					  "name": "Light 9 Luminosity [139]",
-					  "desc": "Light 9 Luminosity 0 to 1"
+					"light-9-quadratic-falloff":{
+					  "name": "Light 9 Quadratic Falloff [079]",
+					  "desc": "Light 9 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-9-ambient-r":{
-					  "name": "Light 9 Ambient (Red) [140]",
-					  "desc": "Light 9 Ambient (Red) 0 to 1"
-					},
-					"light-9-ambient-g":{
-					  "name": "Light 9 Ambient (Green) [141]",
-					  "desc": "Light 9 Ambient (Green) 0 to 1"
-					},
-					"light-9-ambient-b":{
-					  "name": "Light 9 Ambient (Blue) [142]",
-					  "desc": "Light 9 Ambient (Blue) 0 to 1"
-					},
-					"light-9-ambient-luminosity":{
-					  "name": "Light 9 Ambient Luminosity [143]",
-					  "desc": "Light 9 Ambient Luminosity 0 to 1"
-					},
-					"light-9-distance":{
-					  "name": "Light 9 Distance [144]",
-					  "desc": "Light 9 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-9-falloffv1":{
-					  "name": "Light 9 Falloff A [145]",
-					  "desc": "Light 9 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-9-falloffv2":{
-					  "name": "Light 9 Falloff B [146]",
-					  "desc": "Light 9 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-9-falloffv3":{
-					  "name": "Light 9 Falloff C [147]",
-					  "desc": "Light 9 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-10-state-01":{
-					  "name": "Light 10 State 0/1 [148]",
-					  "desc": "Light 10 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-10-intensity-01":{
+					  "name": "Light 10 Intensity [080]",
+					  "desc": "Light 10 Intensity. OFF (0) improves shader performance"
 					},
 					"light-10-pos-x":{
-					  "name": "Light 10 X Position [149]",
-					  "desc": "Light 10 Position (X)"
+					  "name": "Light 10 X Position [081]",
+					  "desc": "Light 10 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-10-pos-y":{
-					  "name": "Light 10 Y Position [150]",
-					  "desc": "Light 10 Position (Y)"
+					  "name": "Light 10 Y Position [082]",
+					  "desc": "Light 10 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-10-pos-z":{
-					  "name": "Light 10 Z Position [151]",
-					  "desc": "Light 10 Position (Z) 0 to 1"
+					  "name": "Light 10 Z Position [083]",
+					  "desc": "Light 10 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-10-color-r":{
-					  "name": "Light 10 Color (Red) [152]",
-					  "desc": "Light 10 Color (Red) 0 to 1"
+					"light-10-color":{
+					  "name": "Light 10 Color [084]",
+					  "desc": "Light 10 Color (RGB)"
 					},
-					"light-10-color-g":{
-					  "name": "Light 10 Color (Green) [153]",
-					  "desc": "Light 10 Color (Green) 0 to 1"
+					"light-10-clamp":{
+					  "name": "Light 10 Clamp [085]",
+					  "desc": "Light 10 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-10-color-b":{
-					  "name": "Light 10 Color (Blue) [154]",
-					  "desc": "Light 10 Color (Blue) 0 to 1"
+					"light-10-linear-falloff":{
+					  "name": "Light 10 Linear Falloff [086]",
+					  "desc": "Light 10 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-10-luminosity":{
-					  "name": "Light 10 Luminosity [155]",
-					  "desc": "Light 10 Luminosity 0 to 1"
+					"light-10-quadratic-falloff":{
+					  "name": "Light 10 Quadratic Falloff [087]",
+					  "desc": "Light 10 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-10-ambient-r":{
-					  "name": "Light 10 Ambient (Red) [156]",
-					  "desc": "Light 10 Ambient (Red) 0 to 1"
-					},
-					"light-10-ambient-g":{
-					  "name": "Light 10 Ambient (Green) [157]",
-					  "desc": "Light 10 Ambient (Green) 0 to 1"
-					},
-					"light-10-ambient-b":{
-					  "name": "Light 10 Ambient (Blue) [158]",
-					  "desc": "Light 10 Ambient (Blue) 0 to 1"
-					},
-					"light-10-ambient-luminosity":{
-					  "name": "Light 10 Ambient Luminosity [159]",
-					  "desc": "Light 10 Ambient Luminosity 0 to 1"
-					},
-					"light-10-distance":{
-					  "name": "Light 10 Distance [160]",
-					  "desc": "Light 10 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-10-falloffv1":{
-					  "name": "Light 10 Falloff A [161]",
-					  "desc": "Light 10 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-10-falloffv2":{
-					  "name": "Light 10 Falloff B [162]",
-					  "desc": "Light 10 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-10-falloffv3":{
-					  "name": "Light 10 Falloff C [163]",
-					  "desc": "Light 10 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-11-state-01":{
-					  "name": "Light 11 State 0/1 [164]",
-					  "desc": "Light 11 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-11-intensity-01":{
+					  "name": "Light 11 Intensity [088]",
+					  "desc": "Light 11 Intensity. OFF (0) improves shader performance"
 					},
 					"light-11-pos-x":{
-					  "name": "Light 11 X Position [165]",
-					  "desc": "Light 11 Position (X)"
+					  "name": "Light 11 X Position [089]",
+					  "desc": "Light 11 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-11-pos-y":{
-					  "name": "Light 11 Y Position [166]",
-					  "desc": "Light 11 Position (Y)"
+					  "name": "Light 11 Y Position [090]",
+					  "desc": "Light 11 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-11-pos-z":{
-					  "name": "Light 11 Z Position [167]",
-					  "desc": "Light H Position (Z) 0 to 1"
+					  "name": "Light 11 Z Position [091]",
+					  "desc": "Light H Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-11-color-r":{
-					  "name": "Light 11 Color (Red) [168]",
-					  "desc": "Light 11 Color (Red) 0 to 1"
+					"light-11-color":{
+					  "name": "Light 11 Color [092]",
+					  "desc": "Light 11 Color (RGB)"
 					},
-					"light-11-color-g":{
-					  "name": "Light 11 Color (Green) [169]",
-					  "desc": "Light 11 Color (Green) 0 to 1"
+					"light-11-clamp":{
+					  "name": "Light 11 Clamp [093]",
+					  "desc": "Light 11 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-11-color-b":{
-					  "name": "Light 11 Color (Blue) [170]",
-					  "desc": "Light 11 Color (Blue) 0 to 1"
+					"light-11-linear-falloff":{
+					  "name": "Light 11 Linear Falloff [094]",
+					  "desc": "Light 11 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-11-luminosity":{
-					  "name": "Light 11 Luminosity [171]",
-					  "desc": "Light 11 Luminosity 0 to 1"
+					"light-11-quadratic-falloff":{
+					  "name": "Light 11 Quadratic Falloff [095]",
+					  "desc": "Light 11 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-11-ambient-r":{
-					  "name": "Light 11 Ambient (Red) [172]",
-					  "desc": "Light 11 Ambient (Red) 0 to 1"
-					},
-					"light-11-ambient-g":{
-					  "name": "Light 11 Ambient (Green) [173]",
-					  "desc": "Light 11 Ambient (Green) 0 to 1"
-					},
-					"light-11-ambient-b":{
-					  "name": "Light 11 Ambient (Blue) [174]",
-					  "desc": "Light 11 Ambient (Blue) 0 to 1"
-					},
-					"light-11-ambient-luminosity":{
-					  "name": "Light 11 Ambient Luminosity [175]",
-					  "desc": "Light 11 Ambient Luminosity 0 to 1"
-					},
-					"light-11-distance":{
-					  "name": "Light 11 Distance [176]",
-					  "desc": "Light 11 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-11-falloffv1":{
-					  "name": "Light 11 Falloff A [177]",
-					  "desc": "Light 11 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-11-falloffv2":{
-					  "name": "Light 11 Falloff B [178]",
-					  "desc": "Light 11 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-11-falloffv3":{
-					  "name": "Light 11 Falloff C [179]",
-					  "desc": "Light 11 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-12-state-01":{
-					  "name": "Light 12 State 0/1 [180]",
-					  "desc": "Light 12 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-12-intensity-01":{
+					  "name": "Light 12 Intensity [096]",
+					  "desc": "Light 12 Intensity. OFF (0) improves shader performance"
 					},
 					"light-12-pos-x":{
-					  "name": "Light 12 X Position [181]",
-					  "desc": "Light 12 Position (X)"
+					  "name": "Light 12 X Position [097]",
+					  "desc": "Light 12 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-12-pos-y":{
-					  "name": "Light 12 Y Position [182]",
-					  "desc": "Light 12 Position (Y)"
+					  "name": "Light 12 Y Position [098]",
+					  "desc": "Light 12 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-12-pos-z":{
-					  "name": "Light 12 Z Position [183]",
-					  "desc": "Light 12 Position (Z) 0 to 1"
+					  "name": "Light 12 Z Position [099]",
+					  "desc": "Light 12 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-12-color-r":{
-					  "name": "Light 12 Color (Red) [184]",
-					  "desc": "Light 12 Color (Red) 0 to 1"
+					"light-12-color":{
+					  "name": "Light 12 Color [100]",
+					  "desc": "Light 12 Color (RGB)"
 					},
-					"light-12-color-g":{
-					  "name": "Light 12 Color (Green) [185]",
-					  "desc": "Light 12 Color (Green) 0 to 1"
+					"light-12-clamp":{
+					  "name": "Light 12 Clamp [101]",
+					  "desc": "Light 12 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-12-color-b":{
-					  "name": "Light 12 Color (Blue) [186]",
-					  "desc": "Light 12 Color (Blue) 0 to 1"
+					"light-12-linear-falloff":{
+					  "name": "Light 12 Linear Falloff [102]",
+					  "desc": "Light 12 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-12-luminosity":{
-					  "name": "Light 12 Luminosity [187]",
-					  "desc": "Light 12 Luminosity 0 to 1"
+					"light-12-quadratic-falloff":{
+					  "name": "Light 12 Quadratic Falloff [103]",
+					  "desc": "Light 12 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-12-ambient-r":{
-					  "name": "Light 12 Ambient (Red) [188]",
-					  "desc": "Light 12 Ambient (Red) 0 to 1"
-					},
-					"light-12-ambient-g":{
-					  "name": "Light 12 Ambient (Green) [189]",
-					  "desc": "Light 12 Ambient (Green) 0 to 1"
-					},
-					"light-12-ambient-b":{
-					  "name": "Light 12 Ambient (Blue) [190]",
-					  "desc": "Light 12 Ambient (Blue) 0 to 1"
-					},
-					"light-12-ambient-luminosity":{
-					  "name": "Light 12 Ambient Luminosity [191]",
-					  "desc": "Light 12 Ambient Luminosity 0 to 1"
-					},
-					"light-12-distance":{
-					  "name": "Light 12 Distance [192]",
-					  "desc": "Light 12 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-12-falloffv1":{
-					  "name": "Light 12 Falloff A [193]",
-					  "desc": "Light 12 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-12-falloffv2":{
-					  "name": "Light 12 Falloff B [194]",
-					  "desc": "Light 12 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-12-falloffv3":{
-					  "name": "Light 12 Falloff C [195]",
-					  "desc": "Light 12 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-13-state-01":{
-					  "name": "Light 13 State 0/1 [196]",
-					  "desc": "Light 13 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-13-intensity-01":{
+					  "name": "Light 13 Intensity [104]",
+					  "desc": "Light 13 Intensity. OFF (0) improves shader performance"
 					},
 					"light-13-pos-x":{
-					  "name": "Light 13 X Position [197]",
-					  "desc": "Light 13 Position (X)"
+					  "name": "Light 13 X Position [105]",
+					  "desc": "Light 13 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-13-pos-y":{
-					  "name": "Light 13 Y Position [198]",
-					  "desc": "Light 13 Position (Y)"
+					  "name": "Light 13 Y Position [106]",
+					  "desc": "Light 13 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-13-pos-z":{
-					  "name": "Light 13 Z Position [199]",
-					  "desc": "Light 13 Position (Z) 0 to 1"
+					  "name": "Light 13 Z Position [107]",
+					  "desc": "Light 13 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-13-color-r":{
-					  "name": "Light 13 Color (Red) [200]",
-					  "desc": "Light 13 Color (Red) 0 to 1"
+					"light-13-color":{
+					  "name": "Light 13 Color [108]",
+					  "desc": "Light 13 Color (RGB)"
 					},
-					"light-13-color-g":{
-					  "name": "Light 13 Color (Green) [201]",
-					  "desc": "Light 13 Color (Green) 0 to 1"
+					"light-13-clamp":{
+					  "name": "Light 13 Clamp [109]",
+					  "desc": "Light 13 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-13-color-b":{
-					  "name": "Light 13 Color (Blue) [202]",
-					  "desc": "Light 13 Color (Blue) 0 to 1"
+					"light-13-linear-falloff":{
+					  "name": "Light 13 Linear Falloff [110]",
+					  "desc": "Light 13 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-13-luminosity":{
-					  "name": "Light 13 Luminosity [203]",
-					  "desc": "Light 13 Luminosity 0 to 1"
+					"light-13-quadratic-falloff":{
+					  "name": "Light 13 Quadratic Falloff [111]",
+					  "desc": "Light 13 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-13-ambient-r":{
-					  "name": "Light 13 Ambient (Red) [204]",
-					  "desc": "Light 13 Ambient (Red) 0 to 1"
-					},
-					"light-13-ambient-g":{
-					  "name": "Light 13 Ambient (Green) [205]",
-					  "desc": "Light 13 Ambient (Green) 0 to 1"
-					},
-					"light-13-ambient-b":{
-					  "name": "Light 13 Ambient (Blue) [206]",
-					  "desc": "Light 13 Ambient (Blue) 0 to 1"
-					},
-					"light-13-ambient-luminosity":{
-					  "name": "Light 13 Ambient Luminosity [207]",
-					  "desc": "Light 13 Ambient Luminosity 0 to 1"
-					},
-					"light-13-distance":{
-					  "name": "Light 13 Distance [208]",
-					  "desc": "Light 13 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-13-falloffv1":{
-					  "name": "Light 13 Falloff A [209]",
-					  "desc": "Light 13 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-13-falloffv2":{
-					  "name": "Light 13 Falloff B [210]",
-					  "desc": "Light 13 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-13-falloffv3":{
-					  "name": "Light 13 Falloff C [211]",
-					  "desc": "Light 13 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-14-state-01":{
-					  "name": "Light 14 State 0/1 [212]",
-					  "desc": "Light 14 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-14-intensity-01":{
+					  "name": "Light 14 Intensity [112]",
+					  "desc": "Light 14 Intensity. OFF (0) improves shader performance"
 					},
 					"light-14-pos-x":{
-					  "name": "Light 14 X Position [213]",
-					  "desc": "Light 14 Position (X)"
+					  "name": "Light 14 X Position [113]",
+					  "desc": "Light 14 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-14-pos-y":{
-					  "name": "Light 14 Y Position [214]",
-					  "desc": "Light 14 Position (Y)"
+					  "name": "Light 14 Y Position [114]",
+					  "desc": "Light 14 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-14-pos-z":{
-					  "name": "Light 14 Z Position [215]",
-					  "desc": "Light 14 Position (Z) 0 to 1"
+					  "name": "Light 14 Z Position [115]",
+					  "desc": "Light 14 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-14-color-r":{
-					  "name": "Light 14 Color (Red) [216]",
-					  "desc": "Light 14 Color (Red) 0 to 1"
+					"light-14-color":{
+					  "name": "Light 14 Color [116]",
+					  "desc": "Light 14 Color (RGB)"
 					},
-					"light-14-color-g":{
-					  "name": "Light 14 Color (Green) [217]",
-					  "desc": "Light 14 Color (Green) 0 to 1"
+					"light-14-clamp":{
+					  "name": "Light 14 Clamp [117]",
+					  "desc": "Light 14 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-14-color-b":{
-					  "name": "Light 14 Color (Blue) [218]",
-					  "desc": "Light 14 Color (Blue) 0 to 1"
+					"light-14-linear-falloff":{
+					  "name": "Light 14 Linear Falloff [118]",
+					  "desc": "Light 14 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-14-luminosity":{
-					  "name": "Light 14 Luminosity [219]",
-					  "desc": "Light 14 Luminosity 0 to 1"
+					"light-14-quadratic-falloff":{
+					  "name": "Light 14 Quadratic Falloff [119]",
+					  "desc": "Light 14 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-14-ambient-r":{
-					  "name": "Light 14 Ambient (Red) [220]",
-					  "desc": "Light 14 Ambient (Red) 0 to 1"
-					},
-					"light-14-ambient-g":{
-					  "name": "Light 14 Ambient (Green) [221]",
-					  "desc": "Light 14 Ambient (Green) 0 to 1"
-					},
-					"light-14-ambient-b":{
-					  "name": "Light 14 Ambient (Blue) [222]",
-					  "desc": "Light 14 Ambient (Blue) 0 to 1"
-					},
-					"light-14-ambient-luminosity":{
-					  "name": "Light 14 Ambient Luminosity [223]",
-					  "desc": "Light 14 Ambient Luminosity 0 to 1"
-					},
-					"light-14-distance":{
-					  "name": "Light 14 Distance [224]",
-					  "desc": "Light 14 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-14-falloffv1":{
-					  "name": "Light 14 Falloff A [225]",
-					  "desc": "Light 14 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-14-falloffv2":{
-					  "name": "Light 14 Falloff B [226]",
-					  "desc": "Light 14 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-14-falloffv3":{
-					  "name": "Light 14 Falloff C [227]",
-					  "desc": "Light 14 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-15-state-01":{
-					  "name": "Light 15 State 0/1 [228]",
-					  "desc": "Light 15 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-15-intensity-01":{
+					  "name": "Light 15 Intensity [120]",
+					  "desc": "Light 15 Intensity. OFF (0) improves shader performance"
 					},
 					"light-15-pos-x":{
-					  "name": "Light 15 X Position [229]",
-					  "desc": "Light 15 Position (X)"
+					  "name": "Light 15 X Position [121]",
+					  "desc": "Light 15 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-15-pos-y":{
-					  "name": "Light 15 Y Position [230]",
-					  "desc": "Light 15 Position (Y)"
+					  "name": "Light 15 Y Position [122]",
+					  "desc": "Light 15 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-15-pos-z":{
-					  "name": "Light 15 Z Position [231]",
-					  "desc": "Light 15 Position (Z) 0 to 1"
+					  "name": "Light 15 Z Position [123]",
+					  "desc": "Light 15 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-15-color-r":{
-					  "name": "Light 15 Color (Red) [232]",
-					  "desc": "Light 15 Color (Red) 0 to 1"
+					"light-15-color":{
+					  "name": "Light 15 Color [124]",
+					  "desc": "Light 15 Color (RGB)"
 					},
-					"light-15-color-g":{
-					  "name": "Light 15 Color (Green) [233]",
-					  "desc": "Light 15 Color (Green) 0 to 1"
+					"light-15-clamp":{
+					  "name": "Light 15 Clamp [125]",
+					  "desc": "Light 15 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-15-color-b":{
-					  "name": "Light 15 Color (Blue) [234]",
-					  "desc": "Light 15 Color (Blue) 0 to 1"
+					"light-15-linear-falloff":{
+					  "name": "Light 15 Linear Falloff [126]",
+					  "desc": "Light 15 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-15-luminosity":{
-					  "name": "Light 15 Luminosity [235]",
-					  "desc": "Light 15 Luminosity 0 to 1"
+					"light-15-quadratic-falloff":{
+					  "name": "Light 15 Quadratic Falloff [127]",
+					  "desc": "Light 15 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-15-ambient-r":{
-					  "name": "Light 15 Ambient (Red) [236]",
-					  "desc": "Light 15 Ambient (Red) 0 to 1"
-					},
-					"light-15-ambient-g":{
-					  "name": "Light 15 Ambient (Green) [237]",
-					  "desc": "Light 15 Ambient (Green) 0 to 1"
-					},
-					"light-15-ambient-b":{
-					  "name": "Light 15 Ambient (Blue) [238]",
-					  "desc": "Light 15 Ambient (Blue) 0 to 1"
-					},
-					"light-15-ambient-luminosity":{
-					  "name": "Light 15 Ambient Luminosity [239]",
-					  "desc": "Light 15 Ambient Luminosity 0 to 1"
-					},
-					"light-15-distance":{
-					  "name": "Light 15 Distance [240]",
-					  "desc": "Light 15 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-15-falloffv1":{
-					  "name": "Light 15 Falloff A [241]",
-					  "desc": "Light 15 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-15-falloffv2":{
-					  "name": "Light 15 Falloff B [242]",
-					  "desc": "Light 15 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-15-falloffv3":{
-					  "name": "Light 15 Falloff C [243]",
-					  "desc": "Light 15 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-16-state-01":{
-					  "name": "Light 16 State 0/1 [244]",
-					  "desc": "Light 16 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-16-intensity-01":{
+					  "name": "Light 16 Intensity [128]",
+					  "desc": "Light 16 Intensity. OFF (0) improves shader performance"
 					},
 					"light-16-pos-x":{
-					  "name": "Light 16 X Position [245]",
-					  "desc": "Light 16 Position (X)"
+					  "name": "Light 16 X Position [129]",
+					  "desc": "Light 16 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-16-pos-y":{
-					  "name": "Light 16 Y Position [246]",
-					  "desc": "Light 16 Position (Y)"
+					  "name": "Light 16 Y Position [130]",
+					  "desc": "Light 16 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-16-pos-z":{
-					  "name": "Light 16 Z Position [247]",
-					  "desc": "Light 16 Position (Z) 0 to 1"
+					  "name": "Light 16 Z Position [131]",
+					  "desc": "Light 16 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-16-color-r":{
-					  "name": "Light 16 Color (Red) [248]",
-					  "desc": "Light 16 Color (Red) 0 to 1"
+					"light-16-color":{
+					  "name": "Light 16 Color [132]",
+					  "desc": "Light 16 Color (RGB)"
 					},
-					"light-16-color-g":{
-					  "name": "Light 16 Color (Green) [249]",
-					  "desc": "Light 16 Color (Green) 0 to 1"
+					"light-16-clamp":{
+					  "name": "Light 16 Clamp [133]",
+					  "desc": "Light 16 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-16-color-b":{
-					  "name": "Light 16 Color (Blue) [250]",
-					  "desc": "Light 16 Color (Blue) 0 to 1"
+					"light-16-linear-falloff":{
+					  "name": "Light 16 Linear Falloff [134]",
+					  "desc": "Light 16 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-16-luminosity":{
-					  "name": "Light 16 Luminosity [251]",
-					  "desc": "Light 16 Luminosity 0 to 1"
+					"light-16-quadratic-falloff":{
+					  "name": "Light 16 Quadratic Falloff [135]",
+					  "desc": "Light 16 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-16-ambient-r":{
-					  "name": "Light 16 Ambient (Red) [252]",
-					  "desc": "Light 16 Ambient (Red) 0 to 1"
-					},
-					"light-16-ambient-g":{
-					  "name": "Light 16 Ambient (Green) [253]",
-					  "desc": "Light 16 Ambient (Green) 0 to 1"
-					},
-					"light-16-ambient-b":{
-					  "name": "Light 16 Ambient (Blue) [254]",
-					  "desc": "Light 16 Ambient (Blue) 0 to 1"
-					},
-					"light-16-ambient-luminosity":{
-					  "name": "Light 16 Ambient Luminosity [255]",
-					  "desc": "Light 16 Ambient Luminosity 0 to 1"
-					},
-					"light-16-distance":{
-					  "name": "Light 16 Distance [256]",
-					  "desc": "Light 16 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-16-falloffv1":{
-					  "name": "Light 16 Falloff A [257]",
-					  "desc": "Light 16 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-16-falloffv2":{
-					  "name": "Light 16 Falloff B [258]",
-					  "desc": "Light 16 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-16-falloffv3":{
-					  "name": "Light 16 Falloff C [259]",
-					  "desc": "Light 16 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-17-state-01":{
-					  "name": "Light 17 State 0/1 [260]",
-					  "desc": "Light 17 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-17-intensity-01":{
+					  "name": "Light 17 Intensity [136]",
+					  "desc": "Light 17 Intensity. OFF (0) improves shader performance"
 					},
 					"light-17-pos-x":{
-					  "name": "Light 17 X Position [261]",
-					  "desc": "Light 17 Position (X)"
+					  "name": "Light 17 X Position [137]",
+					  "desc": "Light 17 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-17-pos-y":{
-					  "name": "Light 17 Y Position [262]",
-					  "desc": "Light 17 Position (Y)"
+					  "name": "Light 17 Y Position [138]",
+					  "desc": "Light 17 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-17-pos-z":{
-					  "name": "Light 17 Z Position [263]",
-					  "desc": "Light 17 Position (Z) 0 to 1"
+					  "name": "Light 17 Z Position [139]",
+					  "desc": "Light 17 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-17-color-r":{
-					  "name": "Light 17 Color (Red) [264]",
-					  "desc": "Light 17 Color (Red) 0 to 1"
+					"light-17-color":{
+					  "name": "Light 17 Color [140]",
+					  "desc": "Light 17 Color (RGB)"
 					},
-					"light-17-color-g":{
-					  "name": "Light 17 Color (Green) [265]",
-					  "desc": "Light 17 Color (Green) 0 to 1"
+					"light-17-clamp":{
+					  "name": "Light 17 Clamp [141]",
+					  "desc": "Light 17 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-17-color-b":{
-					  "name": "Light 17 Color (Blue) [266]",
-					  "desc": "Light 17 Color (Blue) 0 to 1"
+					"light-17-linear-falloff":{
+					  "name": "Light 17 Linear Falloff [142]",
+					  "desc": "Light 17 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-17-luminosity":{
-					  "name": "Light 17 Luminosity [267]",
-					  "desc": "Light 17 Luminosity 0 to 1"
+					"light-17-quadratic-falloff":{
+					  "name": "Light 17 Quadratic Falloff [143]",
+					  "desc": "Light 17 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-17-ambient-r":{
-					  "name": "Light 17 Ambient (Red) [268]",
-					  "desc": "Light 17 Ambient (Red) 0 to 1"
-					},
-					"light-17-ambient-g":{
-					  "name": "Light 17 Ambient (Green) [269]",
-					  "desc": "Light 17 Ambient (Green) 0 to 1"
-					},
-					"light-17-ambient-b":{
-					  "name": "Light 17 Ambient (Blue) [270]",
-					  "desc": "Light 17 Ambient (Blue) 0 to 1"
-					},
-					"light-17-ambient-luminosity":{
-					  "name": "Light 17 Ambient Luminosity [271]",
-					  "desc": "Light 17 Ambient Luminosity 0 to 1"
-					},
-					"light-17-distance":{
-					  "name": "Light 17 Distance [272]",
-					  "desc": "Light 17 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-17-falloffv1":{
-					  "name": "Light 17 Falloff A [273]",
-					  "desc": "Light 17 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-17-falloffv2":{
-					  "name": "Light 17 Falloff B [274]",
-					  "desc": "Light 17 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-17-falloffv3":{
-					  "name": "Light 17 Falloff C [275]",
-					  "desc": "Light 17 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-18-state-01":{
-					  "name": "Light 18 State 0/1 [276]",
-					  "desc": "Light 18 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-18-intensity-01":{
+					  "name": "Light 18 Intensity [144]",
+					  "desc": "Light 18 Intensity. OFF (0) improves shader performance"
 					},
 					"light-18-pos-x":{
-					  "name": "Light 18 X Position [277]",
-					  "desc": "Light 18 Position (X)"
+					  "name": "Light 18 X Position [145]",
+					  "desc": "Light 18 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-18-pos-y":{
-					  "name": "Light 18 Y Position [278]",
-					  "desc": "Light 18 Position (Y)"
+					  "name": "Light 18 Y Position [146]",
+					  "desc": "Light 18 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-18-pos-z":{
-					  "name": "Light 18 Z Position [279]",
-					  "desc": "Light 18 Position (Z) 0 to 1"
+					  "name": "Light 18 Z Position [147]",
+					  "desc": "Light 18 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-18-color-r":{
-					  "name": "Light 18 Color (Red) [280]",
-					  "desc": "Light 18 Color (Red) 0 to 1"
+					"light-18-color":{
+					  "name": "Light 18 Color [148]",
+					  "desc": "Light 18 Color (RGB)"
 					},
-					"light-18-color-g":{
-					  "name": "Light 18 Color (Green) [281]",
-					  "desc": "Light 18 Color (Green) 0 to 1"
+					"light-18-clamp":{
+					  "name": "Light 18 Clamp [149]",
+					  "desc": "Light 18 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-18-color-b":{
-					  "name": "Light 18 Color (Blue) [282]",
-					  "desc": "Light 18 Color (Blue) 0 to 1"
+					"light-18-linear-falloff":{
+					  "name": "Light 18 Linear Falloff [150]",
+					  "desc": "Light 18 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-18-luminosity":{
-					  "name": "Light 18 Luminosity [283]",
-					  "desc": "Light 18 Luminosity 0 to 1"
+					"light-18-quadratic-falloff":{
+					  "name": "Light 18 Quadratic Falloff [151]",
+					  "desc": "Light 18 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-18-ambient-r":{
-					  "name": "Light 18 Ambient (Red) [284]",
-					  "desc": "Light 18 Ambient (Red) 0 to 1"
-					},
-					"light-18-ambient-g":{
-					  "name": "Light 18 Ambient (Green) [285]",
-					  "desc": "Light 18 Ambient (Green) 0 to 1"
-					},
-					"light-18-ambient-b":{
-					  "name": "Light 18 Ambient (Blue) [286]",
-					  "desc": "Light 18 Ambient (Blue) 0 to 1"
-					},
-					"light-18-ambient-luminosity":{
-					  "name": "Light 18 Ambient Luminosity [287]",
-					  "desc": "Light 18 Ambient Luminosity 0 to 1"
-					},
-					"light-18-distance":{
-					  "name": "Light 18 Distance [288]",
-					  "desc": "Light 18 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-18-falloffv1":{
-					  "name": "Light 18 Falloff A [289]",
-					  "desc": "Light 18 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-18-falloffv2":{
-					  "name": "Light 18 Falloff B [290]",
-					  "desc": "Light 18 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-18-falloffv3":{
-					  "name": "Light 18 Falloff C [291]",
-					  "desc": "Light 18 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-19-state-01":{
-					  "name": "Light 19 State 0/1 [292]",
-					  "desc": "Light 19 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-19-intensity-01":{
+					  "name": "Light 19 Intensity [152]",
+					  "desc": "Light 19 Intensity. OFF (0) improves shader performance"
 					},
 					"light-19-pos-x":{
-					  "name": "Light 19 X Position [293]",
-					  "desc": "Light 19 Position (X)"
+					  "name": "Light 19 X Position [153]",
+					  "desc": "Light 19 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-19-pos-y":{
-					  "name": "Light 19 Y Position [294]",
-					  "desc": "Light 19 Position (Y)"
+					  "name": "Light 19 Y Position [154]",
+					  "desc": "Light 19 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-19-pos-z":{
-					  "name": "Light 19 Z Position [295]",
-					  "desc": "Light 19 Position (Z) 0 to 1"
+					  "name": "Light 19 Z Position [155]",
+					  "desc": "Light 19 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-19-color-r":{
-					  "name": "Light 19 Color (Red) [296]",
-					  "desc": "Light 19 Color (Red) 0 to 1"
+					"light-19-color":{
+					  "name": "Light 19 Color [156]",
+					  "desc": "Light 19 Color (RGB)"
 					},
-					"light-19-color-g":{
-					  "name": "Light 19 Color (Green) [297]",
-					  "desc": "Light 19 Color (Green) 0 to 1"
+					"light-19-clamp":{
+					  "name": "Light 19 Clamp [157]",
+					  "desc": "Light 19 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-19-color-b":{
-					  "name": "Light 19 Color (Blue) [298]",
-					  "desc": "Light 19 Color (Blue) 0 to 1"
+					"light-19-linear-falloff":{
+					  "name": "Light 19 Linear Falloff [158]",
+					  "desc": "Light 19 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-19-luminosity":{
-					  "name": "Light 19 Luminosity [299]",
-					  "desc": "Light 19 Luminosity 0 to 1"
+					"light-19-quadratic-falloff":{
+					  "name": "Light 19 Quadratic Falloff [159]",
+					  "desc": "Light 19 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-19-ambient-r":{
-					  "name": "Light 19 Ambient (Red) [300]",
-					  "desc": "Light 19 Ambient (Red) 0 to 1"
-					},
-					"light-19-ambient-g":{
-					  "name": "Light 19 Ambient (Green) [301]",
-					  "desc": "Light 19 Ambient (Green) 0 to 1"
-					},
-					"light-19-ambient-b":{
-					  "name": "Light 19 Ambient (Blue) [302]",
-					  "desc": "Light 19 Ambient (Blue) 0 to 1"
-					},
-					"light-19-ambient-luminosity":{
-					  "name": "Light 19 Ambient Luminosity [303]",
-					  "desc": "Light 19 Ambient Luminosity 0 to 1"
-					},
-					"light-19-distance":{
-					  "name": "Light 19 Distance [304]",
-					  "desc": "Light 19 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-19-falloffv1":{
-					  "name": "Light 19 Falloff A [305]",
-					  "desc": "Light 19 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-19-falloffv2":{
-					  "name": "Light 19 Falloff B [306]",
-					  "desc": "Light 19 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-19-falloffv3":{
-					  "name": "Light 19 Falloff C [307]",
-					  "desc": "Light 19 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-20-state-01":{
-					  "name": "Light 20 State 0/1 [308]",
-					  "desc": "Light 20 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-20-intensity-01":{
+					  "name": "Light 20 Intensity [160]",
+					  "desc": "Light 20 Intensity. OFF (0) improves shader performance"
 					},
 					"light-20-pos-x":{
-					  "name": "Light 20 X Position [309]",
-					  "desc": "Light 20 Position (X)"
+					  "name": "Light 20 X Position [161]",
+					  "desc": "Light 20 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-20-pos-y":{
-					  "name": "Light 20 Y Position [310]",
-					  "desc": "Light 20 Position (Y)"
+					  "name": "Light 20 Y Position [162]",
+					  "desc": "Light 20 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-20-pos-z":{
-					  "name": "Light 20 Z Position [311]",
-					  "desc": "Light 20 Position (Z) 0 to 1"
+					  "name": "Light 20 Z Position [163]",
+					  "desc": "Light 20 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-20-color-r":{
-					  "name": "Light 20 Color (Red) [312]",
-					  "desc": "Light 20 Color (Red) 0 to 1"
+					"light-20-color":{
+					  "name": "Light 20 Color [164]",
+					  "desc": "Light 20 Color (RGB)"
 					},
-					"light-20-color-g":{
-					  "name": "Light 20 Color (Green) [313]",
-					  "desc": "Light 20 Color (Green) 0 to 1"
+					"light-20-clamp":{
+					  "name": "Light 20 Clamp [165]",
+					  "desc": "Light 20 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-20-color-b":{
-					  "name": "Light 20 Color (Blue) [314]",
-					  "desc": "Light 20 Color (Blue) 0 to 1"
+					"light-20-linear-falloff":{
+					  "name": "Light 20 Linear Falloff [166]",
+					  "desc": "Light 20 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-20-luminosity":{
-					  "name": "Light 20 Luminosity [315]",
-					  "desc": "Light 20 Luminosity 0 to 1"
+					"light-20-quadratic-falloff":{
+					  "name": "Light 20 Quadratic Falloff [167]",
+					  "desc": "Light 20 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-20-ambient-r":{
-					  "name": "Light 20 Ambient (Red) [316]",
-					  "desc": "Light 20 Ambient (Red) 0 to 1"
-					},
-					"light-20-ambient-g":{
-					  "name": "Light 20 Ambient (Green) [317]",
-					  "desc": "Light 20 Ambient (Green) 0 to 1"
-					},
-					"light-20-ambient-b":{
-					  "name": "Light 20 Ambient (Blue) [318]",
-					  "desc": "Light 20 Ambient (Blue) 0 to 1"
-					},
-					"light-20-ambient-luminosity":{
-					  "name": "Light 20 Ambient Luminosity [319]",
-					  "desc": "Light 20 Ambient Luminosity 0 to 1"
-					},
-					"light-20-distance":{
-					  "name": "Light 20 Distance [320]",
-					  "desc": "Light 20 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-20-falloffv1":{
-					  "name": "Light 20 Falloff A [321]",
-					  "desc": "Light 20 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-20-falloffv2":{
-					  "name": "Light 20 Falloff B [322]",
-					  "desc": "Light 20 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-20-falloffv3":{
-					  "name": "Light 20 Falloff C [323]",
-					  "desc": "Light 20 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-21-state-01":{
-					  "name": "Light 21 State 0/1 [324]",
-					  "desc": "Light 21 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-21-intensity-01":{
+					  "name": "Light 21 Intensity [168]",
+					  "desc": "Light 21 Intensity. OFF (0) improves shader performance"
 					},
 					"light-21-pos-x":{
-					  "name": "Light 21 X Position [325]",
-					  "desc": "Light 21 Position (X)"
+					  "name": "Light 21 X Position [169]",
+					  "desc": "Light 21 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-21-pos-y":{
-					  "name": "Light 21 Y Position [326]",
-					  "desc": "Light 21 Position (Y)"
+					  "name": "Light 21 Y Position [170]",
+					  "desc": "Light 21 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-21-pos-z":{
-					  "name": "Light 21 Z Position [327]",
-					  "desc": "Light 21 Position (Z) 0 to 1"
+					  "name": "Light 21 Z Position [171]",
+					  "desc": "Light 21 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-21-color-r":{
-					  "name": "Light 21 Color (Red) [328]",
-					  "desc": "Light 21 Color (Red) 0 to 1"
+					"light-21-color":{
+					  "name": "Light 21 Color [172]",
+					  "desc": "Light 21 Color (RGB)"
 					},
-					"light-21-color-g":{
-					  "name": "Light 21 Color (Green) [329]",
-					  "desc": "Light 21 Color (Green) 0 to 1"
+					"light-21-clamp":{
+					  "name": "Light 21 Clamp [173]",
+					  "desc": "Light 21 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-21-color-b":{
-					  "name": "Light 21 Color (Blue) [330]",
-					  "desc": "Light 21 Color (Blue) 0 to 1"
+					"light-21-linear-falloff":{
+					  "name": "Light 21 Linear Falloff [174]",
+					  "desc": "Light 21 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-21-luminosity":{
-					  "name": "Light 21 Luminosity [331]",
-					  "desc": "Light 21 Luminosity 0 to 1"
+					"light-21-quadratic-falloff":{
+					  "name": "Light 21 Quadratic Falloff [175]",
+					  "desc": "Light 21 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-21-ambient-r":{
-					  "name": "Light 21 Ambient (Red) [332]",
-					  "desc": "Light 21 Ambient (Red) 0 to 1"
-					},
-					"light-21-ambient-g":{
-					  "name": "Light 21 Ambient (Green) [333]",
-					  "desc": "Light 21 Ambient (Green) 0 to 1"
-					},
-					"light-21-ambient-b":{
-					  "name": "Light 21 Ambient (Blue) [334]",
-					  "desc": "Light 21 Ambient (Blue) 0 to 1"
-					},
-					"light-21-ambient-luminosity":{
-					  "name": "Light 21 Ambient Luminosity [335]",
-					  "desc": "Light 21 Ambient Luminosity 0 to 1"
-					},
-					"light-21-distance":{
-					  "name": "Light 21 Distance [336]",
-					  "desc": "Light 21 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-21-falloffv1":{
-					  "name": "Light 21 Falloff A [337]",
-					  "desc": "Light 21 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-21-falloffv2":{
-					  "name": "Light 21 Falloff B [338]",
-					  "desc": "Light 21 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-21-falloffv3":{
-					  "name": "Light 21 Falloff C [339]",
-					  "desc": "Light 21 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-22-state-01":{
-					  "name": "Light 22 State 0/1 [340]",
-					  "desc": "Light 22 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-22-intensity-01":{
+					  "name": "Light 22 Intensity [176]",
+					  "desc": "Light 22 Intensity. OFF (0) improves shader performance"
 					},
 					"light-22-pos-x":{
-					  "name": "Light 22 X Position [341]",
-					  "desc": "Light 22 Position (X)"
+					  "name": "Light 22 X Position [177]",
+					  "desc": "Light 22 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-22-pos-y":{
-					  "name": "Light 22 Y Position [342]",
-					  "desc": "Light 22 Position (Y)"
+					  "name": "Light 22 Y Position [178]",
+					  "desc": "Light 22 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-22-pos-z":{
-					  "name": "Light 22 Z Position [343]",
-					  "desc": "Light 22 Position (Z) 0 to 1"
+					  "name": "Light 22 Z Position [179]",
+					  "desc": "Light 22 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-22-color-r":{
-					  "name": "Light 22 Color (Red) [344]",
-					  "desc": "Light 22 Color (Red) 0 to 1"
+					"light-22-color":{
+					  "name": "Light 22 Color [180]",
+					  "desc": "Light 22 Color (RGB)"
 					},
-					"light-22-color-g":{
-					  "name": "Light 22 Color (Green) [345]",
-					  "desc": "Light 22 Color (Green) 0 to 1"
+					"light-22-clamp":{
+					  "name": "Light 22 Clamp [181]",
+					  "desc": "Light 22 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-22-color-b":{
-					  "name": "Light 22 Color (Blue) [346]",
-					  "desc": "Light 22 Color (Blue) 0 to 1"
+					"light-22-linear-falloff":{
+					  "name": "Light 22 Linear Falloff [182]",
+					  "desc": "Light 22 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-22-luminosity":{
-					  "name": "Light 22 Luminosity [347]",
-					  "desc": "Light 22 Luminosity 0 to 1"
+					"light-22-quadratic-falloff":{
+					  "name": "Light 22 Quadratic Falloff [183]",
+					  "desc": "Light 22 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-22-ambient-r":{
-					  "name": "Light 22 Ambient (Red) [348]",
-					  "desc": "Light 22 Ambient (Red) 0 to 1"
-					},
-					"light-22-ambient-g":{
-					  "name": "Light 22 Ambient (Green) [349]",
-					  "desc": "Light 22 Ambient (Green) 0 to 1"
-					},
-					"light-22-ambient-b":{
-					  "name": "Light 22 Ambient (Blue) [350]",
-					  "desc": "Light 22 Ambient (Blue) 0 to 1"
-					},
-					"light-22-ambient-luminosity":{
-					  "name": "Light 22 Ambient Luminosity [351]",
-					  "desc": "Light 22 Ambient Luminosity 0 to 1"
-					},
-					"light-22-distance":{
-					  "name": "Light 22 Distance [352]",
-					  "desc": "Light 22 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-22-falloffv1":{
-					  "name": "Light 22 Falloff A [353]",
-					  "desc": "Light 22 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-22-falloffv2":{
-					  "name": "Light 22 Falloff B [354]",
-					  "desc": "Light 22 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-22-falloffv3":{
-					  "name": "Light 22 Falloff C [355]",
-					  "desc": "Light 22 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-23-state-01":{
-					  "name": "Light 23 State 0/1 [356]",
-					  "desc": "Light 23 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-23-intensity-01":{
+					  "name": "Light 23 Intensity [184]",
+					  "desc": "Light 23 Intensity. OFF (0) improves shader performance"
 					},
 					"light-23-pos-x":{
-					  "name": "Light 23 X Position [357]",
-					  "desc": "Light 23 Position (X)"
+					  "name": "Light 23 X Position [185]",
+					  "desc": "Light 23 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-23-pos-y":{
-					  "name": "Light 23 Y Position [358]",
-					  "desc": "Light 23 Position (Y)"
+					  "name": "Light 23 Y Position [186]",
+					  "desc": "Light 23 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-23-pos-z":{
-					  "name": "Light 23 Z Position [359]",
-					  "desc": "Light 23 Position (Z) 0 to 1"
+					  "name": "Light 23 Z Position [187]",
+					  "desc": "Light 23 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-23-color-r":{
-					  "name": "Light 23 Color (Red) [360]",
-					  "desc": "Light 23 Color (Red) 0 to 1"
+					"light-23-color":{
+					  "name": "Light 23 Color [188]",
+					  "desc": "Light 23 Color (RGB)"
 					},
-					"light-23-color-g":{
-					  "name": "Light 23 Color (Green) [361]",
-					  "desc": "Light 23 Color (Green) 0 to 1"
+					"light-23-clamp":{
+					  "name": "Light 23 Clamp [189]",
+					  "desc": "Light 23 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-23-color-b":{
-					  "name": "Light 23 Color (Blue) [362]",
-					  "desc": "Light 23 Color (Blue) 0 to 1"
+					"light-23-linear-falloff":{
+					  "name": "Light 23 Linear Falloff [190]",
+					  "desc": "Light 23 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-23-luminosity":{
-					  "name": "Light 23 Luminosity [363]",
-					  "desc": "Light 23 Luminosity 0 to 1"
+					"light-23-quadratic-falloff":{
+					  "name": "Light 23 Quadratic Falloff [191]",
+					  "desc": "Light 23 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-23-ambient-r":{
-					  "name": "Light 23 Ambient (Red) [364]",
-					  "desc": "Light 23 Ambient (Red) 0 to 1"
-					},
-					"light-23-ambient-g":{
-					  "name": "Light 23 Ambient (Green) [365]",
-					  "desc": "Light 23 Ambient (Green) 0 to 1"
-					},
-					"light-23-ambient-b":{
-					  "name": "Light 23 Ambient (Blue) [366]",
-					  "desc": "Light 23 Ambient (Blue) 0 to 1"
-					},
-					"light-23-ambient-luminosity":{
-					  "name": "Light 23 Ambient Luminosity [367]",
-					  "desc": "Light 23 Ambient Luminosity 0 to 1"
-					},
-					"light-23-distance":{
-					  "name": "Light 23 Distance [368]",
-					  "desc": "Light 23 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-23-falloffv1":{
-					  "name": "Light 23 Falloff A [369]",
-					  "desc": "Light 23 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-23-falloffv2":{
-					  "name": "Light 23 Falloff B [370]",
-					  "desc": "Light 23 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-23-falloffv3":{
-					  "name": "Light 23 Falloff C [371]",
-					  "desc": "Light 23 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-24-state-01":{
-					  "name": "Light 24 State 0/1 [372]",
-					  "desc": "Light 24 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-24-intensity-01":{
+					  "name": "Light 24 Intensity [192]",
+					  "desc": "Light 24 Intensity. OFF (0) improves shader performance"
 					},
 					"light-24-pos-x":{
-					  "name": "Light 24 X Position [373]",
-					  "desc": "Light 24 Position (X)"
+					  "name": "Light 24 X Position [193]",
+					  "desc": "Light 24 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-24-pos-y":{
-					  "name": "Light 24 Y Position [374]",
-					  "desc": "Light 24 Position (Y)"
+					  "name": "Light 24 Y Position [194]",
+					  "desc": "Light 24 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-24-pos-z":{
-					  "name": "Light 24 Z Position [375]",
-					  "desc": "Light 24 Position (Z) 0 to 1"
+					  "name": "Light 24 Z Position [195]",
+					  "desc": "Light 24 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-24-color-r":{
-					  "name": "Light 24 Color (Red) [376]",
-					  "desc": "Light 24 Color (Red) 0 to 1"
+					"light-24-color":{
+					  "name": "Light 24 Color [196]",
+					  "desc": "Light 24 Color (RGB)"
 					},
-					"light-24-color-g":{
-					  "name": "Light 24 Color (Green) [377]",
-					  "desc": "Light 24 Color (Green) 0 to 1"
+					"light-24-clamp":{
+					  "name": "Light 24 Clamp [197]",
+					  "desc": "Light 24 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-24-color-b":{
-					  "name": "Light 24 Color (Blue) [378]",
-					  "desc": "Light 24 Color (Blue) 0 to 1"
+					"light-24-linear-falloff":{
+					  "name": "Light 24 Linear Falloff [198]",
+					  "desc": "Light 24 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-24-luminosity":{
-					  "name": "Light 24 Luminosity [379]",
-					  "desc": "Light 24 Luminosity 0 to 1"
+					"light-24-quadratic-falloff":{
+					  "name": "Light 24 Quadratic Falloff [199]",
+					  "desc": "Light 24 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-24-ambient-r":{
-					  "name": "Light 24 Ambient (Red) [380]",
-					  "desc": "Light 24 Ambient (Red) 0 to 1"
-					},
-					"light-24-ambient-g":{
-					  "name": "Light 24 Ambient (Green) [381]",
-					  "desc": "Light 24 Ambient (Green) 0 to 1"
-					},
-					"light-24-ambient-b":{
-					  "name": "Light 24 Ambient (Blue) [382]",
-					  "desc": "Light 24 Ambient (Blue) 0 to 1"
-					},
-					"light-24-ambient-luminosity":{
-					  "name": "Light 24 Ambient Luminosity [383]",
-					  "desc": "Light 24 Ambient Luminosity 0 to 1"
-					},
-					"light-24-distance":{
-					  "name": "Light 24 Distance [384]",
-					  "desc": "Light 24 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-24-falloffv1":{
-					  "name": "Light 24 Falloff A [385]",
-					  "desc": "Light 24 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-24-falloffv2":{
-					  "name": "Light 24 Falloff B [386]",
-					  "desc": "Light 24 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-24-falloffv3":{
-					  "name": "Light 24 Falloff C [387]",
-					  "desc": "Light 24 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-25-state-01":{
-					  "name": "Light 25 State 0/1 [388]",
-					  "desc": "Light 25 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-25-intensity-01":{
+					  "name": "Light 25 Intensity [200]",
+					  "desc": "Light 25 Intensity. OFF (0) improves shader performance"
 					},
 					"light-25-pos-x":{
-					  "name": "Light 25 X Position [389]",
-					  "desc": "Light 25 Position (X)"
+					  "name": "Light 25 X Position [201]",
+					  "desc": "Light 25 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-25-pos-y":{
-					  "name": "Light 25 Y Position [390]",
-					  "desc": "Light 25 Position (Y)"
+					  "name": "Light 25 Y Position [202]",
+					  "desc": "Light 25 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-25-pos-z":{
-					  "name": "Light 25 Z Position [391]",
-					  "desc": "Light 25 Position (Z) 0 to 1"
+					  "name": "Light 25 Z Position [203]",
+					  "desc": "Light 25 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-25-color-r":{
-					  "name": "Light 25 Color (Red) [392]",
-					  "desc": "Light 25 Color (Red) 0 to 1"
+					"light-25-color":{
+					  "name": "Light 25 Color [204]",
+					  "desc": "Light 25 Color (RGB)"
 					},
-					"light-25-color-g":{
-					  "name": "Light 25 Color (Green) [393]",
-					  "desc": "Light 25 Color (Green) 0 to 1"
+					"light-25-clamp":{
+					  "name": "Light 25 Clamp [205]",
+					  "desc": "Light 25 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-25-color-b":{
-					  "name": "Light 25 Color (Blue) [394]",
-					  "desc": "Light 25 Color (Blue) 0 to 1"
+					"light-25-linear-falloff":{
+					  "name": "Light 25 Linear Falloff [206]",
+					  "desc": "Light 25 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-25-luminosity":{
-					  "name": "Light 25 Luminosity [395]",
-					  "desc": "Light 25 Luminosity 0 to 1"
+					"light-25-quadratic-falloff":{
+					  "name": "Light 25 Quadratic Falloff [207]",
+					  "desc": "Light 25 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-25-ambient-r":{
-					  "name": "Light 25 Ambient (Red) [396]",
-					  "desc": "Light 25 Ambient (Red) 0 to 1"
-					},
-					"light-25-ambient-g":{
-					  "name": "Light 25 Ambient (Green) [397]",
-					  "desc": "Light 25 Ambient (Green) 0 to 1"
-					},
-					"light-25-ambient-b":{
-					  "name": "Light 25 Ambient (Blue) [398]",
-					  "desc": "Light 25 Ambient (Blue) 0 to 1"
-					},
-					"light-25-ambient-luminosity":{
-					  "name": "Light 25 Ambient Luminosity [399]",
-					  "desc": "Light 25 Ambient Luminosity 0 to 1"
-					},
-					"light-25-distance":{
-					  "name": "Light 25 Distance [400]",
-					  "desc": "Light 25 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-25-falloffv1":{
-					  "name": "Light 25 Falloff A [401]",
-					  "desc": "Light 25 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-25-falloffv2":{
-					  "name": "Light 25 Falloff B [402]",
-					  "desc": "Light 25 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-25-falloffv3":{
-					  "name": "Light 25 Falloff C [403]",
-					  "desc": "Light 25 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-26-state-01":{
-					  "name": "Light 26 State 0/1 [404]",
-					  "desc": "Light 26 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-26-intensity-01":{
+					  "name": "Light 26 Intensity [208]",
+					  "desc": "Light 26 Intensity. OFF (0) improves shader performance"
 					},
 					"light-26-pos-x":{
-					  "name": "Light 26 X Position [405]",
-					  "desc": "Light 26 Position (X)"
+					  "name": "Light 26 X Position [209]",
+					  "desc": "Light 26 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-26-pos-y":{
-					  "name": "Light 26 Y Position [406]",
-					  "desc": "Light 26 Position (Y)"
+					  "name": "Light 26 Y Position [210]",
+					  "desc": "Light 26 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-26-pos-z":{
-					  "name": "Light 26 Z Position [407]",
-					  "desc": "Light 26 Position (Z) 0 to 1"
+					  "name": "Light 26 Z Position [211]",
+					  "desc": "Light 26 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-26-color-r":{
-					  "name": "Light 26 Color (Red) [408]",
-					  "desc": "Light 26 Color (Red) 0 to 1"
+					"light-26-color":{
+					  "name": "Light 26 Color [212]",
+					  "desc": "Light 26 Color (RGB)"
 					},
-					"light-26-color-g":{
-					  "name": "Light 26 Color (Green) [409]",
-					  "desc": "Light 26 Color (Green) 0 to 1"
+					"light-26-clamp":{
+					  "name": "Light 26 Clamp [213]",
+					  "desc": "Light 26 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-26-color-b":{
-					  "name": "Light 26 Color (Blue) [410]",
-					  "desc": "Light 26 Color (Blue) 0 to 1"
+					"light-26-linear-falloff":{
+					  "name": "Light 26 Linear Falloff [214]",
+					  "desc": "Light 26 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-26-luminosity":{
-					  "name": "Light 26 Luminosity [411]",
-					  "desc": "Light 26 Luminosity 0 to 1"
+					"light-26-quadratic-falloff":{
+					  "name": "Light 26 Quadratic Falloff [215]",
+					  "desc": "Light 26 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-26-ambient-r":{
-					  "name": "Light 26 Ambient (Red) [412]",
-					  "desc": "Light 26 Ambient (Red) 0 to 1"
-					},
-					"light-26-ambient-g":{
-					  "name": "Light 26 Ambient (Green) [413]",
-					  "desc": "Light 26 Ambient (Green) 0 to 1"
-					},
-					"light-26-ambient-b":{
-					  "name": "Light 26 Ambient (Blue) [414]",
-					  "desc": "Light 26 Ambient (Blue) 0 to 1"
-					},
-					"light-26-ambient-luminosity":{
-					  "name": "Light 26 Ambient Luminosity [415]",
-					  "desc": "Light 26 Ambient Luminosity 0 to 1"
-					},
-					"light-26-distance":{
-					  "name": "Light 26 Distance [416]",
-					  "desc": "Light 26 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-26-falloffv1":{
-					  "name": "Light 26 Falloff A [417]",
-					  "desc": "Light 26 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-26-falloffv2":{
-					  "name": "Light 26 Falloff B [418]",
-					  "desc": "Light 26 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-26-falloffv3":{
-					  "name": "Light 26 Falloff C [419]",
-					  "desc": "Light 26 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-27-state-01":{
-					  "name": "Light 27 State 0/1 [420]",
-					  "desc": "Light 27 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-27-intensity-01":{
+					  "name": "Light 27 Intensity [216]",
+					  "desc": "Light 27 Intensity. OFF (0) improves shader performance"
 					},
 					"light-27-pos-x":{
-					  "name": "Light 27 X Position [421]",
-					  "desc": "Light 27 Position (X)"
+					  "name": "Light 27 X Position [217]",
+					  "desc": "Light 27 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-27-pos-y":{
-					  "name": "Light 27 Y Position [422]",
-					  "desc": "Light 27 Position (Y)"
+					  "name": "Light 27 Y Position [218]",
+					  "desc": "Light 27 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-27-pos-z":{
-					  "name": "Light 27 Z Position [423]",
-					  "desc": "Light 27 Position (Z) 0 to 1"
+					  "name": "Light 27 Z Position [219]",
+					  "desc": "Light 27 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-27-color-r":{
-					  "name": "Light 27 Color (Red) [424]",
-					  "desc": "Light 27 Color (Red) 0 to 1"
+					"light-27-color":{
+					  "name": "Light 27 Color [220]",
+					  "desc": "Light 27 Color (RGB)"
 					},
-					"light-27-color-g":{
-					  "name": "Light 27 Color (Green) [425]",
-					  "desc": "Light 27 Color (Green) 0 to 1"
+					"light-27-clamp":{
+					  "name": "Light 27 Clamp [221]",
+					  "desc": "Light 27 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-27-color-b":{
-					  "name": "Light 27 Color (Blue) [426]",
-					  "desc": "Light 27 Color (Blue) 0 to 1"
+					"light-27-linear-falloff":{
+					  "name": "Light 27 Linear Falloff [222]",
+					  "desc": "Light 27 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-27-luminosity":{
-					  "name": "Light 27 Luminosity [427]",
-					  "desc": "Light 27 Luminosity 0 to 1"
+					"light-27-quadratic-falloff":{
+					  "name": "Light 27 Quadratic Falloff [223]",
+					  "desc": "Light 27 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-27-ambient-r":{
-					  "name": "Light 27 Ambient (Red) [428]",
-					  "desc": "Light 27 Ambient (Red) 0 to 1"
-					},
-					"light-27-ambient-g":{
-					  "name": "Light 27 Ambient (Green) [429]",
-					  "desc": "Light 27 Ambient (Green) 0 to 1"
-					},
-					"light-27-ambient-b":{
-					  "name": "Light 27 Ambient (Blue) [430]",
-					  "desc": "Light 27 Ambient (Blue) 0 to 1"
-					},
-					"light-27-ambient-luminosity":{
-					  "name": "Light 27 Ambient Luminosity [431]",
-					  "desc": "Light 27 Ambient Luminosity 0 to 1"
-					},
-					"light-27-distance":{
-					  "name": "Light 27 Distance [432]",
-					  "desc": "Light 27 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-27-falloffv1":{
-					  "name": "Light 27 Falloff A [433]",
-					  "desc": "Light 27 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-27-falloffv2":{
-					  "name": "Light 27 Falloff B [434]",
-					  "desc": "Light 27 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-27-falloffv3":{
-					  "name": "Light 27 Falloff C [435]",
-					  "desc": "Light 27 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-28-state-01":{
-					  "name": "Light 28 State 0/1 [436]",
-					  "desc": "Light 28 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-28-intensity-01":{
+					  "name": "Light 28 Intensity [224]",
+					  "desc": "Light 28 Intensity. OFF (0) improves shader performance"
 					},
 					"light-28-pos-x":{
-					  "name": "Light 28 X Position [437]",
-					  "desc": "Light 28 Position (X)"
+					  "name": "Light 28 X Position [225]",
+					  "desc": "Light 28 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-28-pos-y":{
-					  "name": "Light 28 Y Position [438]",
-					  "desc": "Light 28 Position (Y)"
+					  "name": "Light 28 Y Position [226]",
+					  "desc": "Light 28 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-28-pos-z":{
-					  "name": "Light 28 Z Position [439]",
-					  "desc": "Light 28 Position (Z) 0 to 1"
+					  "name": "Light 28 Z Position [227]",
+					  "desc": "Light 28 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-28-color-r":{
-					  "name": "Light 28 Color (Red) [440]",
-					  "desc": "Light 28 Color (Red) 0 to 1"
+					"light-28-color":{
+					  "name": "Light 28 Color [228]",
+					  "desc": "Light 28 Color (RGB)"
 					},
-					"light-28-color-g":{
-					  "name": "Light 28 Color (Green) [441]",
-					  "desc": "Light 28 Color (Green) 0 to 1"
+					"light-28-clamp":{
+					  "name": "Light 28 Clamp [229]",
+					  "desc": "Light 28 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-28-color-b":{
-					  "name": "Light 28 Color (Blue) [442]",
-					  "desc": "Light 28 Color (Blue) 0 to 1"
+					"light-28-linear-falloff":{
+					  "name": "Light 28 Linear Falloff [230]",
+					  "desc": "Light 28 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-28-luminosity":{
-					  "name": "Light 28 Luminosity [443]",
-					  "desc": "Light 28 Luminosity 0 to 1"
+					"light-28-quadratic-falloff":{
+					  "name": "Light 28 Quadratic Falloff [231]",
+					  "desc": "Light 28 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-28-ambient-r":{
-					  "name": "Light 28 Ambient (Red) [444]",
-					  "desc": "Light 28 Ambient (Red) 0 to 1"
-					},
-					"light-28-ambient-g":{
-					  "name": "Light 28 Ambient (Green) [445]",
-					  "desc": "Light 28 Ambient (Green) 0 to 1"
-					},
-					"light-28-ambient-b":{
-					  "name": "Light 28 Ambient (Blue) [446]",
-					  "desc": "Light 28 Ambient (Blue) 0 to 1"
-					},
-					"light-28-ambient-luminosity":{
-					  "name": "Light 28 Ambient Luminosity [447]",
-					  "desc": "Light 28 Ambient Luminosity 0 to 1"
-					},
-					"light-28-distance":{
-					  "name": "Light 28 Distance [448]",
-					  "desc": "Light 28 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-28-falloffv1":{
-					  "name": "Light 28 Falloff A [449]",
-					  "desc": "Light 28 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-28-falloffv2":{
-					  "name": "Light 28 Falloff B [450]",
-					  "desc": "Light 28 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-28-falloffv3":{
-					  "name": "Light 28 Falloff C [451]",
-					  "desc": "Light 28 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-29-state-01":{
-					  "name": "Light 29 State 0/1 [452]",
-					  "desc": "Light 29 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-29-intensity-01":{
+					  "name": "Light 29 Intensity [232]",
+					  "desc": "Light 29 Intensity. OFF (0) improves shader performance"
 					},
 					"light-29-pos-x":{
-					  "name": "Light 29 X Position [453]",
-					  "desc": "Light 29 Position (X)"
+					  "name": "Light 29 X Position [233]",
+					  "desc": "Light 29 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-29-pos-y":{
-					  "name": "Light 29 Y Position [454]",
-					  "desc": "Light 29 Position (Y)"
+					  "name": "Light 29 Y Position [234]",
+					  "desc": "Light 29 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-29-pos-z":{
-					  "name": "Light 29 Z Position [455]",
-					  "desc": "Light 29 Position (Z) 0 to 1"
+					  "name": "Light 29 Z Position [235]",
+					  "desc": "Light 29 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-29-color-r":{
-					  "name": "Light 29 Color (Red) [456]",
-					  "desc": "Light 29 Color (Red) 0 to 1"
+					"light-29-color":{
+					  "name": "Light 29 Color [236]",
+					  "desc": "Light 29 Color (RGB)"
 					},
-					"light-29-color-g":{
-					  "name": "Light 29 Color (Green) [457]",
-					  "desc": "Light 29 Color (Green) 0 to 1"
+					"light-29-clamp":{
+					  "name": "Light 29 Clamp [237]",
+					  "desc": "Light 29 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-29-color-b":{
-					  "name": "Light 29 Color (Blue) [458]",
-					  "desc": "Light 29 Color (Blue) 0 to 1"
+					"light-29-linear-falloff":{
+					  "name": "Light 29 Linear Falloff [238]",
+					  "desc": "Light 29 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-29-luminosity":{
-					  "name": "Light 29 Luminosity [459]",
-					  "desc": "Light 29 Luminosity 0 to 1"
+					"light-29-quadratic-falloff":{
+					  "name": "Light 29 Quadratic Falloff [239]",
+					  "desc": "Light 29 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-29-ambient-r":{
-					  "name": "Light 29 Ambient (Red) [460]",
-					  "desc": "Light 29 Ambient (Red) 0 to 1"
-					},
-					"light-29-ambient-g":{
-					  "name": "Light 29 Ambient (Green) [461]",
-					  "desc": "Light 29 Ambient (Green) 0 to 1"
-					},
-					"light-29-ambient-b":{
-					  "name": "Light 29 Ambient (Blue) [462]",
-					  "desc": "Light 29 Ambient (Blue) 0 to 1"
-					},
-					"light-29-ambient-luminosity":{
-					  "name": "Light 29 Ambient Luminosity [463]",
-					  "desc": "Light 29 Ambient Luminosity 0 to 1"
-					},
-					"light-29-distance":{
-					  "name": "Light 29 Distance [464]",
-					  "desc": "Light 29 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-29-falloffv1":{
-					  "name": "Light 29 Falloff A [465]",
-					  "desc": "Light 29 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-29-falloffv2":{
-					  "name": "Light 29 Falloff B [466]",
-					  "desc": "Light 29 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-29-falloffv3":{
-					  "name": "Light 29 Falloff C [467]",
-					  "desc": "Light 29 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-30-state-01":{
-					  "name": "Light 30 State 0/1 [468]",
-					  "desc": "Light 30 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-30-intensity-01":{
+					  "name": "Light 30 Intensity [240]",
+					  "desc": "Light 30 Intensity. OFF (0) improves shader performance"
 					},
 					"light-30-pos-x":{
-					  "name": "Light 30 X Position [469]",
-					  "desc": "Light 30 Position (X)"
+					  "name": "Light 30 X Position [241]",
+					  "desc": "Light 30 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-30-pos-y":{
-					  "name": "Light 30 Y Position [470]",
-					  "desc": "Light 30 Position (Y)"
+					  "name": "Light 30 Y Position [242]",
+					  "desc": "Light 30 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-30-pos-z":{
-					  "name": "Light 30 Z Position [471]",
-					  "desc": "Light 30 Position (Z) 0 to 1"
+					  "name": "Light 30 Z Position [243]",
+					  "desc": "Light 30 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-30-color-r":{
-					  "name": "Light 30 Color (Red) [472]",
-					  "desc": "Light 30 Color (Red) 0 to 1"
+					"light-30-color":{
+					  "name": "Light 30 Color [244]",
+					  "desc": "Light 30 Color (RGB)"
 					},
-					"light-30-color-g":{
-					  "name": "Light 30 Color (Green) [473]",
-					  "desc": "Light 30 Color (Green) 0 to 1"
+					"light-30-clamp":{
+					  "name": "Light 30 Clamp [245]",
+					  "desc": "Light 30 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-30-color-b":{
-					  "name": "Light 30 Color (Blue) [474]",
-					  "desc": "Light 30 Color (Blue) 0 to 1"
+					"light-30-linear-falloff":{
+					  "name": "Light 30 Linear Falloff [246]",
+					  "desc": "Light 30 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-30-luminosity":{
-					  "name": "Light 30 Luminosity [475]",
-					  "desc": "Light 30 Luminosity 0 to 1"
+					"light-30-quadratic-falloff":{
+					  "name": "Light 30 Quadratic Falloff [247]",
+					  "desc": "Light 30 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-30-ambient-r":{
-					  "name": "Light 30 Ambient (Red) [476]",
-					  "desc": "Light 30 Ambient (Red) 0 to 1"
-					},
-					"light-30-ambient-g":{
-					  "name": "Light 30 Ambient (Green) [477]",
-					  "desc": "Light 30 Ambient (Green) 0 to 1"
-					},
-					"light-30-ambient-b":{
-					  "name": "Light 30 Ambient (Blue) [478]",
-					  "desc": "Light 30 Ambient (Blue) 0 to 1"
-					},
-					"light-30-ambient-luminosity":{
-					  "name": "Light 30 Ambient Luminosity [479]",
-					  "desc": "Light 30 Ambient Luminosity 0 to 1"
-					},
-					"light-30-distance":{
-					  "name": "Light 30 Distance [480]",
-					  "desc": "Light 30 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-30-falloffv1":{
-					  "name": "Light 30 Falloff A [481]",
-					  "desc": "Light 30 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-30-falloffv2":{
-					  "name": "Light 30 Falloff B [482]",
-					  "desc": "Light 30 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-30-falloffv3":{
-					  "name": "Light 30 Falloff C [483]",
-					  "desc": "Light 30 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-31-state-01":{
-					  "name": "Light 31 State 0/1 [484]",
-					  "desc": "Light 31 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-31-intensity-01":{
+					  "name": "Light 31 Intensity [248]",
+					  "desc": "Light 31 Intensity. OFF (0) improves shader performance"
 					},
 					"light-31-pos-x":{
-					  "name": "Light 31 X Position [485]",
-					  "desc": "Light 31 Position (X)"
+					  "name": "Light 31 X Position [249]",
+					  "desc": "Light 31 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-31-pos-y":{
-					  "name": "Light 31 Y Position [486]",
-					  "desc": "Light 31 Position (Y)"
+					  "name": "Light 31 Y Position [250]",
+					  "desc": "Light 31 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-31-pos-z":{
-					  "name": "Light 31 Z Position [487]",
-					  "desc": "Light 31 Position (Z) 0 to 1"
+					  "name": "Light 31 Z Position [251]",
+					  "desc": "Light 31 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-31-color-r":{
-					  "name": "Light 31 Color (Red) [488]",
-					  "desc": "Light 31 Color (Red) 0 to 1"
+					"light-31-color":{
+					  "name": "Light 31 Color [252]",
+					  "desc": "Light 31 Color (RGB)"
 					},
-					"light-31-color-g":{
-					  "name": "Light 31 Color (Green) [489]",
-					  "desc": "Light 31 Color (Green) 0 to 1"
+					"light-31-clamp":{
+					  "name": "Light 31 Clamp [253]",
+					  "desc": "Light 31 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-31-color-b":{
-					  "name": "Light 31 Color (Blue) [490]",
-					  "desc": "Light 31 Color (Blue) 0 to 1"
+					"light-31-linear-falloff":{
+					  "name": "Light 31 Linear Falloff [254]",
+					  "desc": "Light 31 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-31-luminosity":{
-					  "name": "Light 31 Luminosity [491]",
-					  "desc": "Light 31 Luminosity 0 to 1"
+					"light-31-quadratic-falloff":{
+					  "name": "Light 31 Quadratic Falloff [255]",
+					  "desc": "Light 31 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					},
-					"light-31-ambient-r":{
-					  "name": "Light 31 Ambient (Red) [492]",
-					  "desc": "Light 31 Ambient (Red) 0 to 1"
-					},
-					"light-31-ambient-g":{
-					  "name": "Light 31 Ambient (Green) [493]",
-					  "desc": "Light 31 Ambient (Green) 0 to 1"
-					},
-					"light-31-ambient-b":{
-					  "name": "Light 31 Ambient (Blue) [494]",
-					  "desc": "Light 31 Ambient (Blue) 0 to 1"
-					},
-					"light-31-ambient-luminosity":{
-					  "name": "Light 31 Ambient Luminosity [495]",
-					  "desc": "Light 31 Ambient Luminosity 0 to 1"
-					},
-					"light-31-distance":{
-					  "name": "Light 31 Distance [496]",
-					  "desc": "Light 31 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-31-falloffv1":{
-					  "name": "Light 31 Falloff A [497]",
-					  "desc": "Light 31 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-31-falloffv2":{
-					  "name": "Light 31 Falloff B [498]",
-					  "desc": "Light 31 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-31-falloffv3":{
-					  "name": "Light 31 Falloff C [499]",
-					  "desc": "Light 31 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-32-state-01":{
-					  "name": "Light 32 State 0/1 [500]",
-					  "desc": "Light 32 OFF (0), ON (1) or dim inbetween. OFF (0) improves performance"
+					"light-32-intensity-01":{
+					  "name": "Light 32 Intensity [256]",
+					  "desc": "Light 32 Intensity. OFF (0) improves shader performance"
 					},
 					"light-32-pos-x":{
-					  "name": "Light 32 X Position [501]",
-					  "desc": "Light 32 Position (X)"
+					  "name": "Light 32 X Position [257]",
+					  "desc": "Light 32 Viewport Position (X-axis). 0 to 100 for left to right end of viewport. Forward: ((LayerToCanvasX(layer,LightSource.X,0))/(round(LayerToCanvasX(layer,ViewportRight(layer),0)))*100)"
 					},
 					"light-32-pos-y":{
-					  "name": "Light 32 Y Position [502]",
-					  "desc": "Light 32 Position (Y)"
+					  "name": "Light 32 Y Position [258]",
+					  "desc": "Light 32 Viewport Position (Y-axis). 0 to 100 for top to bottom end of viewport. Forward: ((LayerToCanvasY(layer,0,LightSource.Y))/(round(LayerToCanvasY(layer,0,ViewportBottom(layer)))*100)"
 					},
 					"light-32-pos-z":{
-					  "name": "Light 32 Z Position [503]",
-					  "desc": "Light 32 Position (Z) 0 to 1"
+					  "name": "Light 32 Z Position [259]",
+					  "desc": "Light 32 Depth Translation (Z-axis). Lower value to move away from camera, increase value to move towards the camera"
 					},
-					"light-32-color-r":{
-					  "name": "Light 32 Color (Red) [504]",
-					  "desc": "Light 32 Color (Red) 0 to 1"
+					"light-32-color":{
+					  "name": "Light 32 Color [260]",
+					  "desc": "Light 32 Color (RGB)"
 					},
-					"light-32-color-g":{
-					  "name": "Light 32 Color (Green) [505]",
-					  "desc": "Light 32 Color (Green) 0 to 1"
+					"light-32-clamp":{
+					  "name": "Light 32 Clamp [261]",
+					  "desc": "Light 32 hard-edge circle (clamp) to dark. 0 to 100 for small to large circle. Depends on Linear and Quadratic Falloff"
 					},
-					"light-32-color-b":{
-					  "name": "Light 32 Color (Blue) [506]",
-					  "desc": "Light 32 Color (Blue) 0 to 1"
+					"light-32-linear-falloff":{
+					  "name": "Light 32 Linear Falloff [262]",
+					  "desc": "Light 32 Linear Falloff - Linear decrease in intensity as distance from light source increases"
 					},
-					"light-32-luminosity":{
-					  "name": "Light 32 Luminosity [507]",
-					  "desc": "Light 32 Luminosity 0 to 1"
-					},
-					"light-32-ambient-r":{
-					  "name": "Light 32 Ambient (Red) [508]",
-					  "desc": "Light 32 Ambient (Red) 0 to 1"
-					},
-					"light-32-ambient-g":{
-					  "name": "Light 32 Ambient (Green) [509]",
-					  "desc": "Light 32 Ambient (Green) 0 to 1"
-					},
-					"light-32-ambient-b":{
-					  "name": "Light 32 Ambient (Blue) [510]",
-					  "desc": "Light 32 Ambient (Blue) 0 to 1"
-					},
-					"light-32-ambient-luminosity":{
-					  "name": "Light 32 Ambient Luminosity [511]",
-					  "desc": "Light 32 Ambient Luminosity 0 to 1"
-					},
-					"light-32-distance":{
-					  "name": "Light 32 Distance [512]",
-					  "desc": "Light 32 hard-edge circle (clamp) to dark. Depends on falloff B and C"
-					},
-					"light-32-falloffv1":{
-					  "name": "Light 32 Falloff A [513]",
-					  "desc": "Light 32 Falloff A - Overall curve intensity. 0 = Full Intensity"
-					},
-					"light-32-falloffv2":{
-					  "name": "Light 32 Falloff B [514]",
-					  "desc": "Light 32 Falloff B - Soft curve falloff. 0 = No Curve/Falloff"
-					},
-					"light-32-falloffv3":{
-					  "name": "Light 32 Falloff C [515]",
-					  "desc": "Light 32 Falloff C - Hard curve falloff. 0 = No Curve/Falloff"
+					"light-32-quadratic-falloff":{
+					  "name": "Light 32 Quadratic Falloff [263]",
+					  "desc": "Light 32 Quadratic Falloff - Quadratic decrease in intensity as distance from light source increases"
 					}
 				}
 			}

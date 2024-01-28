@@ -1,6 +1,6 @@
 {
 	"projectFormatVersion": 1,
-	"savedWithRelease": 32702,
+	"savedWithRelease": 36802,
 	"name": "NormalMap32",
 	"runtime": "c3",
 	"useWorker": "auto",
@@ -54,14 +54,16 @@
 			"name": "NormalMap32",
 			"author": "Everade",
 			"bundled": false,
-			"version": "1.9.0.0"
+			"version": "2.0.0.0"
 		}
 	],
-	"uniqueId": "v5nornzpxrj",
+	"uniqueId": "zm3s3tfkmw7",
 	"objectTypes": {
 		"items": [
-			"2DSprite",
-			"2DSpriteNormalMap",
+			"SphereTexture",
+			"SphereNormal",
+			"SceneTexture",
+			"SceneNormal",
 			"PlatformInfo",
 			"LightSource",
 			"Browser"
@@ -78,13 +80,15 @@
 	},
 	"layouts": {
 		"items": [
-			"Layout"
+			"PerSpriteLayout",
+			"PerLayerLayout"
 		],
 		"subfolders": []
 	},
 	"eventSheets": {
 		"items": [
-			"NormalMap32"
+			"PerLayerEvents",
+			"PerSpriteEvents"
 		],
 		"subfolders": []
 	},
@@ -112,25 +116,9 @@
 		"icon": {
 			"items": [
 				{
-					"name": "icon-16.png",
-					"type": "image/png",
-					"sid": 950292115844621,
-					"icon-info": {
-						"purpose": "app-icon"
-					}
-				},
-				{
-					"name": "icon-32.png",
-					"type": "image/png",
-					"sid": 826141858185723,
-					"icon-info": {
-						"purpose": "app-icon"
-					}
-				},
-				{
 					"name": "icon-64.png",
 					"type": "image/png",
-					"sid": 428688437780232,
+					"sid": 602655779765987,
 					"icon-info": {
 						"purpose": "app-icon"
 					}
@@ -138,23 +126,7 @@
 				{
 					"name": "icon-128.png",
 					"type": "image/png",
-					"sid": 448325936780482,
-					"icon-info": {
-						"purpose": "app-icon"
-					}
-				},
-				{
-					"name": "loading-logo.png",
-					"type": "image/png",
-					"sid": 110467401187209,
-					"icon-info": {
-						"purpose": "loading-logo"
-					}
-				},
-				{
-					"name": "icon-512.png",
-					"type": "image/png",
-					"sid": 251508014585618,
+					"sid": 863744986501028,
 					"icon-info": {
 						"purpose": "app-icon"
 					}
@@ -162,7 +134,39 @@
 				{
 					"name": "icon-256.png",
 					"type": "image/png",
-					"sid": 801539853575789,
+					"sid": 873245145775290,
+					"icon-info": {
+						"purpose": "app-icon"
+					}
+				},
+				{
+					"name": "icon-512.png",
+					"type": "image/png",
+					"sid": 913341203513657,
+					"icon-info": {
+						"purpose": "app-icon"
+					}
+				},
+				{
+					"name": "loading-logo.png",
+					"type": "image/png",
+					"sid": 344772381251201,
+					"icon-info": {
+						"purpose": "loading-logo"
+					}
+				},
+				{
+					"name": "icon-32.png",
+					"type": "image/png",
+					"sid": 568562094291390,
+					"icon-info": {
+						"purpose": "app-icon"
+					}
+				},
+				{
+					"name": "icon-16.png",
+					"type": "image/png",
+					"sid": 752073896548946,
 					"icon-info": {
 						"purpose": "app-icon"
 					}
@@ -187,8 +191,8 @@
 		]
 	},
 	"properties": {
-		"description": "Create a 3D light effect on any 2D sprite using a normal map. Each normal map pixel represents the direction in which the sprite's pixel is facing. Supports 32 simultanious light sources per map.",
-		"version": "1.0.1.0",
+		"description": "NormalMap32 allows you to create and control up to 32 colored point lights that interact with a 2D normal map texture. The result is a simulated 3D lighting effect.",
+		"version": "2.0.0.0",
 		"author": "Everade",
 		"authorEmail": "",
 		"authorWebsite": "https://www.construct.net/en/make-games/addons/898/normalmap32",
@@ -221,7 +225,7 @@
 		],
 		"orientations": "landscape",
 		"webgpu": "auto",
-		"gpuPreference": "high-performance",
+		"gpuPreference": "default",
 		"scriptsType": "module",
 		"framerateMode": "vsync",
 		"compositingMode": "standard",
@@ -237,9 +241,10 @@
 		"cordovaiOSScheme": "app",
 		"cordovaAndroidScheme": "https",
 		"autoReloadScriptsOnPreview": false,
-		"exportFileStructure": "folders"
+		"exportFileStructure": "folders",
+		"uidAllocationMode": "increment"
 	},
-	"viewportWidth": 854,
-	"viewportHeight": 480,
+	"viewportWidth": 1024,
+	"viewportHeight": 512,
 	"firstLayout": null
 }

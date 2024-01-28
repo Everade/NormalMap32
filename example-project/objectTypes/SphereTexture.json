@@ -1,14 +1,14 @@
 {
-	"name": "2DSprite",
+	"name": "SphereTexture",
 	"plugin-id": "Sprite",
-	"sid": 686895704279329,
+	"sid": 758296901613523,
 	"isGlobal": false,
 	"instanceVariables": [],
 	"behaviorTypes": [
 		{
 			"behaviorId": "Rotate",
 			"name": "Rotate",
-			"sid": 979766997759137
+			"sid": 344413051567840
 		}
 	],
 	"effectTypes": [],
@@ -24,12 +24,13 @@
 						"originalSource": "",
 						"exportFormat": "lossless",
 						"exportQuality": 0.8,
-						"imageSpriteId": 4336249,
+						"imageSpriteId": 5541868,
 						"useCollisionPoly": true,
-						"duration": 1
+						"duration": 1,
+						"tag": ""
 					}
 				],
-				"sid": 568766003293018,
+				"sid": 531941312011672,
 				"name": "Default",
 				"isLooping": false,
 				"isPingPong": false,

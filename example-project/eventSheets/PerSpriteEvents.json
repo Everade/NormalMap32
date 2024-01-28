@@ -1,0 +1,552 @@
+{
+	"name": "PerSpriteEvents",
+	"events": [
+		{
+			"eventType": "comment",
+			"text": "- Notice -\nThis SPHERE example runs the effect per normal map.\nAllowing us to account for individual sprite rotation and flipping. The downside of this approach is that it adds more load on both CPU and GPU per tick. Because we need to run more loops in our event logic, as well as running the effect multiple times on the GPU. If you plan your entire screen to be filled with normal maps, the \"PerLayerLayout\" example will most likely yield better performance.",
+			"text-color": [
+				1,
+				1,
+				1,
+				1
+			],
+			"background-color": [
+				1,
+				0.3607843137254902,
+				0.3607843137254902,
+				1
+			]
+		},
+		{
+			"eventType": "comment",
+			"text": "- Info -\nLight settings are set per Normal Map sprite, not on your light sources!\niResolution parameters are ignored when running in WebGL2 or WebGPU. Setting the iResolution parameters is only required  for backwards compatibility if you want to support WebGL1 in your project."
+		},
+		{
+			"eventType": "comment",
+			"text": "Initializing variables for automated resolution algorithm. They are automatically set in the UpdateViewport function."
+		},
+		{
+			"eventType": "variable",
+			"name": "VPR",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "Viewport Right (X coordinate)",
+			"isStatic": true,
+			"isConstant": false,
+			"sid": 518794985176812
+		},
+		{
+			"eventType": "variable",
+			"name": "VPB",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "Viewport Bottom (Y coordinate)",
+			"isStatic": true,
+			"isConstant": false,
+			"sid": 727692485396871
+		},
+		{
+			"eventType": "variable",
+			"name": "PR",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "Device Pixel Ratio",
+			"isStatic": true,
+			"isConstant": false,
+			"sid": 232319752358870
+		},
+		{
+			"eventType": "variable",
+			"name": "WH",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "Height of canvas absolute size (including pixel ratio)",
+			"isStatic": true,
+			"isConstant": false,
+			"sid": 277361591026196
+		},
+		{
+			"eventType": "variable",
+			"name": "WW",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "Width of canvas absolute size (including pixel ratio)",
+			"isStatic": true,
+			"isConstant": false,
+			"sid": 239409215966849
+		},
+		{
+			"eventType": "variable",
+			"name": "WWL",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "Width of canvas - Light",
+			"isStatic": true,
+			"isConstant": false,
+			"sid": 205173643270805
+		},
+		{
+			"eventType": "variable",
+			"name": "WHL",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "Height of canvas - Light",
+			"isStatic": true,
+			"isConstant": false,
+			"sid": 516068347059332
+		},
+		{
+			"eventType": "comment",
+			"text": "The offset is only used to loop through multiple lights in our logic. (Each light has 8 effect parameters)"
+		},
+		{
+			"eventType": "variable",
+			"name": "lightOffset",
+			"type": "number",
+			"initialValue": "8",
+			"comment": "NormalMap32 - Parameter offset for next light",
+			"isStatic": true,
+			"isConstant": true,
+			"sid": 692316896338782
+		},
+		{
+			"eventType": "comment",
+			"text": "Defines how many Light IDs are effectively used in your layout. Keep as low as possible for best performance. Min(1), Max(32)"
+		},
+		{
+			"eventType": "variable",
+			"name": "lightCountLayer",
+			"type": "number",
+			"initialValue": "3",
+			"comment": "Light IDs higher than defined here will be disabled",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 817048686015584
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "Max Light ID",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "comment",
+					"text": "To keep shader iterations as minimal as possible, giving minor performance improvements if not utilizing all 32 lights.\nKeep in mind that this effect parameter will disable all Light IDs higher than the number defined. Min(1), Max(32)"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-created",
+							"objectClass": "fNormal",
+							"sid": 444721015716195
+						}
+					],
+					"actions": [
+						{
+							"type": "comment",
+							"text": "Max Light ID [005]"
+						},
+						{
+							"id": "set-effect-parameter",
+							"objectClass": "fNormal",
+							"sid": 622225359614861,
+							"parameters": {
+								"effect": "\"NormalMap32\"",
+								"parameter-index": "5",
+								"value": "lightCountLayer"
+							}
+						}
+					],
+					"sid": 190287358346947
+				}
+			],
+			"sid": 338202015272204
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "Screen Resolution",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "comment",
+					"text": "Initializing variables for automated resolution algorithm. Needed for correct light positioning."
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-start-of-layout",
+							"objectClass": "System",
+							"sid": 287448277941077
+						}
+					],
+					"actions": [
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 854003114798239,
+							"parameters": {
+								"seconds": "0"
+							}
+						},
+						{
+							"callFunction": "UpdateViewport",
+							"sid": 795947285733182
+						}
+					],
+					"sid": 512608587474855
+				},
+				{
+					"eventType": "comment",
+					"text": "Initialize viewport effect parameters upon normal map creation. (Only needed for WebGL1 support)"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-created",
+							"objectClass": "fNormal",
+							"sid": 369920946526632
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "UpdateNormalViewportWebGL1",
+							"sid": 616046923996234
+						}
+					],
+					"sid": 569259878691353
+				},
+				{
+					"eventType": "comment",
+					"text": "Update viewport on the normal map effect parameters when viewport is being resized."
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-resized",
+							"objectClass": "Browser",
+							"sid": 196266987770335
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "UpdateViewport",
+							"sid": 853119328433594
+						}
+					],
+					"sid": 486422062553987
+				}
+			],
+			"sid": 947830316818141
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "Light Positioning - NormalMap",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "comment",
+					"text": "Update light source positions on the normal map effect parameters based on their relative light bulps."
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 647497973398348,
+							"parameters": {
+								"object": "fNormal"
+							}
+						},
+						{
+							"id": "for",
+							"objectClass": "System",
+							"sid": 992352158828858,
+							"parameters": {
+								"name": "\"\"",
+								"start-index": "0",
+								"end-index": "lightCountLayer"
+							}
+						},
+						{
+							"id": "compare-animation-frame",
+							"objectClass": "LightSource",
+							"sid": 909732005131618,
+							"parameters": {
+								"comparison": 0,
+								"number": "loopindex"
+							}
+						},
+						{
+							"id": "pick-nearestfurthest",
+							"objectClass": "LightSource",
+							"sid": 166891404152468,
+							"parameters": {
+								"which": "nearest",
+								"x": "fNormal.X",
+								"y": "fNormal.Y"
+							}
+						}
+					],
+					"actions": [
+						{
+							"type": "comment",
+							"text": "We loop through all light IDs on the layout.\nLess light source IDs used = enhanced performance."
+						},
+						{
+							"type": "comment",
+							"text": "Only one light source of the same ID can interrogate with each normal map at a time.\nSo there should never be multiple lights of the same ID in close proximity to each other. (for example Light 2 and another Light 2)\nWe then always take the closest bulp of each ID to be considered as current active light, which allows us to place multiple instances of the same ID within the game world.\n\nThis allows us to use thousands of lights per layout, as we switch between them dynamically. Just space them far enough apart so you won't notice when the next light bulp takes over.\n\nImportant: Use as few light IDs as possible for maximum performance. Using all 32, although possible, will be very CPU and GPU hungry.\nFor example: world designed with only light ID 1-3 (each 10 times) will be much more performant than using light ID 1-30 (just one each), even if they're all out of view. This is because a shader cycle will be much shorter when using fewer lights."
+						},
+						{
+							"type": "comment",
+							"text": "Light 1-3 X Position [009]-[017]-[025]"
+						},
+						{
+							"id": "set-effect-parameter",
+							"objectClass": "fNormal",
+							"sid": 443335528507551,
+							"parameters": {
+								"effect": "\"NormalMap32\"",
+								"parameter-index": "9-lightOffset+loopindex*lightOffset",
+								"value": "(LayerToCanvasX(1, LightSource.X, 0))/(WWL)*100"
+							}
+						},
+						{
+							"type": "comment",
+							"text": "Light 1-3 Y Position [010]-[018]-[026]"
+						},
+						{
+							"id": "set-effect-parameter",
+							"objectClass": "fNormal",
+							"sid": 689658963379327,
+							"parameters": {
+								"effect": "\"NormalMap32\"",
+								"parameter-index": "10-lightOffset+loopindex *lightOffset",
+								"value": "(LayerToCanvasY(1, 0, LightSource.Y))/(WHL)*100"
+							}
+						}
+					],
+					"sid": 891529571456315
+				}
+			],
+			"sid": 119707072635948
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "Normal Map Transformations",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "comment",
+					"text": "NormalMap32 supports both flipped, and rotated normal maps.\nHowever for the effect to be adjusted accordingly, we need to forward the normal map sprite scale, and current angle.\nKeep in mind that you only need to update these values as soon as you adjust them on the sprite itself. It is not necessarily required to update these on every tick if they don't change their scale or angle constantly, or even at all. For example a sprite which has been flipped in its width will require you to forward -1 on the \"Normal Map Scale X [002]\" parameter. Scale 1 is default, -1 is flipped."
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"type": "comment",
+							"text": "Normal Map Scale X [002]"
+						},
+						{
+							"id": "set-effect-parameter",
+							"objectClass": "fNormal",
+							"sid": 722580509122033,
+							"parameters": {
+								"effect": "\"NormalMap32\"",
+								"parameter-index": "2",
+								"value": "fNormal.Width / fNormal.ImageWidth"
+							}
+						},
+						{
+							"type": "comment",
+							"text": "Normal Map Scale Y [003]"
+						},
+						{
+							"id": "set-effect-parameter",
+							"objectClass": "fNormal",
+							"sid": 182978537765631,
+							"parameters": {
+								"effect": "\"NormalMap32\"",
+								"parameter-index": "3",
+								"value": "fNormal.Height / fNormal.ImageHeight"
+							}
+						},
+						{
+							"type": "comment",
+							"text": "Normal Map Angle [004]"
+						},
+						{
+							"id": "set-effect-parameter",
+							"objectClass": "fNormal",
+							"sid": 535675954652723,
+							"parameters": {
+								"effect": "\"NormalMap32\"",
+								"parameter-index": "4",
+								"value": "fNormal.Angle"
+							}
+						}
+					],
+					"sid": 212843282068320
+				}
+			],
+			"sid": 508047597491146
+		},
+		{
+			"eventType": "comment",
+			"text": "Viewport Functions"
+		},
+		{
+			"functionName": "UpdateViewport",
+			"functionDescription": "Updates all Viewport related variables and updates all Normal Map Screen Resolution effect parameters accordingly.",
+			"functionCategory": "Viewport",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 756444941793134,
+			"children": [
+				{
+					"eventType": "comment",
+					"text": "Needed when viewport size or device pixelratio is changed, to render normal map lights positioned properly."
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 898578136791127,
+							"parameters": {
+								"variable": "PR",
+								"value": "PlatformInfo.DevicePixelRatio\n"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 564935922132498,
+							"parameters": {
+								"variable": "VPB",
+								"value": "ViewportBottom(1)"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 189598338661370,
+							"parameters": {
+								"variable": "VPR",
+								"value": "ViewportRight(1)\n"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 981602437885366,
+							"parameters": {
+								"variable": "WWL",
+								"value": "round(LayerToCanvasX(1,VPR,0))"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 519639643330557,
+							"parameters": {
+								"variable": "WHL",
+								"value": "round(LayerToCanvasY(1,0,VPB))"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 266269516478680,
+							"parameters": {
+								"variable": "WW",
+								"value": "round(LayerToCanvasX(1,VPR,0)*PR)"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 395480166949045,
+							"parameters": {
+								"variable": "WH",
+								"value": "round(LayerToCanvasY(1,0,VPB)*PR)\n"
+							}
+						},
+						{
+							"callFunction": "UpdateNormalViewportWebGL1",
+							"sid": 713371982934968
+						}
+					],
+					"sid": 714049922780227
+				}
+			]
+		},
+		{
+			"functionName": "UpdateNormalViewportWebGL1",
+			"functionDescription": "Updates a Normal Maps' Screen X and Y Resolution effect parameters.",
+			"functionCategory": "Viewport",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"type": "comment",
+					"text": "We only need to update these parameters to support WebGL1!"
+				}
+			],
+			"sid": 504126757065790,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-effect-parameter",
+							"objectClass": "fNormal",
+							"sid": 210533263795896,
+							"parameters": {
+								"effect": "\"NormalMap32\"",
+								"parameter-index": "0",
+								"value": "WW"
+							}
+						},
+						{
+							"id": "set-effect-parameter",
+							"objectClass": "fNormal",
+							"sid": 600209943123781,
+							"parameters": {
+								"effect": "\"NormalMap32\"",
+								"parameter-index": "1",
+								"value": "WH"
+							}
+						}
+					],
+					"sid": 263785572738200
+				}
+			]
+		}
+	],
+	"sid": 434956202624341
+}

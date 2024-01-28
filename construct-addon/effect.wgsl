@@ -477,15 +477,16 @@ fn main(input : FragmentInput) -> FragmentOutput {
 	normal = vec3<f32>(normal.x / shaderParams.normalScaleX, normal.y / shaderParams.normalScaleY, normal.z);
 	normal = vec3<f32>(rotate(normal.xy, -shaderParams.normalAngle * PI180), normal.z);
 
+	let fragCoord: vec2<f32> = input.fragPos.xy / iResolution;
+	let aspectRatio: f32 = iResolution.x / iResolution.y;
 	let lightMax: i32 = i32(clamp(shaderParams.lightMaxID, 0.0, 32.0));
 	let ambient: vec3<f32> = shaderParams.ambientColor * shaderParams.ambientIntensity * 2.0;
 	var sum : vec3<f32> = vec3<f32>(back.rgb * ambient);
 
 	for (var i : i32 = 0; i < 32; i++) {
 		if (i >= lightMax) { break; }
-		if (lightIntensity[i] == 0.0) { continue; }
-		var light : vec3<f32> = vec3<f32>(lightPos[i].xy - input.fragPos.xy / iResolution, lightPos[i].z);
-		light.x *= iResolution.x / iResolution.y;
+		var light : vec3<f32> = vec3<f32>(lightPos[i].xy - fragCoord, lightPos[i].z);
+		light.x *= aspectRatio;
 		var D : f32 = length(light);
 		D = mix(D, 1000.0, step(lightClamp[i], D));
 		var L : vec3<f32> = normalize(light);

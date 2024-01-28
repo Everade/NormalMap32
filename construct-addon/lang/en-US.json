@@ -42,7 +42,7 @@
 					},
 					"light-1-intensity-01":{
 					  "name": "Light 1 Intensity [008]",
-					  "desc": "Light 1 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 1 Intensity. OFF (0)"
 					},
 					"light-1-pos-x":{
 					  "name": "Light 1 X Position [009]",
@@ -74,7 +74,7 @@
 					},
 					"light-2-intensity-01":{
 					  "name": "Light 2 Intensity [016]",
-					  "desc": "Light 2 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 2 Intensity. OFF (0)"
 					},
 					"light-2-pos-x":{
 					  "name": "Light 2 X Position [017]",
@@ -106,7 +106,7 @@
 					},
 					"light-3-intensity-01":{
 					  "name": "Light 3 Intensity [024]",
-					  "desc": "Light 3 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 3 Intensity. OFF (0)"
 					},
 					"light-3-pos-x":{
 					  "name": "Light 3 X Position [025]",
@@ -138,7 +138,7 @@
 					},
 					"light-4-intensity-01":{
 					  "name": "Light 4 Intensity [032]",
-					  "desc": "Light 4 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 4 Intensity. OFF (0)"
 					},
 					"light-4-pos-x":{
 					  "name": "Light 4 X Position [033]",
@@ -170,7 +170,7 @@
 					},
 					"light-5-intensity-01":{
 					  "name": "Light 5 Intensity [040]",
-					  "desc": "Light 5 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 5 Intensity. OFF (0)"
 					},
 					"light-5-pos-x":{
 					  "name": "Light 5 X Position [041]",
@@ -202,7 +202,7 @@
 					},
 					"light-6-intensity-01":{
 					  "name": "Light 6 Intensity [048]",
-					  "desc": "Light 6 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 6 Intensity. OFF (0)"
 					},
 					"light-6-pos-x":{
 					  "name": "Light 6 X Position [049]",
@@ -234,7 +234,7 @@
 					},
 					"light-7-intensity-01":{
 					  "name": "Light 7 Intensity [056]",
-					  "desc": "Light 7 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 7 Intensity. OFF (0)"
 					},
 					"light-7-pos-x":{
 					  "name": "Light 7 X Position [057]",
@@ -266,7 +266,7 @@
 					},
 					"light-8-intensity-01":{
 					  "name": "Light 8 Intensity [064]",
-					  "desc": "Light 8 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 8 Intensity. OFF (0)"
 					},
 					"light-8-pos-x":{
 					  "name": "Light 8 X Position [065]",
@@ -298,7 +298,7 @@
 					},
 					"light-9-intensity-01":{
 					  "name": "Light 9 Intensity [072]",
-					  "desc": "Light 9 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 9 Intensity. OFF (0)"
 					},
 					"light-9-pos-x":{
 					  "name": "Light 9 X Position [073]",
@@ -330,7 +330,7 @@
 					},
 					"light-10-intensity-01":{
 					  "name": "Light 10 Intensity [080]",
-					  "desc": "Light 10 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 10 Intensity. OFF (0)"
 					},
 					"light-10-pos-x":{
 					  "name": "Light 10 X Position [081]",
@@ -362,7 +362,7 @@
 					},
 					"light-11-intensity-01":{
 					  "name": "Light 11 Intensity [088]",
-					  "desc": "Light 11 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 11 Intensity. OFF (0)"
 					},
 					"light-11-pos-x":{
 					  "name": "Light 11 X Position [089]",
@@ -394,7 +394,7 @@
 					},
 					"light-12-intensity-01":{
 					  "name": "Light 12 Intensity [096]",
-					  "desc": "Light 12 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 12 Intensity. OFF (0)"
 					},
 					"light-12-pos-x":{
 					  "name": "Light 12 X Position [097]",
@@ -426,7 +426,7 @@
 					},
 					"light-13-intensity-01":{
 					  "name": "Light 13 Intensity [104]",
-					  "desc": "Light 13 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 13 Intensity. OFF (0)"
 					},
 					"light-13-pos-x":{
 					  "name": "Light 13 X Position [105]",
@@ -458,7 +458,7 @@
 					},
 					"light-14-intensity-01":{
 					  "name": "Light 14 Intensity [112]",
-					  "desc": "Light 14 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 14 Intensity. OFF (0)"
 					},
 					"light-14-pos-x":{
 					  "name": "Light 14 X Position [113]",
@@ -490,7 +490,7 @@
 					},
 					"light-15-intensity-01":{
 					  "name": "Light 15 Intensity [120]",
-					  "desc": "Light 15 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 15 Intensity. OFF (0)"
 					},
 					"light-15-pos-x":{
 					  "name": "Light 15 X Position [121]",
@@ -522,7 +522,7 @@
 					},
 					"light-16-intensity-01":{
 					  "name": "Light 16 Intensity [128]",
-					  "desc": "Light 16 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 16 Intensity. OFF (0)"
 					},
 					"light-16-pos-x":{
 					  "name": "Light 16 X Position [129]",
@@ -554,7 +554,7 @@
 					},
 					"light-17-intensity-01":{
 					  "name": "Light 17 Intensity [136]",
-					  "desc": "Light 17 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 17 Intensity. OFF (0)"
 					},
 					"light-17-pos-x":{
 					  "name": "Light 17 X Position [137]",
@@ -586,7 +586,7 @@
 					},
 					"light-18-intensity-01":{
 					  "name": "Light 18 Intensity [144]",
-					  "desc": "Light 18 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 18 Intensity. OFF (0)"
 					},
 					"light-18-pos-x":{
 					  "name": "Light 18 X Position [145]",
@@ -618,7 +618,7 @@
 					},
 					"light-19-intensity-01":{
 					  "name": "Light 19 Intensity [152]",
-					  "desc": "Light 19 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 19 Intensity. OFF (0)"
 					},
 					"light-19-pos-x":{
 					  "name": "Light 19 X Position [153]",
@@ -650,7 +650,7 @@
 					},
 					"light-20-intensity-01":{
 					  "name": "Light 20 Intensity [160]",
-					  "desc": "Light 20 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 20 Intensity. OFF (0)"
 					},
 					"light-20-pos-x":{
 					  "name": "Light 20 X Position [161]",
@@ -682,7 +682,7 @@
 					},
 					"light-21-intensity-01":{
 					  "name": "Light 21 Intensity [168]",
-					  "desc": "Light 21 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 21 Intensity. OFF (0)"
 					},
 					"light-21-pos-x":{
 					  "name": "Light 21 X Position [169]",
@@ -714,7 +714,7 @@
 					},
 					"light-22-intensity-01":{
 					  "name": "Light 22 Intensity [176]",
-					  "desc": "Light 22 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 22 Intensity. OFF (0)"
 					},
 					"light-22-pos-x":{
 					  "name": "Light 22 X Position [177]",
@@ -746,7 +746,7 @@
 					},
 					"light-23-intensity-01":{
 					  "name": "Light 23 Intensity [184]",
-					  "desc": "Light 23 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 23 Intensity. OFF (0)"
 					},
 					"light-23-pos-x":{
 					  "name": "Light 23 X Position [185]",
@@ -778,7 +778,7 @@
 					},
 					"light-24-intensity-01":{
 					  "name": "Light 24 Intensity [192]",
-					  "desc": "Light 24 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 24 Intensity. OFF (0)"
 					},
 					"light-24-pos-x":{
 					  "name": "Light 24 X Position [193]",
@@ -810,7 +810,7 @@
 					},
 					"light-25-intensity-01":{
 					  "name": "Light 25 Intensity [200]",
-					  "desc": "Light 25 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 25 Intensity. OFF (0)"
 					},
 					"light-25-pos-x":{
 					  "name": "Light 25 X Position [201]",
@@ -842,7 +842,7 @@
 					},
 					"light-26-intensity-01":{
 					  "name": "Light 26 Intensity [208]",
-					  "desc": "Light 26 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 26 Intensity. OFF (0)"
 					},
 					"light-26-pos-x":{
 					  "name": "Light 26 X Position [209]",
@@ -874,7 +874,7 @@
 					},
 					"light-27-intensity-01":{
 					  "name": "Light 27 Intensity [216]",
-					  "desc": "Light 27 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 27 Intensity. OFF (0)"
 					},
 					"light-27-pos-x":{
 					  "name": "Light 27 X Position [217]",
@@ -906,7 +906,7 @@
 					},
 					"light-28-intensity-01":{
 					  "name": "Light 28 Intensity [224]",
-					  "desc": "Light 28 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 28 Intensity. OFF (0)"
 					},
 					"light-28-pos-x":{
 					  "name": "Light 28 X Position [225]",
@@ -938,7 +938,7 @@
 					},
 					"light-29-intensity-01":{
 					  "name": "Light 29 Intensity [232]",
-					  "desc": "Light 29 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 29 Intensity. OFF (0)"
 					},
 					"light-29-pos-x":{
 					  "name": "Light 29 X Position [233]",
@@ -970,7 +970,7 @@
 					},
 					"light-30-intensity-01":{
 					  "name": "Light 30 Intensity [240]",
-					  "desc": "Light 30 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 30 Intensity. OFF (0)"
 					},
 					"light-30-pos-x":{
 					  "name": "Light 30 X Position [241]",
@@ -1002,7 +1002,7 @@
 					},
 					"light-31-intensity-01":{
 					  "name": "Light 31 Intensity [248]",
-					  "desc": "Light 31 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 31 Intensity. OFF (0)"
 					},
 					"light-31-pos-x":{
 					  "name": "Light 31 X Position [249]",
@@ -1034,7 +1034,7 @@
 					},
 					"light-32-intensity-01":{
 					  "name": "Light 32 Intensity [256]",
-					  "desc": "Light 32 Intensity. OFF (0) improves shader performance"
+					  "desc": "Light 32 Intensity. OFF (0)"
 					},
 					"light-32-pos-x":{
 					  "name": "Light 32 X Position [257]",

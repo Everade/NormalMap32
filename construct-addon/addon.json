@@ -4,7 +4,7 @@
 	"supported-renderers": ["webgl","webgl2","webgpu"],
 	"name": "NormalMap32",
 	"id": "normalmap32",
-	"version": "2.0.0.0",
+	"version": "2.1.0.0",
 	"author": "Everade",
 	"website": "https://www.construct.net/make-games/addons/898/normalmap32",
 	"documentation": "https://www.construct.net/make-games/addons/898/normalmap32/documentation",

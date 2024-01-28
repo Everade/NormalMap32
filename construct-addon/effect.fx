@@ -464,15 +464,16 @@ void main(void) {
 	normal.xy /= vec2(normalScaleX,normalScaleY);
 	normal.xy = rotate(normal.xy, -normalAngle * PI180);
 
+	vec2 fragCoord = gl_FragCoord.xy / iResolution;
+	float aspectRatio = iResolution.x / iResolution.y;
 	int lightMax = int(clamp(lightMaxID, 0.0, 32.0));
 	vec3 ambient = ambientColor * ambientIntensity * 2.0;
 	vec3 sum = vec3(back.rgb * ambient);
 
 	for (int i = 0; i < 32; i++) {
 		if (i >= lightMax) break;
-		if (lightIntensity[i] == 0.0) continue;
-		vec3 lightDir = vec3(lightPos[i].xy - gl_FragCoord.xy / iResolution, lightPos[i].z);
-		lightDir.x *= iResolution.x / iResolution.y;
+		vec3 lightDir = vec3(lightPos[i].xy - fragCoord, lightPos[i].z);
+		lightDir.x *= aspectRatio;
 		float D = length(lightDir);
 		D = mix(D, 1000.0, step(lightClamp[i], D));
 		vec3 L = normalize(lightDir);

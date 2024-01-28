@@ -33,6 +33,10 @@
 //	Added WebGL2 variant (GLSL 300 es)
 //	Code optimizations
 //
+// V1.8 - by Everade
+//	WebGL2 variant code optimizations. Taking advantage of arrays and for loops.
+//	These optimizations gets rid of the WebGL1 copy pasta. Other minor improvements.
+//
 // Note: if possible don't use 'precision highp float'! This will unnecessarily reduce performance
 // on mobile devices. Instead always try to specify an appropriate precision level. As a guide, use:
 // lowp - for color and alpha values returned by samplers
@@ -65,6 +69,7 @@ precision highp float;
 // Resolution
 uniform float screenXResolution;
 uniform float screenYResolution;
+
 // Light 1
 uniform float light1State;
 uniform float light1PosX;
@@ -623,17 +628,224 @@ uniform mediump vec2 destEnd;
 uniform mediump vec2 srcEnd;
 uniform mediump vec2 srcStart;
 
-// Light position, normalized
-vec3 LightPos;
-
 // Resolution
 vec2 Resolution;
 
 // Fragment Shader
 out vec4 outColor;
 
-void main(void)
-{
+void main(void) {
+	// Light parameters array
+	float lightState[32] = float[](
+		light1State,
+		light2State,
+		light3State,
+		light4State,
+		light5State,
+		light6State,
+		light7State,
+		light8State,
+		light9State,
+		light10State,
+		light11State,
+		light12State,
+		light13State,
+		light14State,
+		light15State,
+		light16State,
+		light17State,
+		light18State,
+		light19State,
+		light20State,
+		light21State,
+		light22State,
+		light23State,
+		light24State,
+		light25State,
+		light26State,
+		light27State,
+		light28State,
+		light29State,
+		light30State,
+		light31State,
+		light32State
+	);
+
+	float lightDistance[32] = float[](
+		light1Distance,
+		light2Distance,
+		light3Distance,
+		light4Distance,
+		light5Distance,
+		light6Distance,
+		light7Distance,
+		light8Distance,
+		light9Distance,
+		light10Distance,
+		light11Distance,
+		light12Distance,
+		light13Distance,
+		light14Distance,
+		light15Distance,
+		light16Distance,
+		light17Distance,
+		light18Distance,
+		light19Distance,
+		light20Distance,
+		light21Distance,
+		light22Distance,
+		light23Distance,
+		light24Distance,
+		light25Distance,
+		light26Distance,
+		light27Distance,
+		light28Distance,
+		light29Distance,
+		light30Distance,
+		light31Distance,
+		light32Distance
+	);
+
+	vec3 LightPos[32] = vec3[] (
+		vec3(light1PosX, 1.0 - light1PosY, light1PosZ),
+		vec3(light2PosX, 1.0 - light2PosY, light2PosZ),
+		vec3(light3PosX, 1.0 - light3PosY, light3PosZ),
+		vec3(light4PosX, 1.0 - light4PosY, light4PosZ),
+		vec3(light5PosX, 1.0 - light5PosY, light5PosZ),
+		vec3(light6PosX, 1.0 - light6PosY, light6PosZ),
+		vec3(light7PosX, 1.0 - light7PosY, light7PosZ),
+		vec3(light8PosX, 1.0 - light8PosY, light8PosZ),
+		vec3(light9PosX, 1.0 - light9PosY, light9PosZ),
+		vec3(light10PosX, 1.0 - light10PosY, light10PosZ),
+		vec3(light11PosX, 1.0 - light11PosY, light11PosZ),
+		vec3(light12PosX, 1.0 - light12PosY, light12PosZ),
+		vec3(light13PosX, 1.0 - light13PosY, light13PosZ),
+		vec3(light14PosX, 1.0 - light14PosY, light14PosZ),
+		vec3(light15PosX, 1.0 - light15PosY, light15PosZ),
+		vec3(light16PosX, 1.0 - light16PosY, light16PosZ),
+		vec3(light17PosX, 1.0 - light17PosY, light17PosZ),
+		vec3(light18PosX, 1.0 - light18PosY, light18PosZ),
+		vec3(light19PosX, 1.0 - light19PosY, light19PosZ),
+		vec3(light20PosX, 1.0 - light20PosY, light20PosZ),
+		vec3(light21PosX, 1.0 - light21PosY, light21PosZ),
+		vec3(light22PosX, 1.0 - light22PosY, light22PosZ),
+		vec3(light23PosX, 1.0 - light23PosY, light23PosZ),
+		vec3(light24PosX, 1.0 - light24PosY, light24PosZ),
+		vec3(light25PosX, 1.0 - light25PosY, light25PosZ),
+		vec3(light26PosX, 1.0 - light26PosY, light26PosZ),
+		vec3(light27PosX, 1.0 - light27PosY, light27PosZ),
+		vec3(light28PosX, 1.0 - light28PosY, light28PosZ),
+		vec3(light29PosX, 1.0 - light29PosY, light29PosZ),
+		vec3(light30PosX, 1.0 - light30PosY, light30PosZ),
+		vec3(light31PosX, 1.0 - light31PosY, light31PosZ),
+		vec3(light32PosX, 1.0 - light32PosY, light32PosZ)
+	);
+
+	vec4 LightColor[32] = vec4[] (
+		vec4(light1ColorR, light1ColorG, light1ColorB, light1Luminosity),
+		vec4(light2ColorR, light2ColorG, light2ColorB, light2Luminosity),
+		vec4(light3ColorR, light3ColorG, light3ColorB, light3Luminosity),
+		vec4(light4ColorR, light4ColorG, light4ColorB, light4Luminosity),
+		vec4(light5ColorR, light5ColorG, light5ColorB, light5Luminosity),
+		vec4(light6ColorR, light6ColorG, light6ColorB, light6Luminosity),
+		vec4(light7ColorR, light7ColorG, light7ColorB, light7Luminosity),
+		vec4(light8ColorR, light8ColorG, light8ColorB, light8Luminosity),
+		vec4(light9ColorR, light9ColorG, light9ColorB, light9Luminosity),
+		vec4(light10ColorR, light10ColorG, light10ColorB, light10Luminosity),
+		vec4(light11ColorR, light11ColorG, light11ColorB, light11Luminosity),
+		vec4(light12ColorR, light12ColorG, light12ColorB, light12Luminosity),
+		vec4(light13ColorR, light13ColorG, light13ColorB, light13Luminosity),
+		vec4(light14ColorR, light14ColorG, light14ColorB, light14Luminosity),
+		vec4(light15ColorR, light15ColorG, light15ColorB, light15Luminosity),
+		vec4(light16ColorR, light16ColorG, light16ColorB, light16Luminosity),
+		vec4(light17ColorR, light17ColorG, light17ColorB, light17Luminosity),
+		vec4(light18ColorR, light18ColorG, light18ColorB, light18Luminosity),
+		vec4(light19ColorR, light19ColorG, light19ColorB, light19Luminosity),
+		vec4(light20ColorR, light20ColorG, light20ColorB, light20Luminosity),
+		vec4(light21ColorR, light21ColorG, light21ColorB, light21Luminosity),
+		vec4(light22ColorR, light22ColorG, light22ColorB, light22Luminosity),
+		vec4(light23ColorR, light23ColorG, light23ColorB, light23Luminosity),
+		vec4(light24ColorR, light24ColorG, light24ColorB, light24Luminosity),
+		vec4(light25ColorR, light25ColorG, light25ColorB, light25Luminosity),
+		vec4(light26ColorR, light26ColorG, light26ColorB, light26Luminosity),
+		vec4(light27ColorR, light27ColorG, light27ColorB, light27Luminosity),
+		vec4(light28ColorR, light28ColorG, light28ColorB, light28Luminosity),
+		vec4(light29ColorR, light29ColorG, light29ColorB, light29Luminosity),
+		vec4(light30ColorR, light30ColorG, light30ColorB, light30Luminosity),
+		vec4(light31ColorR, light31ColorG, light31ColorB, light31Luminosity),
+		vec4(light32ColorR, light32ColorG, light32ColorB, light32Luminosity)
+	);
+
+	vec4 AmbientColor[32] = vec4[] (
+		vec4(light1AmbientR, light1AmbientG, light1AmbientB, light1AmbientLuminosity),
+		vec4(light2AmbientR, light2AmbientG, light2AmbientB, light2AmbientLuminosity),
+		vec4(light3AmbientR, light3AmbientG, light3AmbientB, light3AmbientLuminosity),
+		vec4(light4AmbientR, light4AmbientG, light4AmbientB, light4AmbientLuminosity),
+		vec4(light5AmbientR, light5AmbientG, light5AmbientB, light5AmbientLuminosity),
+		vec4(light6AmbientR, light6AmbientG, light6AmbientB, light6AmbientLuminosity),
+		vec4(light7AmbientR, light7AmbientG, light7AmbientB, light7AmbientLuminosity),
+		vec4(light8AmbientR, light8AmbientG, light8AmbientB, light8AmbientLuminosity),
+		vec4(light9AmbientR, light9AmbientG, light9AmbientB, light9AmbientLuminosity),
+		vec4(light10AmbientR, light10AmbientG, light10AmbientB, light10AmbientLuminosity),
+		vec4(light11AmbientR, light11AmbientG, light11AmbientB, light11AmbientLuminosity),
+		vec4(light12AmbientR, light12AmbientG, light12AmbientB, light12AmbientLuminosity),
+		vec4(light13AmbientR, light13AmbientG, light13AmbientB, light13AmbientLuminosity),
+		vec4(light14AmbientR, light14AmbientG, light14AmbientB, light14AmbientLuminosity),
+		vec4(light15AmbientR, light15AmbientG, light15AmbientB, light15AmbientLuminosity),
+		vec4(light16AmbientR, light16AmbientG, light16AmbientB, light16AmbientLuminosity),
+		vec4(light17AmbientR, light17AmbientG, light17AmbientB, light17AmbientLuminosity),
+		vec4(light18AmbientR, light18AmbientG, light18AmbientB, light18AmbientLuminosity),
+		vec4(light19AmbientR, light19AmbientG, light19AmbientB, light19AmbientLuminosity),
+		vec4(light20AmbientR, light20AmbientG, light20AmbientB, light20AmbientLuminosity),
+		vec4(light21AmbientR, light21AmbientG, light21AmbientB, light21AmbientLuminosity),
+		vec4(light22AmbientR, light22AmbientG, light22AmbientB, light22AmbientLuminosity),
+		vec4(light23AmbientR, light23AmbientG, light23AmbientB, light23AmbientLuminosity),
+		vec4(light24AmbientR, light24AmbientG, light24AmbientB, light24AmbientLuminosity),
+		vec4(light25AmbientR, light25AmbientG, light25AmbientB, light25AmbientLuminosity),
+		vec4(light26AmbientR, light26AmbientG, light26AmbientB, light26AmbientLuminosity),
+		vec4(light27AmbientR, light27AmbientG, light27AmbientB, light27AmbientLuminosity),
+		vec4(light28AmbientR, light28AmbientG, light28AmbientB, light28AmbientLuminosity),
+		vec4(light29AmbientR, light29AmbientG, light29AmbientB, light29AmbientLuminosity),
+		vec4(light30AmbientR, light30AmbientG, light30AmbientB, light30AmbientLuminosity),
+		vec4(light31AmbientR, light31AmbientG, light31AmbientB, light31AmbientLuminosity),
+		vec4(light32AmbientR, light32AmbientG, light32AmbientB, light32AmbientLuminosity)
+	);
+
+	vec3 Falloff[32] = vec3[] (
+		vec3(light1Falloffv1, light1Falloffv2, light1Falloffv3),
+		vec3(light2Falloffv1, light2Falloffv2, light2Falloffv3),
+		vec3(light3Falloffv1, light3Falloffv2, light3Falloffv3),
+		vec3(light4Falloffv1, light4Falloffv2, light4Falloffv3),
+		vec3(light5Falloffv1, light5Falloffv2, light5Falloffv3),
+		vec3(light6Falloffv1, light6Falloffv2, light6Falloffv3),
+		vec3(light7Falloffv1, light7Falloffv2, light7Falloffv3),
+		vec3(light8Falloffv1, light8Falloffv2, light8Falloffv3),
+		vec3(light9Falloffv1, light9Falloffv2, light9Falloffv3),
+		vec3(light10Falloffv1, light10Falloffv2, light10Falloffv3),
+		vec3(light11Falloffv1, light11Falloffv2, light11Falloffv3),
+		vec3(light12Falloffv1, light12Falloffv2, light12Falloffv3),
+		vec3(light13Falloffv1, light13Falloffv2, light13Falloffv3),
+		vec3(light14Falloffv1, light14Falloffv2, light14Falloffv3),
+		vec3(light15Falloffv1, light15Falloffv2, light15Falloffv3),
+		vec3(light16Falloffv1, light16Falloffv2, light16Falloffv3),
+		vec3(light17Falloffv1, light17Falloffv2, light17Falloffv3),
+		vec3(light18Falloffv1, light18Falloffv2, light18Falloffv3),
+		vec3(light19Falloffv1, light19Falloffv2, light19Falloffv3),
+		vec3(light20Falloffv1, light20Falloffv2, light20Falloffv3),
+		vec3(light21Falloffv1, light21Falloffv2, light21Falloffv3),
+		vec3(light22Falloffv1, light22Falloffv2, light22Falloffv3),
+		vec3(light23Falloffv1, light23Falloffv2, light23Falloffv3),
+		vec3(light24Falloffv1, light24Falloffv2, light24Falloffv3),
+		vec3(light25Falloffv1, light25Falloffv2, light25Falloffv3),
+		vec3(light26Falloffv1, light26Falloffv2, light26Falloffv3),
+		vec3(light27Falloffv1, light27Falloffv2, light27Falloffv3),
+		vec3(light28Falloffv1, light28Falloffv2, light28Falloffv3),
+		vec3(light29Falloffv1, light29Falloffv2, light29Falloffv3),
+		vec3(light30Falloffv1, light30Falloffv2, light30Falloffv3),
+		vec3(light31Falloffv1, light31Falloffv2, light31Falloffv3),
+		vec3(light32Falloffv1, light32Falloffv2, light32Falloffv3)
+	);
+
 	// RGBA of our normal map color
 	lowp vec4 front = texture(samplerFront, vTex);
 
@@ -654,1108 +866,43 @@ void main(void)
 	// Vertex shader attribute
 	vec4 vColor = vec4(1.0,1.0,1.0,1.0);
 
-// ===============
-// LIGHT 1
-// ===============
-	// Light RGBA - alpha is intensity
-	vec4 LightColor = vec4(light1ColorR,light1ColorG,light1ColorB,light1Luminosity);
-	// Ambient RGBA - alpha is intensity 
-	vec4 AmbientColor = vec4(light1AmbientR,light1AmbientG,light1AmbientB,light1AmbientLuminosity);
-	// Attenuation coefficients
-	vec3 Falloff = vec3(light1Falloffv1,light1Falloffv2,light1Falloffv3);
-
-	// Retrieve position of light
-	LightPos.x = light1PosX;
-	LightPos.y = light1PosY;
-	LightPos.y = 1.0 - LightPos.y;
-	LightPos.z = light1PosZ;
-
-	// Delta position of light
-	vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-	// Correct for aspect ratio
-	LightDir.x *= Resolution.x / Resolution.y;
-
-	// Determine distance (used for attenuation) BEFORE we normalize our LightDir
-	float D = length(LightDir);
-
-	// Hard limit for NormalMap, beyond this distance, go dark
-	D = (D < light1Distance) ? D : 1000.0;
-
-	// Normalize our vectors
-	vec3 N = normalize(NormalMap * 2.0 - 1.0);
-	vec3 L = normalize(LightDir);
-
-	// Pre-multiply light color with intensity
-	// Then perform "N dot L" to determine our diffuse term
-	vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-
-	// Pre-multiply ambient color with intensity
-	vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-	// Calculate attenuation
-	float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-	// Bring it all together
-	vec3 Intensity = Ambient + Diffuse * Attenuation;
-	vec3 FinalColor = DiffuseColor.rgb * Intensity;
-	outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-	// Sum up for multiple lights
-	Sum += FinalColor * light1State;
-
-// ===============
-// LIGHT 2
-// ===============
-	if (light2State != 0.0){
-		vec4 LightColor = vec4(light2ColorR,light2ColorG,light2ColorB,light2Luminosity);
-		vec4 AmbientColor = vec4(light2AmbientR,light2AmbientG,light2AmbientB,light2AmbientLuminosity);
-		vec3 Falloff = vec3(light2Falloffv1,light2Falloffv2,light2Falloffv3);
-
-		LightPos.x = light2PosX;
-		LightPos.y = light2PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light2PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light2Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light2State;
-	}
-
-// ===============
-// LIGHT 3
-// ===============
-	if (light3State != 0.0){
-		vec4 LightColor = vec4(light3ColorR,light3ColorG,light3ColorB,light3Luminosity);
-		vec4 AmbientColor = vec4(light3AmbientR,light3AmbientG,light3AmbientB,light3AmbientLuminosity);
-		vec3 Falloff = vec3(light3Falloffv1,light3Falloffv2,light3Falloffv3);
-
-		LightPos.x = light3PosX;
-		LightPos.y = light3PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light3PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light3Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light3State;
-	}
-
-// ===============
-// LIGHT 4
-// ===============
-	if (light4State != 0.0){
-		vec4 LightColor = vec4(light4ColorR,light4ColorG,light4ColorB,light4Luminosity);
-		vec4 AmbientColor = vec4(light4AmbientR,light4AmbientG,light4AmbientB,light4AmbientLuminosity);
-		vec3 Falloff = vec3(light4Falloffv1,light4Falloffv2,light4Falloffv3);
-		
-		LightPos.x = light4PosX;
-		LightPos.y = light4PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light4PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light4Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light4State;
-	}
-
-// ===============
-// LIGHT 5
-// ===============
-	if (light5State != 0.0){
-		vec4 LightColor = vec4(light5ColorR,light5ColorG,light5ColorB,light5Luminosity);
-		vec4 AmbientColor = vec4(light5AmbientR,light5AmbientG,light5AmbientB,light5AmbientLuminosity);
-		vec3 Falloff = vec3(light5Falloffv1,light5Falloffv2,light5Falloffv3);
-
-		LightPos.x = light5PosX;
-		LightPos.y = light5PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light5PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light5Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light5State;
-	}
-
-// ===============
-// LIGHT 6
-// ===============
-	if (light6State != 0.0){
-		vec4 LightColor = vec4(light6ColorR,light6ColorG,light6ColorB,light6Luminosity);
-		vec4 AmbientColor = vec4(light6AmbientR,light6AmbientG,light6AmbientB,light6AmbientLuminosity);
-		vec3 Falloff = vec3(light6Falloffv1,light6Falloffv2,light6Falloffv3);
-
-		LightPos.x = light6PosX;
-		LightPos.y = light6PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light6PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light6Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light6State;
-	}
-
-// ===============
-// LIGHT 7
-// ===============
-	if (light7State != 0.0){
-		vec4 LightColor = vec4(light7ColorR,light7ColorG,light7ColorB,light7Luminosity);
-		vec4 AmbientColor = vec4(light7AmbientR,light7AmbientG,light7AmbientB,light7AmbientLuminosity);
-		vec3 Falloff = vec3(light7Falloffv1,light7Falloffv2,light7Falloffv3);
-
-		LightPos.x = light7PosX;
-		LightPos.y = light7PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light7PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light7Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light7State;
-	}
-
-// ===============
-// LIGHT 8
-// ===============
-	if (light8State != 0.0){
-		vec4 LightColor = vec4(light8ColorR,light8ColorG,light8ColorB,light8Luminosity);
-		vec4 AmbientColor = vec4(light8AmbientR,light8AmbientG,light8AmbientB,light8AmbientLuminosity);
-		vec3 Falloff = vec3(light8Falloffv1,light8Falloffv2,light8Falloffv3);
-
-		LightPos.x = light8PosX;
-		LightPos.y = light8PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light8PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light8Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light8State;
-	}
-
-// ===============
-// LIGHT 9
-// ===============
-	if (light9State != 0.0){
-		vec4 LightColor = vec4(light9ColorR,light9ColorG,light9ColorB,light9Luminosity);
-		vec4 AmbientColor = vec4(light9AmbientR,light9AmbientG,light9AmbientB,light9AmbientLuminosity);
-		vec3 Falloff = vec3(light9Falloffv1,light9Falloffv2,light9Falloffv3);
-
-		LightPos.x = light9PosX;
-		LightPos.y = light9PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light9PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light9Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light9State;
-	}
-
-// ===============
-// LIGHT 10
-// ===============
-	if (light10State != 0.0){
-		vec4 LightColor = vec4(light10ColorR,light10ColorG,light10ColorB,light10Luminosity);
-		vec4 AmbientColor = vec4(light10AmbientR,light10AmbientG,light10AmbientB,light10AmbientLuminosity);
-		vec3 Falloff = vec3(light10Falloffv1,light10Falloffv2,light10Falloffv3);
-
-		LightPos.x = light10PosX;
-		LightPos.y = light10PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light10PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light10Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light10State;
-	}
-
-// ===============
-// LIGHT 11
-// ===============
-	if (light11State != 0.0){
-		vec4 LightColor = vec4(light11ColorR,light11ColorG,light11ColorB,light11Luminosity);
-		vec4 AmbientColor = vec4(light11AmbientR,light11AmbientG,light11AmbientB,light11AmbientLuminosity);
-		vec3 Falloff = vec3(light11Falloffv1,light11Falloffv2,light11Falloffv3);
-
-		LightPos.x = light11PosX;
-		LightPos.y = light11PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light11PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light11Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light11State;
-	}
-
-// ===============
-// LIGHT 12
-// ===============
-	if (light12State != 0.0){
-		vec4 LightColor = vec4(light12ColorR,light12ColorG,light12ColorB,light12Luminosity);
-		vec4 AmbientColor = vec4(light12AmbientR,light12AmbientG,light12AmbientB,light12AmbientLuminosity);
-		vec3 Falloff = vec3(light12Falloffv1,light12Falloffv2,light12Falloffv3);
-
-		LightPos.x = light12PosX;
-		LightPos.y = light12PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light12PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light12Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light12State;
-	}
-
-// ===============
-// LIGHT 13
-// ===============
-	if (light13State != 0.0){
-		vec4 LightColor = vec4(light13ColorR,light13ColorG,light13ColorB,light13Luminosity);
-		vec4 AmbientColor = vec4(light13AmbientR,light13AmbientG,light13AmbientB,light13AmbientLuminosity);
-		vec3 Falloff = vec3(light13Falloffv1,light13Falloffv2,light13Falloffv3);
-
-		LightPos.x = light13PosX;
-		LightPos.y = light13PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light13PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light13Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light13State;
-	}
-
-// ===============
-// LIGHT 14
-// ===============
-	if (light14State != 0.0){
-		vec4 LightColor = vec4(light14ColorR,light14ColorG,light14ColorB,light14Luminosity);
-		vec4 AmbientColor = vec4(light14AmbientR,light14AmbientG,light14AmbientB,light14AmbientLuminosity);
-		vec3 Falloff = vec3(light14Falloffv1,light14Falloffv2,light14Falloffv3);
-
-		LightPos.x = light14PosX;
-		LightPos.y = light14PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light14PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light14Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light14State;
-	}
-
-// ===============
-// LIGHT 15
-// ===============
-	if (light15State != 0.0){
-		vec4 LightColor = vec4(light15ColorR,light15ColorG,light15ColorB,light15Luminosity);
-		vec4 AmbientColor = vec4(light15AmbientR,light15AmbientG,light15AmbientB,light15AmbientLuminosity);
-		vec3 Falloff = vec3(light15Falloffv1,light15Falloffv2,light15Falloffv3);
-
-		LightPos.x = light15PosX;
-		LightPos.y = light15PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light15PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light15Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light15State;
-	}
-
-// ===============
-// LIGHT 16
-// ===============
-	if (light16State != 0.0){
-		vec4 LightColor = vec4(light16ColorR,light16ColorG,light16ColorB,light16Luminosity);
-		vec4 AmbientColor = vec4(light16AmbientR,light16AmbientG,light16AmbientB,light16AmbientLuminosity);
-		vec3 Falloff = vec3(light16Falloffv1,light16Falloffv2,light16Falloffv3);
-
-		LightPos.x = light16PosX;
-		LightPos.y = light16PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light16PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light16Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light16State;
-	}
-
-// ===============
-// LIGHT 17
-// ===============
-	if (light17State != 0.0){
-		vec4 LightColor = vec4(light17ColorR,light17ColorG,light17ColorB,light17Luminosity);
-		vec4 AmbientColor = vec4(light17AmbientR,light17AmbientG,light17AmbientB,light17AmbientLuminosity);
-		vec3 Falloff = vec3(light17Falloffv1,light17Falloffv2,light17Falloffv3);
-
-		LightPos.x = light17PosX;
-		LightPos.y = light17PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light17PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light17Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light17State;
-	}
-
-// ===============
-// LIGHT 18
-// ===============
-	if (light18State != 0.0){
-		vec4 LightColor = vec4(light18ColorR,light18ColorG,light18ColorB,light18Luminosity);
-		vec4 AmbientColor = vec4(light18AmbientR,light18AmbientG,light18AmbientB,light18AmbientLuminosity);
-		vec3 Falloff = vec3(light18Falloffv1,light18Falloffv2,light18Falloffv3);
-
-		LightPos.x = light18PosX;
-		LightPos.y = light18PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light18PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light18Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light18State;
-	}
-
-// ===============
-// LIGHT 19
-// ===============
-	if (light19State != 0.0){
-		vec4 LightColor = vec4(light19ColorR,light19ColorG,light19ColorB,light19Luminosity);
-		vec4 AmbientColor = vec4(light19AmbientR,light19AmbientG,light19AmbientB,light19AmbientLuminosity);
-		vec3 Falloff = vec3(light19Falloffv1,light19Falloffv2,light19Falloffv3);
-
-		LightPos.x = light19PosX;
-		LightPos.y = light19PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light19PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light19Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light19State;
-	}
-
-// ===============
-// LIGHT 20
-// ===============
-	if (light20State != 0.0){
-		vec4 LightColor = vec4(light20ColorR,light20ColorG,light20ColorB,light20Luminosity);
-		vec4 AmbientColor = vec4(light20AmbientR,light20AmbientG,light20AmbientB,light20AmbientLuminosity);
-		vec3 Falloff = vec3(light20Falloffv1,light20Falloffv2,light20Falloffv3);
-
-		LightPos.x = light20PosX;
-		LightPos.y = light20PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light20PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light20Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light20State;
-	}
-
-// ===============
-// LIGHT 21
-// ===============
-	if (light21State != 0.0){
-		vec4 LightColor = vec4(light21ColorR,light21ColorG,light21ColorB,light21Luminosity);
-		vec4 AmbientColor = vec4(light21AmbientR,light21AmbientG,light21AmbientB,light21AmbientLuminosity);
-		vec3 Falloff = vec3(light21Falloffv1,light21Falloffv2,light21Falloffv3);
-
-		LightPos.x = light21PosX;
-		LightPos.y = light21PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light21PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light21Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light21State;
-	}
-
-// ===============
-// LIGHT 22
-// ===============
-	if (light22State != 0.0){
-		vec4 LightColor = vec4(light22ColorR,light22ColorG,light22ColorB,light22Luminosity);
-		vec4 AmbientColor = vec4(light22AmbientR,light22AmbientG,light22AmbientB,light22AmbientLuminosity);
-		vec3 Falloff = vec3(light22Falloffv1,light22Falloffv2,light22Falloffv3);
-
-		LightPos.x = light22PosX;
-		LightPos.y = light22PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light22PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light22Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light22State;
-	}
-
-// ===============
-// LIGHT 23
-// ===============
-	if (light23State != 0.0){
-		vec4 LightColor = vec4(light23ColorR,light23ColorG,light23ColorB,light23Luminosity);
-		vec4 AmbientColor = vec4(light23AmbientR,light23AmbientG,light23AmbientB,light23AmbientLuminosity);
-		vec3 Falloff = vec3(light23Falloffv1,light23Falloffv2,light23Falloffv3);
-
-		LightPos.x = light23PosX;
-		LightPos.y = light23PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light23PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light23Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light23State;
-	}
-
-// ===============
-// LIGHT 24
-// ===============
-	if (light24State != 0.0){
-		vec4 LightColor = vec4(light24ColorR,light24ColorG,light24ColorB,light24Luminosity);
-		vec4 AmbientColor = vec4(light24AmbientR,light24AmbientG,light24AmbientB,light24AmbientLuminosity);
-		vec3 Falloff = vec3(light24Falloffv1,light24Falloffv2,light24Falloffv3);
-
-		LightPos.x = light24PosX;
-		LightPos.y = light24PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light24PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light24Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light24State;
-	}
-
-// ===============
-// LIGHT 25
-// ===============
-	if (light25State != 0.0){
-		vec4 LightColor = vec4(light25ColorR,light25ColorG,light25ColorB,light25Luminosity);
-		vec4 AmbientColor = vec4(light25AmbientR,light25AmbientG,light25AmbientB,light25AmbientLuminosity);
-		vec3 Falloff = vec3(light25Falloffv1,light25Falloffv2,light25Falloffv3);
-
-		LightPos.x = light25PosX;
-		LightPos.y = light25PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light25PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light25Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light25State;
-	}
-
-// ===============
-// LIGHT 26
-// ===============
-	if (light26State != 0.0){
-		vec4 LightColor = vec4(light26ColorR,light26ColorG,light26ColorB,light26Luminosity);
-		vec4 AmbientColor = vec4(light26AmbientR,light26AmbientG,light26AmbientB,light26AmbientLuminosity);
-		vec3 Falloff = vec3(light26Falloffv1,light26Falloffv2,light26Falloffv3);
-
-		LightPos.x = light26PosX;
-		LightPos.y = light26PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light26PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light26Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light26State;
-	}
-
-// ===============
-// LIGHT 27
-// ===============
-	if (light27State != 0.0){
-		vec4 LightColor = vec4(light27ColorR,light27ColorG,light27ColorB,light27Luminosity);
-		vec4 AmbientColor = vec4(light27AmbientR,light27AmbientG,light27AmbientB,light27AmbientLuminosity);
-		vec3 Falloff = vec3(light27Falloffv1,light27Falloffv2,light27Falloffv3);
-
-		LightPos.x = light27PosX;
-		LightPos.y = light27PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light27PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light27Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light27State;
-	}
-
-// ===============
-// LIGHT 28
-// ===============
-	if (light28State != 0.0){
-		vec4 LightColor = vec4(light28ColorR,light28ColorG,light28ColorB,light28Luminosity);
-		vec4 AmbientColor = vec4(light28AmbientR,light28AmbientG,light28AmbientB,light28AmbientLuminosity);
-		vec3 Falloff = vec3(light28Falloffv1,light28Falloffv2,light28Falloffv3);
-
-		LightPos.x = light28PosX;
-		LightPos.y = light28PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light28PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light28Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light28State;
-	}
-
-// ===============
-// LIGHT 29
-// ===============
-	if (light29State != 0.0){
-		vec4 LightColor = vec4(light29ColorR,light29ColorG,light29ColorB,light29Luminosity);
-		vec4 AmbientColor = vec4(light29AmbientR,light29AmbientG,light29AmbientB,light29AmbientLuminosity);
-		vec3 Falloff = vec3(light29Falloffv1,light29Falloffv2,light29Falloffv3);
-
-		LightPos.x = light29PosX;
-		LightPos.y = light29PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light29PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light29Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light29State;
-	}
-
-// ===============
-// LIGHT 30
-// ===============
-	if (light30State != 0.0){
-		vec4 LightColor = vec4(light30ColorR,light30ColorG,light30ColorB,light30Luminosity);
-		vec4 AmbientColor = vec4(light30AmbientR,light30AmbientG,light30AmbientB,light30AmbientLuminosity);
-		vec3 Falloff = vec3(light30Falloffv1,light30Falloffv2,light30Falloffv3);
-
-		LightPos.x = light30PosX;
-		LightPos.y = light30PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light30PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light30Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light30State;
-	}
-
-// ===============
-// LIGHT 31
-// ===============
-	if (light31State != 0.0){
-		vec4 LightColor = vec4(light31ColorR,light31ColorG,light31ColorB,light31Luminosity);
-		vec4 AmbientColor = vec4(light31AmbientR,light31AmbientG,light31AmbientB,light31AmbientLuminosity);
-		vec3 Falloff = vec3(light31Falloffv1,light31Falloffv2,light31Falloffv3);
-
-		LightPos.x = light31PosX;
-		LightPos.y = light31PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light31PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light31Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light31State;
-	}
-
-// ===============
-// LIGHT 32
-// ===============
-	if (light32State != 0.0){
-		vec4 LightColor = vec4(light32ColorR,light32ColorG,light32ColorB,light32Luminosity);
-		vec4 AmbientColor = vec4(light32AmbientR,light32AmbientG,light32AmbientB,light32AmbientLuminosity);
-		vec3 Falloff = vec3(light32Falloffv1,light32Falloffv2,light32Falloffv3);
-
-		LightPos.x = light32PosX;
-		LightPos.y = light32PosY;
-		LightPos.y = 1.0 - LightPos.y;
-		LightPos.z = light32PosZ;
-		vec3 LightDir = vec3(LightPos.xy - (gl_FragCoord.xy / Resolution.xy), LightPos.z);
-
-		LightDir.x *= Resolution.x / Resolution.y;
-
-		float D = length(LightDir);
-		D = (D < light32Distance) ? D : 1000.0;
-
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
-		vec3 L = normalize(LightDir);
-
-		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
-		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
-
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
-
-		vec3 Intensity = Ambient + Diffuse * Attenuation;
-		vec3 FinalColor = DiffuseColor.rgb * Intensity;
-		outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
-
-		Sum += FinalColor * light32State;
+	// Loop through all active lights
+	for (int i = 0; i < 32; i++) {
+		if (lightState[i] != 0.0) {
+			// Delta position of light
+			vec3 LightDir = vec3(LightPos[i].xy - (gl_FragCoord.xy / Resolution.xy), LightPos[i].z);
+
+			// Correct for aspect ratio
+			LightDir.x *= Resolution.x / Resolution.y;
+
+			// Determine distance (used for attenuation) BEFORE we normalize our LightDir
+			float D = length(LightDir);
+
+			// Hard limit for NormalMap, beyond this distance, go dark
+			D = (D < lightDistance[i]) ? D : 1000.0;
+
+			// Normalize our vectors
+			vec3 N = normalize(NormalMap * 2.0 - 1.0);
+			vec3 L = normalize(LightDir);
+
+			// Pre-multiply light color with intensity
+			// Then perform "N dot L" to determine our diffuse term
+			vec3 Diffuse = (LightColor[i].rgb * LightColor[i].a) * max(dot(N, L), 0.0);
+
+			// Pre-multiply ambient color with intensity
+			vec3 Ambient = AmbientColor[i].rgb * AmbientColor[i].a;
+
+			// Calculate attenuation
+			float Attenuation = clamp( 1.0 - ( Falloff[i].x + (Falloff[i].y*pow(D,2.0)) + (Falloff[i].z*pow(D,5.0)) ),0.0,1.0);
+
+			// Bring it all together
+			vec3 Intensity = Ambient + Diffuse * Attenuation;
+			vec3 FinalColor = DiffuseColor.rgb * Intensity;
+			outColor = (vColor * vec4(FinalColor, DiffuseColor.a) * front.a );
+
+			// Sum up for multiple lights
+			Sum += FinalColor * lightState[i];
+		}
 	}
 
 // ===============

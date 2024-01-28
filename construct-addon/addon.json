@@ -4,8 +4,8 @@
 	"supported-renderers": ["webgl","webgl2"],
 	"name": "NormalMap32",
 	"id": "normalmap32",
-	"version": "1.7.0.0",
-	"author": "Donelwero, Matriax, Mikal, Everade",
+	"version": "1.8.1.0",
+	"author": "Everade",
 	"website": "https://www.construct.net/make-games/addons/898/normalmap32",
 	"documentation": "https://www.construct.net/make-games/addons/898/normalmap32/documentation",
 	"description": "Create a 3D light effect on any 2D sprite using a normal map. Each normal map pixel represents the direction in which the sprite's pixel is facing.",
@@ -16,7 +16,7 @@
 		"effect.webgl2.fx"
 	],
 
-	"category": "color",
+	"category": "normal-mapping",
 	"blends-background": true,
 	"cross-sampling": false,
 	"preserves-opaqueness": false,

@@ -32,6 +32,10 @@
 //	Added WebGL2 variant (GLSL 300 es)
 //	Code optimizations
 //
+// V1.8 - by Everade
+//	WebGL2 variant code optimizations. Taking advantage of arrays and for loops.
+//	These optimizations gets rid of the WebGL1 copy pasta. Other minor improvements.
+//
 // Note: if possible don't use 'precision highp float'! This will unnecessarily reduce performance
 // on mobile devices. Instead always try to specify an appropriate precision level. As a guide, use:
 // lowp - for color and alpha values returned by samplers
@@ -690,7 +694,7 @@ void main(void)
 	vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
 	// Calculate attenuation
-	float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+	float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 	// Bring it all together
 	vec3 Intensity = Ambient + Diffuse * Attenuation;
@@ -725,7 +729,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -759,7 +763,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -793,7 +797,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -827,7 +831,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -861,7 +865,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -895,7 +899,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -929,7 +933,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -963,7 +967,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -997,7 +1001,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -1031,7 +1035,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -1065,7 +1069,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -1099,7 +1103,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -1133,7 +1137,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -1167,7 +1171,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -1201,7 +1205,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -1235,7 +1239,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -1269,7 +1273,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -1303,7 +1307,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -1337,7 +1341,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -1371,7 +1375,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -1405,7 +1409,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -1439,7 +1443,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -1473,7 +1477,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -1507,7 +1511,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -1541,7 +1545,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -1575,7 +1579,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -1609,7 +1613,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -1643,7 +1647,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -1677,7 +1681,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -1711,7 +1715,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;
@@ -1745,7 +1749,7 @@ void main(void)
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
 		vec3 Ambient = AmbientColor.rgb * AmbientColor.a;
 
-		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*D*D) + (Falloff.z*D*D*D*D*D) ),0.0,1.0);
+		float Attenuation = clamp( 1.0 - ( Falloff.x + (Falloff.y*pow(D,2.0)) + (Falloff.z*pow(D,5.0)) ),0.0,1.0);
 
 		vec3 Intensity = Ambient + Diffuse * Attenuation;
 		vec3 FinalColor = DiffuseColor.rgb * Intensity;

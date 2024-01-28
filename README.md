@@ -40,6 +40,7 @@ Applying the effect to lots of individual normal map sprites can be costly. Cons
 - Up to 32 simultaneous RGB light sources per normal map.
 - Linear, quadratic or mixed light falloff.
 - Distance clamping for spot light effects.
+- Supports rotated normal maps.
 - Global ambient light (RGB).
 
 ## Credits

@@ -4,7 +4,7 @@
 	"supported-renderers": ["webgl","webgl2"],
 	"name": "NormalMap32",
 	"id": "normalmap32",
-	"version": "1.8.1.0",
+	"version": "1.9.0.0",
 	"author": "Everade",
 	"website": "https://www.construct.net/make-games/addons/898/normalmap32",
 	"documentation": "https://www.construct.net/make-games/addons/898/normalmap32/documentation",
@@ -15,7 +15,6 @@
 		"effect.fx",
 		"effect.webgl2.fx"
 	],
-
 	"category": "normal-mapping",
 	"blends-background": true,
 	"cross-sampling": false,
@@ -26,7 +25,6 @@
 		"horizontal": 0,
 		"vertical": 0
 	},
-
 	"parameters": [
 		{
 		  "id": "screen-x-resolution",
@@ -41,9 +39,21 @@
 		  "uniform": "screenYResolution"
 		},
 		{
-		  "id": "light-1-state-01",
+		  "id": "normal-angle",
 		  "type": "float",
 		  "initial-value": 0,
+		  "uniform": "normalAngle"
+		},
+		{
+		  "id": "light-max-id",
+		  "type": "float",
+		  "initial-value": 32.0,
+		  "uniform": "lightMaxID"
+		},
+		{
+		  "id": "light-1-state-01",
+		  "type": "float",
+		  "initial-value": 1,
 		  "uniform": "light1State"
 		},
 		{
@@ -3019,7 +3029,7 @@
 		{
 		  "id": "light-32-state-01",
 		  "type": "float",
-		  "initial-value": 1,
+		  "initial-value": 0,
 		  "uniform": "light32State"
 		},
 		{
@@ -3061,7 +3071,7 @@
 		{
 		  "id": "light-32-luminosity",
 		  "type": "float",
-		  "initial-value": 0,
+		  "initial-value": 1,
 		  "uniform": "light32Luminosity"
 		},
 		{
@@ -3085,31 +3095,31 @@
 		{
 		  "id": "light-32-ambient-luminosity",
 		  "type": "float",
-		  "initial-value": 1,
+		  "initial-value": 0,
 		  "uniform": "light32AmbientLuminosity"
 		},
 		{
 		  "id": "light-32-distance",
 		  "type": "float",
-		  "initial-value": 0,
+		  "initial-value": 1000,
 		  "uniform": "light32Distance"
 		},
 		{
 		  "id": "light-32-falloffv1",
 		  "type": "float",
-		  "initial-value": 1,
+		  "initial-value": 0.5,
 		  "uniform": "light32Falloffv1"
 		},
 		{
 		  "id": "light-32-falloffv2",
 		  "type": "float",
-		  "initial-value": 1,
+		  "initial-value": 0,
 		  "uniform": "light32Falloffv2"
 		},
 		{
 		  "id": "light-32-falloffv3",
 		  "type": "float",
-		  "initial-value": 1,
+		  "initial-value": 0.2,
 		  "uniform": "light32Falloffv3"
 		}
 	]

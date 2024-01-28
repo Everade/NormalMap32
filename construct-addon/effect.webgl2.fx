@@ -37,31 +37,9 @@
 //	WebGL2 variant code optimizations. Taking advantage of arrays and for loops.
 //	These optimizations gets rid of the WebGL1 copy pasta. Other minor improvements.
 //
-// Note: if possible don't use 'precision highp float'! This will unnecessarily reduce performance
-// on mobile devices. Instead always try to specify an appropriate precision level. As a guide, use:
-// lowp - for color and alpha values returned by samplers
-// mediump - for texture co-ordinates
-// highp - only where increased precision is necessary
-//
-// The current texture co-ordinates (required).  Note these are normalised to [0, 1] float range, so
-// (1, 1) is always the bottom right corner and (0.5, 0.5) is always the middle.
-//
-// The sampler to retrieve pixels from the foreground texture (required)
-//
-// Optional: for sampling the background.  Uncomment all three if background
-// sampling is required, and set 'blends-background' to 'true' in the XML file.
-//
-// Optional parameters. Uncomment any lines and they will automatically
-// receive the correct values from runtime. Be sure not to accidentally
-// uncomment any parameters you do not really need - doing so can reduce performance.
-// uniform mediump float pixelWidth;		// width of a pixel in texture co-ordinates
-// uniform mediump float pixelHeight;		// height of a pixel in texture co-ordinates
-// uniform mediump float layerScale;		// scale of the current layer
-// uniform mediump float seconds;			// number of seconds elapsed since start of game
-//
-// Add any custom parameters below as uniform floats, e.g.
-// uniform mediump float exampleParam;
-// where 'exampleParam' is specified as the 'uniform' for a parameter in the XML file.
+// V1.9 - by Everade
+//	Added support for rotating normal maps.
+//	Added light max id parameter to reduce the loop cycle in the WebGL2 variant if less lights are used.
 
 precision highp float;
 
@@ -69,12 +47,16 @@ precision highp float;
 // Resolution
 uniform float screenXResolution;
 uniform float screenYResolution;
-
+// Normal Map angle
+uniform float normalAngle;
+// Max Light ID
+uniform float lightMaxID;
 // Light 1
 uniform float light1State;
 uniform float light1PosX;
 uniform float light1PosY;
 uniform float light1PosZ;
+uniform float light1Angle;
 uniform float light1ColorR;
 uniform float light1ColorG;
 uniform float light1ColorB;
@@ -92,6 +74,7 @@ uniform float light2State;
 uniform float light2PosX;
 uniform float light2PosY;
 uniform float light2PosZ;
+uniform float light2Angle;
 uniform float light2ColorR;
 uniform float light2ColorG;
 uniform float light2ColorB;
@@ -109,6 +92,7 @@ uniform float light3State;
 uniform float light3PosX;
 uniform float light3PosY;
 uniform float light3PosZ;
+uniform float light3Angle;
 uniform float light3ColorR;
 uniform float light3ColorG;
 uniform float light3ColorB;
@@ -126,6 +110,7 @@ uniform float light4State;
 uniform float light4PosX;
 uniform float light4PosY;
 uniform float light4PosZ;
+uniform float light4Angle;
 uniform float light4ColorR;
 uniform float light4ColorG;
 uniform float light4ColorB;
@@ -143,6 +128,7 @@ uniform float light5State;
 uniform float light5PosX;
 uniform float light5PosY;
 uniform float light5PosZ;
+uniform float light5Angle;
 uniform float light5ColorR;
 uniform float light5ColorG;
 uniform float light5ColorB;
@@ -160,6 +146,7 @@ uniform float light6State;
 uniform float light6PosX;
 uniform float light6PosY;
 uniform float light6PosZ;
+uniform float light6Angle;
 uniform float light6ColorR;
 uniform float light6ColorG;
 uniform float light6ColorB;
@@ -177,6 +164,7 @@ uniform float light7State;
 uniform float light7PosX;
 uniform float light7PosY;
 uniform float light7PosZ;
+uniform float light7Angle;
 uniform float light7ColorR;
 uniform float light7ColorG;
 uniform float light7ColorB;
@@ -194,6 +182,7 @@ uniform float light8State;
 uniform float light8PosX;
 uniform float light8PosY;
 uniform float light8PosZ;
+uniform float light8Angle;
 uniform float light8ColorR;
 uniform float light8ColorG;
 uniform float light8ColorB;
@@ -211,6 +200,7 @@ uniform float light9State;
 uniform float light9PosX;
 uniform float light9PosY;
 uniform float light9PosZ;
+uniform float light9Angle;
 uniform float light9ColorR;
 uniform float light9ColorG;
 uniform float light9ColorB;
@@ -228,6 +218,7 @@ uniform float light10State;
 uniform float light10PosX;
 uniform float light10PosY;
 uniform float light10PosZ;
+uniform float light10Angle;
 uniform float light10ColorR;
 uniform float light10ColorG;
 uniform float light10ColorB;
@@ -245,6 +236,7 @@ uniform float light11State;
 uniform float light11PosX;
 uniform float light11PosY;
 uniform float light11PosZ;
+uniform float light11Angle;
 uniform float light11ColorR;
 uniform float light11ColorG;
 uniform float light11ColorB;
@@ -262,6 +254,7 @@ uniform float light12State;
 uniform float light12PosX;
 uniform float light12PosY;
 uniform float light12PosZ;
+uniform float light12Angle;
 uniform float light12ColorR;
 uniform float light12ColorG;
 uniform float light12ColorB;
@@ -279,6 +272,7 @@ uniform float light13State;
 uniform float light13PosX;
 uniform float light13PosY;
 uniform float light13PosZ;
+uniform float light13Angle;
 uniform float light13ColorR;
 uniform float light13ColorG;
 uniform float light13ColorB;
@@ -296,6 +290,7 @@ uniform float light14State;
 uniform float light14PosX;
 uniform float light14PosY;
 uniform float light14PosZ;
+uniform float light14Angle;
 uniform float light14ColorR;
 uniform float light14ColorG;
 uniform float light14ColorB;
@@ -313,6 +308,7 @@ uniform float light15State;
 uniform float light15PosX;
 uniform float light15PosY;
 uniform float light15PosZ;
+uniform float light15Angle;
 uniform float light15ColorR;
 uniform float light15ColorG;
 uniform float light15ColorB;
@@ -330,6 +326,7 @@ uniform float light16State;
 uniform float light16PosX;
 uniform float light16PosY;
 uniform float light16PosZ;
+uniform float light16Angle;
 uniform float light16ColorR;
 uniform float light16ColorG;
 uniform float light16ColorB;
@@ -347,6 +344,7 @@ uniform float light17State;
 uniform float light17PosX;
 uniform float light17PosY;
 uniform float light17PosZ;
+uniform float light17Angle;
 uniform float light17ColorR;
 uniform float light17ColorG;
 uniform float light17ColorB;
@@ -364,6 +362,7 @@ uniform float light18State;
 uniform float light18PosX;
 uniform float light18PosY;
 uniform float light18PosZ;
+uniform float light18Angle;
 uniform float light18ColorR;
 uniform float light18ColorG;
 uniform float light18ColorB;
@@ -381,6 +380,7 @@ uniform float light19State;
 uniform float light19PosX;
 uniform float light19PosY;
 uniform float light19PosZ;
+uniform float light19Angle;
 uniform float light19ColorR;
 uniform float light19ColorG;
 uniform float light19ColorB;
@@ -398,6 +398,7 @@ uniform float light20State;
 uniform float light20PosX;
 uniform float light20PosY;
 uniform float light20PosZ;
+uniform float light20Angle;
 uniform float light20ColorR;
 uniform float light20ColorG;
 uniform float light20ColorB;
@@ -415,6 +416,7 @@ uniform float light21State;
 uniform float light21PosX;
 uniform float light21PosY;
 uniform float light21PosZ;
+uniform float light21Angle;
 uniform float light21ColorR;
 uniform float light21ColorG;
 uniform float light21ColorB;
@@ -432,6 +434,7 @@ uniform float light22State;
 uniform float light22PosX;
 uniform float light22PosY;
 uniform float light22PosZ;
+uniform float light22Angle;
 uniform float light22ColorR;
 uniform float light22ColorG;
 uniform float light22ColorB;
@@ -449,6 +452,7 @@ uniform float light23State;
 uniform float light23PosX;
 uniform float light23PosY;
 uniform float light23PosZ;
+uniform float light23Angle;
 uniform float light23ColorR;
 uniform float light23ColorG;
 uniform float light23ColorB;
@@ -466,6 +470,7 @@ uniform float light24State;
 uniform float light24PosX;
 uniform float light24PosY;
 uniform float light24PosZ;
+uniform float light24Angle;
 uniform float light24ColorR;
 uniform float light24ColorG;
 uniform float light24ColorB;
@@ -483,6 +488,7 @@ uniform float light25State;
 uniform float light25PosX;
 uniform float light25PosY;
 uniform float light25PosZ;
+uniform float light25Angle;
 uniform float light25ColorR;
 uniform float light25ColorG;
 uniform float light25ColorB;
@@ -500,6 +506,7 @@ uniform float light26State;
 uniform float light26PosX;
 uniform float light26PosY;
 uniform float light26PosZ;
+uniform float light26Angle;
 uniform float light26ColorR;
 uniform float light26ColorG;
 uniform float light26ColorB;
@@ -517,6 +524,7 @@ uniform float light27State;
 uniform float light27PosX;
 uniform float light27PosY;
 uniform float light27PosZ;
+uniform float light27Angle;
 uniform float light27ColorR;
 uniform float light27ColorG;
 uniform float light27ColorB;
@@ -534,6 +542,7 @@ uniform float light28State;
 uniform float light28PosX;
 uniform float light28PosY;
 uniform float light28PosZ;
+uniform float light28Angle;
 uniform float light28ColorR;
 uniform float light28ColorG;
 uniform float light28ColorB;
@@ -551,6 +560,7 @@ uniform float light29State;
 uniform float light29PosX;
 uniform float light29PosY;
 uniform float light29PosZ;
+uniform float light29Angle;
 uniform float light29ColorR;
 uniform float light29ColorG;
 uniform float light29ColorB;
@@ -568,6 +578,7 @@ uniform float light30State;
 uniform float light30PosX;
 uniform float light30PosY;
 uniform float light30PosZ;
+uniform float light30Angle;
 uniform float light30ColorR;
 uniform float light30ColorG;
 uniform float light30ColorB;
@@ -585,6 +596,7 @@ uniform float light31State;
 uniform float light31PosX;
 uniform float light31PosY;
 uniform float light31PosZ;
+uniform float light31Angle;
 uniform float light31ColorR;
 uniform float light31ColorG;
 uniform float light31ColorB;
@@ -602,6 +614,7 @@ uniform float light32State;
 uniform float light32PosX;
 uniform float light32PosY;
 uniform float light32PosZ;
+uniform float light32Angle;
 uniform float light32ColorR;
 uniform float light32ColorG;
 uniform float light32ColorB;
@@ -629,12 +642,26 @@ uniform mediump vec2 srcEnd;
 uniform mediump vec2 srcStart;
 
 // Resolution
-vec2 Resolution;
+lowp vec2 Resolution;
 
 // Fragment Shader
 out vec4 outColor;
 
+// PI
+const float pi = 3.1415926;
+
+// Inverted 2D rotation matrix
+vec2 rotate(vec2 v, float a) {
+    float s = sin(a);
+    float c = cos(a);
+    mat2 m = mat2(c, s, -s, c);
+    return m * v;
+}
+
 void main(void) {
+	// Convert float to int
+	int lightMax = int(lightMaxID);
+
 	// Light parameters array
 	float lightState[32] = float[](
 		light1State,
@@ -846,15 +873,19 @@ void main(void) {
 		vec3(light32Falloffv1, light32Falloffv2, light32Falloffv3)
 	);
 
-	// RGBA of our normal map color
+	// RGBA of normal map color
 	lowp vec4 front = texture(samplerFront, vTex);
 
-	// RGBA of our diffuse color, use relative location
+	// RGBA of diffuse color, use relative location
 	mediump vec2 n = (vTex - srcStart) / (srcEnd - srcStart);
 	lowp vec4 DiffuseColor = texture(samplerBack, mix(destStart, destEnd, n));
 
-	// RGB of our normal map
-	mediump vec3 NormalMap = texture(samplerFront, vTex).rgb;
+	// RGB of normal map
+	mediump vec3 NormalMap = texture(samplerFront, vTex).rgb * 2.0 - 1.0;
+
+	// Corrected normal z-axis rotation
+	if (normalAngle != 0.0)
+		NormalMap.xy = rotate(NormalMap.xy, -normalAngle*(pi/180.0));
 
 	// Sum of multiple lights
 	vec3 Sum = vec3(0.0);
@@ -867,7 +898,7 @@ void main(void) {
 	vec4 vColor = vec4(1.0,1.0,1.0,1.0);
 
 	// Loop through all active lights
-	for (int i = 0; i < 32; i++) {
+	for (int i = 0; i < lightMax; i++) {
 		if (lightState[i] != 0.0) {
 			// Delta position of light
 			vec3 LightDir = vec3(LightPos[i].xy - (gl_FragCoord.xy / Resolution.xy), LightPos[i].z);
@@ -882,7 +913,7 @@ void main(void) {
 			D = (D < lightDistance[i]) ? D : 1000.0;
 
 			// Normalize our vectors
-			vec3 N = normalize(NormalMap * 2.0 - 1.0);
+			vec3 N = normalize(NormalMap);
 			vec3 L = normalize(LightDir);
 
 			// Pre-multiply light color with intensity

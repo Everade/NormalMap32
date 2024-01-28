@@ -35,6 +35,20 @@
 			"bundled": false
 		},
 		{
+			"type": "behavior",
+			"id": "Rotate",
+			"name": "Rotate",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "behavior",
+			"id": "Sin",
+			"name": "Sine",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
 			"type": "effect",
 			"id": "normalmap32",
 			"name": "NormalMap32",
@@ -64,13 +78,13 @@
 	},
 	"layouts": {
 		"items": [
-			"Layout 1"
+			"Layout"
 		],
 		"subfolders": []
 	},
 	"eventSheets": {
 		"items": [
-			"Event sheet 1"
+			"NormalMap32"
 		],
 		"subfolders": []
 	},
@@ -174,7 +188,7 @@
 	},
 	"properties": {
 		"description": "Create a 3D light effect on any 2D sprite using a normal map. Each normal map pixel represents the direction in which the sprite's pixel is facing. Supports 32 simultanious light sources per map.",
-		"version": "1.0.0.2",
+		"version": "1.0.1.0",
 		"author": "Everade",
 		"authorEmail": "",
 		"authorWebsite": "https://www.construct.net/en/make-games/addons/898/normalmap32",

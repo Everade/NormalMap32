@@ -36,31 +36,9 @@
 //	WebGL2 variant code optimizations. Taking advantage of arrays and for loops.
 //	These optimizations gets rid of the WebGL1 copy pasta. Other minor improvements.
 //
-// Note: if possible don't use 'precision highp float'! This will unnecessarily reduce performance
-// on mobile devices. Instead always try to specify an appropriate precision level. As a guide, use:
-// lowp - for color and alpha values returned by samplers
-// mediump - for texture co-ordinates
-// highp - only where increased precision is necessary
-//
-// The current texture co-ordinates (required).  Note these are normalised to [0, 1] float range, so
-// (1, 1) is always the bottom right corner and (0.5, 0.5) is always the middle.
-//
-// The sampler to retrieve pixels from the foreground texture (required)
-//
-// Optional: for sampling the background.  Uncomment all three if background
-// sampling is required, and set 'blends-background' to 'true' in the XML file.
-//
-// Optional parameters. Uncomment any lines and they will automatically
-// receive the correct values from runtime. Be sure not to accidentally
-// uncomment any parameters you do not really need - doing so can reduce performance.
-// uniform mediump float pixelWidth;		// width of a pixel in texture co-ordinates
-// uniform mediump float pixelHeight;		// height of a pixel in texture co-ordinates
-// uniform mediump float layerScale;		// scale of the current layer
-// uniform mediump float seconds;			// number of seconds elapsed since start of game
-//
-// Add any custom parameters below as uniform floats, e.g.
-// uniform mediump float exampleParam;
-// where 'exampleParam' is specified as the 'uniform' for a parameter in the XML file.
+// V1.9 - by Everade
+//	Added support for rotating normal maps.
+//	Added light max id parameter to reduce the loop cycle in the WebGL2 variant if less lights are used.
 
 precision highp float;
 
@@ -68,6 +46,8 @@ precision highp float;
 // Resolution
 uniform float screenXResolution;
 uniform float screenYResolution;
+// Normal Map angle
+uniform float normalAngle;
 // Light 1
 uniform float light1State;
 uniform float light1PosX;
@@ -632,17 +612,32 @@ vec3 LightPos;
 // Resolution
 vec2 Resolution;
 
+// PI
+const float pi = 3.1415926;
+
+// Inverted 2D rotation matrix
+vec2 rotate(vec2 v, float a) {
+    float s = sin(a);
+    float c = cos(a);
+    mat2 m = mat2(c, s, -s, c);
+    return m * v;
+}
+
 void main(void)
 {
-	// RGBA of our normal map color
+	// RGBA of normal map color
 	lowp vec4 front = texture2D(samplerFront, vTex);
 
-	// RGBA of our diffuse color, use relative location
+	// RGBA of diffuse color, use relative location
 	mediump vec2 n = (vTex - srcStart) / (srcEnd - srcStart);
 	lowp vec4 DiffuseColor = texture2D(samplerBack, mix(destStart, destEnd, n));
 
-	// RGB of our normal map
-	mediump vec3 NormalMap = texture2D(samplerFront, vTex).rgb;
+	// RGB of normal map
+	mediump vec3 NormalMap = texture2D(samplerFront, vTex).rgb * 2.0 - 1.0;
+
+	// Corrected normal z-axis rotation
+	if (normalAngle != 0.0)
+		NormalMap.xy = rotate(NormalMap.xy, -normalAngle*(pi/180.0));
 
 	// Sum of multiple lights
 	vec3 Sum = vec3(0.0);
@@ -683,7 +678,7 @@ void main(void)
 	D = (D < light1Distance) ? D : 1000.0;
 
 	// Normalize our vectors
-	vec3 N = normalize(NormalMap * 2.0 - 1.0);
+	vec3 N = normalize(NormalMap);
 	vec3 L = normalize(LightDir);
 
 	// Pre-multiply light color with intensity
@@ -723,7 +718,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light2Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -757,7 +752,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light3Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -791,7 +786,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light4Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -825,7 +820,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light5Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -859,7 +854,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light6Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -893,7 +888,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light7Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -927,7 +922,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light8Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -961,7 +956,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light9Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -995,7 +990,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light10Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -1029,7 +1024,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light11Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -1063,7 +1058,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light12Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -1097,7 +1092,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light13Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -1131,7 +1126,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light14Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -1165,7 +1160,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light15Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -1199,7 +1194,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light16Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -1233,7 +1228,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light17Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -1267,7 +1262,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light18Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -1301,7 +1296,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light19Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -1335,7 +1330,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light20Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -1369,7 +1364,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light21Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -1403,7 +1398,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light22Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -1437,7 +1432,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light23Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -1471,7 +1466,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light24Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -1505,7 +1500,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light25Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -1539,7 +1534,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light26Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -1573,7 +1568,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light27Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -1607,7 +1602,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light28Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -1641,7 +1636,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light29Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -1675,7 +1670,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light30Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -1709,7 +1704,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light31Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);
@@ -1743,7 +1738,7 @@ void main(void)
 		float D = length(LightDir);
 		D = (D < light32Distance) ? D : 1000.0;
 
-		vec3 N = normalize(NormalMap * 2.0 - 1.0);
+		vec3 N = normalize(NormalMap);
 		vec3 L = normalize(LightDir);
 
 		vec3 Diffuse = (LightColor.rgb * LightColor.a) * max(dot(N, L), 0.0);

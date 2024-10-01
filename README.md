@@ -32,7 +32,7 @@ Please note that a light source object is not a requirement, but it's a convenie
 
 ## Performance Considerations
 
-Applying the effect to lots of individual normal map sprites can be costly. Consider to either draw all normal sprites to a canvas or apply it to a layer instead. Set Max Light ID to the lowest possible value for enhanced shader performance.
+Applying the effect to lots of individual normal map sprites can be costly. It is recommended to apply the effect to a single layer instead. Set Max Light ID to the lowest possible value for enhanced shader performance.
 
 ## Features
 
@@ -43,7 +43,7 @@ Applying the effect to lots of individual normal map sprites can be costly. Cons
 - Supports flipped and rotated normal maps.
 - Global ambient light (RGB).
 
-## Credits
+## Attribution
 
 - [Normal Mapping - ShaderLesson6](https://github.com/mattdesl/lwjgl-basics/wiki/ShaderLesson6) by Matt DesLauriers
 - [NormalMapExtended](https://www.construct.net/make-games/addons/194/normalmapextended) by donelwero, matriax, Mikal

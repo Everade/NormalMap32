@@ -14,6 +14,10 @@ The Construct plugin is distributed as a [.c3addon file](https://www.construct.n
 > [!WARNING]
 > If you want to modify the plugin for your own purposes, it is strongly advised to **change the Construct plugin ID.** This will avoid serious compatibility problems which could result in your project becoming unopenable.
 
+## Download & Install Instructions
+
+Download the latest [release](https://github.com/Everade/NormalMap32/releases). To install an addon in Construct 3, open the Addon Manager (Menu > View > Addon Manager). In this dialog, click "Install new addon..." and choose the .c3addon file. Construct 3 will prompt to confirm installation of the addon. If you confirm the install, you must restart Construct 3 before the addon is available. In the browser you can just press the Reload button. You can also install itby directly dragging and dropping the .c3addon file in to Construct 3.
+
 ## What is a Normal Map?
 
 Normal mapping is a texture mapping technique used for faking the lighting of bumps and dents – an implementation of bump mapping. Each normal map pixel represents the direction in which the sprite's pixel is facing.
